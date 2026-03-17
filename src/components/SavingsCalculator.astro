@@ -1,0 +1,63 @@
+---
+---
+
+<div class="max-w-md mx-auto bg-white rounded-2xl shadow-xl p-6 space-y-4">
+
+  <!-- Header -->
+  <div class="bg-primary text-white rounded-xl p-4 flex items-center gap-3">
+    <div class="bg-secondary text-primary font-bold rounded-full w-10 h-10 flex items-center justify-center">
+      01
+    </div>
+    <div>
+      <h2 class="font-bold text-2xl">CALCULA TU AHORRO</h2>
+      <p class="text-xs  opacity-80">
+        Usaremos estos datos para estimar tu ahorro potencial.
+      </p>
+    </div>
+  </div>
+
+  <!-- Dirección -->
+  <input
+    type="text"
+    placeholder="📍 Dirección Actual"
+    class="w-full bg-gray-100 rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-blue-300"
+  />
+
+  <!-- Tipo -->
+  <div>
+    <p class="text-gray-400 font-semibold mb-2">Tipo de Propiedad</p>
+    <div class="flex gap-2">
+      <button class="flex-1 bg-primary text-white rounded-lg py-2 font-bold border-2 border-secondary">
+        HOGAR
+      </button>
+      <button class="flex-1 bg-gray-100 text-gray-500 rounded-lg py-2 font-bold border">
+        EMPRESA
+      </button>
+    </div>
+  </div>
+
+  <!-- Valor -->
+  <input
+    type="number"
+    placeholder="Valor Mensual de Luz (COP)*"
+    class="w-full bg-gray-100 rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-blue-300"
+  />
+
+  <!-- Consumo -->
+  <input
+    type="number"
+    placeholder="Consumo Mensual (kWh)*"
+    class="w-full bg-gray-100 rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-blue-300"
+  />
+
+  <p class="text-xs text-gray-400">
+    *Puedes encontrar este dato en tu factura eléctrica
+  </p>
+
+  <!-- Botón -->
+  <button class="w-full bg-primary text-white font-bold py-3 rounded-xl flex items-center justify-center gap-2 border-2 border-secondary hover:scale-105 transition">
+    VER MI PROYECCIÓN ENERGÉTICA
+    <span>➜</span>
+  </button>
+
+</div>

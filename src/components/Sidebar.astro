@@ -1,0 +1,83 @@
+---
+import { Icon } from "astro-icon/components";
+const itemsMedio = [
+    {
+        icon: "hogar-icon",
+        link: "home",
+        label: "Inicio",
+    },
+    {
+        icon: "calculadora-icon",
+        link: "home",
+        label: "Inicio",
+    },
+    {
+        icon: "beneficio-icon",
+        link: "home",
+        label: "Inicio",
+    },
+    {
+        icon: "ajustes-icon",
+        link: "home",
+        label: "Inicio",
+    },
+    {
+        icon: "pregunta-y-respuesta-icon",
+        link: "home",
+        label: "Inicio",
+    },
+    {
+        icon: "atencion-al-cliente-icon",
+        link: "home",
+        label: "Inicio",
+    },
+];
+const itemsFooter = [
+    {
+        icon: "atencion-al-cliente-icon",
+        link: "",
+        label: "",
+    },
+    {
+        icon: "atencion-al-cliente-icon",
+        link: "",
+        label: "",
+    },
+];
+---
+
+<div
+    class="fixed w-15 h-screen pt-4 shadow-lg flex items-center flex-col justify-between bg-white"
+>
+    <div class="px-2">
+        <img
+            src="/images/logo-wmsas.png"
+            alt=""
+            class="hover:scale-105 transition-all"
+        />
+    </div>
+    <div class="w-full">
+        {
+            itemsMedio.map((item, index) => (
+                <a
+                    href={item.link}
+                    class="text-primary text-3xl border-l-6 border-primary px-2 py-4 bg-gray-200 w-full flex justify-center"
+                >
+                    <Icon name={item.icon} />
+                </a>
+            ))
+        }
+    </div>
+    <div class="w-full">
+        {
+            itemsFooter.map((item, index) => (
+                <a
+                    href={item.link}
+                    class="text-primary text-3xl border-l-6 border-white px-2 py-4 bg-secondary w-full flex justify-center"
+                >
+                    <Icon name={item.icon} />
+                </a>
+            ))
+        }
+    </div>
+</div>
