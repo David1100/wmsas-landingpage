@@ -1,0 +1,191 @@
+---
+import { Icon } from "astro-icon/components";
+
+const items = [
+    {
+        image: "/images/fondo-solar-home.jpg",
+        title: "Residencia García",
+        subtitle: "Ahorro del 85% en factura de luz",
+        stat: "$2,400 MXN/mes",
+    },
+    {
+        image: "/images/fondo-solar-home.jpg",
+        title: "Consultorio Médico López",
+        subtitle: "Energía limpia + reconocimiento verde",
+        stat: "6 paneles",
+    },
+    {
+        image: "/images/fondo-solar-home.jpg",
+        title: "Restaurante El Sol",
+        subtitle: "Sistema de 8kW instalado",
+        stat: "800 kg CO₂/año",
+    },
+    {
+        image: "/images/fondo-solar-home.jpg",
+        title: "Casa Suárez",
+        subtitle: "Bimestre completo sin costo energético",
+        stat: "4 paneles",
+    },
+    {
+        image: "/images/fondo-solar-home.jpg",
+        title: "Oficinas WMSAS",
+        subtitle: "Autoabastecimiento total",
+        stat: "15 kW instalado",
+    },
+];
+---
+
+<section id="cases" class="py-8 lg:py-12 min-h-screen space-y-8 relative">
+    <div class="text-center">
+        <h1 class="uppercase text-primary text-4xl md:text-6xl font-black">
+            casos <span class="text-secondary">reales</span>
+        </h1>
+        <h1 class="uppercase text-primary text-4xl md:text-6xl font-black">
+            resultados <span class="text-secondary">medibles</span>
+        </h1>
+        <p class="font-semibold text-xl mt-4 md:mt-8">
+            Empresas y hogares ya están generando su propia energía
+        </p>
+        <div class="mt-8 flex items-center gap-4 justify-center flex-wrap">
+            <button
+                class="uppercase px-4 py-2 rounded-lg bg-secondary font-bold text-primary"
+            >
+                proyectos reales
+            </button>
+            <h1 class="text-3xl font-bold text-center">
+                Nuestros <span class="uppercase text-secondary">resultados</span>
+                hablan por sí solos!
+            </h1>
+        </div>
+    </div>
+
+    <div class="relative max-w-7xl mx-auto px-4 md:px-12">
+        <div class="overflow-hidden" id="slider-container">
+            <div
+                class="flex transition-transform duration-500 ease-out py-4"
+                id="slider-track"
+            >
+                {
+                    items.map((item) => (
+                        <div class="w-full md:w-1/2 lg:w-1/3 shrink-0 px-2 md:px-3">
+                            <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                                <div class="h-50 overflow-hidden relative">
+                                    <img
+                                        src={item.image}
+                                        alt={item.title}
+                                        class="w-full h-full object-cover"
+                                    />
+                                    <span class="absolute bg-green-400 z-1 left-2 bottom-2 text-[10px] py-1 px-2 rounded-lg font-bold flex items-center text-white gap-1">
+                                        <Icon name='check-icon'/>
+                                        Instalado
+                                    </span>
+                                </div>
+                                <div class="p-6">
+                                    <h2 class="text-xl font-bold text-primary">
+                                        {item.title}
+                                    </h2>
+                                    <p class="text-gray-500 mt-1 text-sm">
+                                        {item.subtitle}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    ))
+                }
+            </div>
+        </div>
+
+        <button
+            id="slider-prev"
+            class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 md:translate-x-0 w-10 h-10 md:w-12 md:h-12 rounded-full bg-primary flex items-center justify-center shadow-lg hover:bg-primary/80 transition-colors z-10"
+            aria-label="Caso anterior"
+        >
+            <svg class="w-5 h-5 text-white" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+                <path d="m1394.006 0 92.299 92.168-867.636 867.767 867.636 867.636-92.299 92.429-959.935-960.065z" fill-rule="evenodd"/>
+            </svg>
+        </button>
+
+        <button
+            id="slider-next"
+            class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 md:translate-x-0 w-10 h-10 md:w-12 md:h-12 rounded-full bg-primary flex items-center justify-center shadow-lg hover:bg-primary/80 transition-colors z-10"
+            aria-label="Siguiente caso"
+        >
+            <svg class="w-5 h-5 text-white" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+                <path d="M526.299 0 434 92.168l867.636 867.767L434 1827.57l92.299 92.43 959.935-960.065z" fill-rule="evenodd"/>
+            </svg>
+        </button>
+    </div>
+
+    <div class="flex justify-center gap-2" id="slider-dots">
+        {
+            items.map((_, index) => (
+                <button
+                    class="w-3 h-3 rounded-full transition-all duration-300"
+                    data-dot={index}
+                    aria-label={`Ir al caso ${index + 1}`}
+                />
+            ))
+        }
+    </div>
+</section>
+
+<script>
+    const track = document.getElementById("slider-track");
+    const prevBtn = document.getElementById("slider-prev");
+    const nextBtn = document.getElementById("slider-next");
+    const dots = document.querySelectorAll("[data-dot]");
+
+    let currentIndex = 0;
+    let slidesPerView = 1;
+
+    function getSlidesPerView() {
+        if (window.innerWidth >= 1024) return 3;
+        if (window.innerWidth >= 768) return 2;
+        return 1;
+    }
+
+    function updateSlider() {
+        if (!track) return;
+        slidesPerView = getSlidesPerView();
+        const maxIndex = Math.max(0, 5 - slidesPerView);
+        currentIndex = Math.min(currentIndex, maxIndex);
+        const slideWidth = 100 / slidesPerView;
+        track.style.transform = `translateX(-${currentIndex * slideWidth}%)`;
+
+        dots.forEach((dot, i) => {
+            if (i === currentIndex) {
+                dot.classList.remove("bg-gray-300");
+                dot.classList.add("bg-secondary", "w-6");
+            } else {
+                dot.classList.remove("bg-secondary", "w-6");
+                dot.classList.add("bg-gray-300");
+            }
+        });
+    }
+
+    function goNext() {
+        const maxIndex = Math.max(0, 5 - slidesPerView);
+        currentIndex = currentIndex >= maxIndex ? 0 : currentIndex + 1;
+        updateSlider();
+    }
+
+    function goPrev() {
+        const maxIndex = Math.max(0, 5 - slidesPerView);
+        currentIndex = currentIndex <= 0 ? maxIndex : currentIndex - 1;
+        updateSlider();
+    }
+
+    prevBtn.addEventListener("click", goPrev);
+    nextBtn.addEventListener("click", goNext);
+
+    dots.forEach((dot) => {
+        dot.addEventListener("click", () => {
+            currentIndex = parseInt(dot.getAttribute("data-dot") || "0");
+            updateSlider();
+        });
+    });
+
+    window.addEventListener("resize", updateSlider);
+
+    updateSlider();
+</script>

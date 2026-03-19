@@ -47,38 +47,38 @@ const items = [
 ];
 ---
 
-<section class="h-screen py-12 flex flex-col justify-center items-center">
-    <h1 class="text-6xl text-secondary font-bold uppercase">beneficios</h1>
-    <p class="text-sm font-semibold">
+<section id="beneficios" class="py-8 lg:py-20 flex flex-col justify-center items-center min-h-screen">
+    <h1 class="text-3xl sm:text-4xl lg:text-6xl text-secondary font-bold uppercase text-center">beneficios</h1>
+    <p class="text-xs sm:text-sm font-semibold text-center px-4">
         Lo que cambias cuando tomas control energetico
     </p>
-    <div class="grid grid-cols-3 gap-8 py-12">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 py-6 lg:py-12 px-4">
         {
             items.map((item, index) => (
-                <div class="w-md bg-white rounded-3xl px-8 py-4 shadow-[0_10px_40px_-15px_rgba(0,0,0,0.3)] border border-gray-100 hover:scale-105 transition-all">
-                    <div class="flex items-center gap-4 mb-4">
-                        <div class="bg-primary p-2 rounded-lg flex items-center justify-center shrink-0">
-                            <Icon name={item.icon} class={'text-white text-4xl'}/>
+                <div class="w-full bg-white rounded-2xl sm:rounded-3xl px-4 sm:px-6 lg:px-8 py-3 sm:py-4 shadow-[0_10px_40px_-15px_rgba(0,0,0,0.3)] border border-gray-100 hover:scale-105 transition-all">
+                    <div class="flex items-center gap-2 sm:gap-4 mb-3 sm:mb-4">
+                        <div class="bg-primary p-1.5 sm:p-2 rounded-lg flex items-center justify-center shrink-0">
+                            <Icon name={item.icon} class={'text-white text-2xl sm:text-3xl lg:text-4xl'}/>
                         </div>
 
-                        <h2 class="text-[#C5D33A] font-semibold text-2xl leading-tight uppercase tracking-tight">
+                        <h2 class="text-[#C5D33A] font-semibold text-lg sm:text-xl lg:text-2xl leading-tight uppercase tracking-tight">
                             {item.title.split(" ")[0]}
                             <br />
                             {item.title.split(" ")[1] +' '+ item.title.split(" ")[2]}
                         </h2>
                     </div>
 
-                    <div class="mb-5">
-                        <p class="text-gray-400 font-semibold text-xl leading-snug">
+                    <div class="mb-3 sm:mb-5">
+                        <p class="text-gray-400 font-semibold text-sm sm:text-base lg:text-xl leading-snug">
                             {item.description1}
                         </p>
-                        <p class="text-gray-400 font-semibold text-xl leading-snug">
+                        <p class="text-gray-400 font-semibold text-sm sm:text-base lg:text-xl leading-snug">
                             {item.description2}
                         </p>
                     </div>
 
-                    <div class="bg-primary py-2 px-6 rounded-lg text-center">
-                        <button class="text-white font-bold text-lg">
+                    <div class="bg-primary py-1.5 sm:py-2 px-4 sm:px-6 rounded-lg text-center">
+                        <button class="text-white font-bold text-xs sm:text-base lg:text-lg">
                             {item.button}
                         </button>
                     </div>

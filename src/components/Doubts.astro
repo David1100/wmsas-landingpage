@@ -1,0 +1,101 @@
+---
+import { Icon } from "astro-icon/components";
+
+const items = [
+    {
+        category: "ahorro",
+        question: "¿Ahorraré desde el primer día?",
+        response: "Sí, desde el primer día que tu sistema solar comience a funcionar comenzarás a ver reducción en tu factura de electricidad. Nuestro equipo de expertos evalúa tu consumo para dimensionar correctamente tu instalación.",
+    },
+    {
+        category: "instalación",
+        question: "¿Cuánto tiempo toma la instalación?",
+        response: "La instalación típica de un sistema solar residencial toma entre 1 y 3 días, dependiendo del tamaño del sistema y la complejidad del techo. Nos encargamos de todo el proceso de principio a fin.",
+    },
+    {
+        category: "mantenimiento",
+        question: "¿Qué mantenimiento requiere?",
+        response: "Los paneles solares requieren muy poco mantenimiento. Recomendamos una limpieza básica semestral y una revisión técnica anual. Nuestros paneles tienen garantía de 25 años y ofrecemos planes de mantenimiento preventivo.",
+    },
+    {
+        category: "trámites",
+        question: "¿Necesito permisos especiales?",
+        response: "Nosotros nos encargamos de todos los trámites y permisos necesarios para la instalación, incluyendo el registro ante la CFE y los permisos municipales. Solo necesitas proporcionar la documentación básica.",
+    },
+];
+---
+
+<section id="doubts" class="py-8 lg:py-20 min-h-screen fondo-doubts space-y-8">
+    <div class="text-center">
+        <h1 class="text-4xl text-primary font-black">Resolvemos tus dudas</h1>
+        <h1 class="text-4xl font-bold">
+            sobre <strong class="uppercase">energía solar</strong>
+        </h1>
+    </div>
+
+    <ul class="max-w-6xl mx-auto space-y-6">
+        {
+            items.map((item, index) => (
+                <li class="bg-white shadow-lg rounded-lg overflow-hidden" data-index={index}>
+                    <div class="flex items-center gap-4 p-4 cursor-pointer" data-toggle>
+                        <div class="bg-primary p-1.5 sm:p-2 rounded-lg shrink-0">
+                            <Icon
+                                name="bombilla-icon"
+                                class="text-white text-2xl sm:text-3xl lg:text-4xl"
+                            />
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <span class="bg-secondary rounded-lg px-4 py-1 text-primary uppercase font-semibold text-sm">
+                                {item.category}
+                            </span>
+                            <h2 class="text-lg font-bold mt-1">{item.question}</h2>
+                        </div>
+                        <button
+                            class="shrink-0 w-10 h-10 rounded-full bg-primary flex items-center justify-center"
+                            aria-label="Desplegar respuesta"
+                            data-btn
+                        >
+                            <Icon
+                                name="arrow-open-down-icon"
+                                class="text-white w-5 h-5 [&_path]:fill-white doubt-toggle-icon"
+                            />
+                        </button>
+                    </div>
+                    <div class="doubt-response px-4 pb-0" data-response>
+                        <div>
+                            <p class="text-gray-600 leading-relaxed pb-4">{item.response}</p>
+                        </div>
+                    </div>
+                </li>
+            ))
+        }
+    </ul>
+</section>
+
+<script>
+    document.querySelectorAll("[data-toggle]").forEach((row) => {
+        row.addEventListener("click", (e) => {
+            const li = row.closest("li");
+            const btn = li.querySelector("[data-btn]");
+            const response = li.querySelector("[data-response]");
+            const icon = btn.querySelector("Icon");
+            const isOpen = response.classList.contains("open");
+
+            document
+                .querySelectorAll(".doubt-response.open")
+                .forEach((openResponse) => {
+                    const openBtn = openResponse
+                        .closest("li")
+                        .querySelector("[data-btn]");
+                    const openIcon = openBtn.querySelector("Icon");
+                    openResponse.classList.remove("open");
+                    if (openIcon) openIcon.classList.remove("open");
+                });
+
+            if (!isOpen) {
+                response.classList.add("open");
+                if (icon) icon.classList.add("open");
+            }
+        });
+    });
+</script>

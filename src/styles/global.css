@@ -11,7 +11,12 @@
 }
 
 
-.MuiChartsLegend-label{
+html {
+    scroll-behavior: smooth;
+    font-family: sans-serif;
+}
+
+.MuiChartsLegend-label {
     color: white;
 }
 
@@ -22,7 +27,8 @@ button {
 .fondo {
     position: relative;
     width: 100%;
-    min-height: 100vh; /* Para que cubra toda la pantalla */
+    min-height: 100vh;
+    /* Para que cubra toda la pantalla */
     overflow: hidden;
 }
 
@@ -33,15 +39,47 @@ button {
     left: 0;
     width: 100%;
     height: 100%;
-    
+
     /* Configuración de la imagen */
     background-image: url('/images/fondo-web-wmsas.jpg');
     background-size: cover;
     background-position: center;
-    background-attachment: fixed; /* Esto hace que el fondo se quede quieto */
-    
+    background-attachment: fixed;
     /* Control de opacidad */
-    opacity: 0.1; /* Ajusta este valor (0.0 a 1.0) según prefieras */
-    
-    z-index: -1; /* Envía la imagen detrás del contenido */
+    opacity: 0.1;
+    /* Ajusta este valor (0.0 a 1.0) según prefieras */
+
+    z-index: -1;
+    /* Envía la imagen detrás del contenido */
+}
+
+.fondo-doubts {
+    /* Reemplaza con la ruta de tu imagen en /public o /src/assets */
+    background-image: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.8)),
+        url('/images/fondo-doubts.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.doubt-response {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.4s ease-out;
+}
+
+.doubt-response.open {
+    grid-template-rows: 1fr;
+}
+
+.doubt-response > div {
+    overflow: hidden;
+}
+
+.doubt-toggle-icon {
+    transition: transform 0.4s ease-out;
+}
+
+.doubt-toggle-icon.open {
+    transform: rotate(180deg);
 }

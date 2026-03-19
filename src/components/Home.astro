@@ -10,60 +10,52 @@
         <button class="uppercase font-semibold bg-primary rounded-lg px-2 py-1 text-white">contáctacnos</button>  
     </div>
 </header>
-<section class="grid grid-cols-12 h-screen gap-4 bg-white">
-    <div class="col-span-3 space-y-8 pt-46 px-4">
+<section id="inicio" class="grid lg:grid-cols-12 h-screen gap-4 bg-white">
+    <div class="col-span-12 lg:col-span-3 space-y-4 lg:space-y-8 pt-20 lg:pt-0 px-4 lg:px-4 flex flex-col justify-center">
         <div>
-            <h1 class="uppercase text-secondary text-5xl font-black">
+            <h1 class="uppercase text-secondary text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black">
                 tu camino
             </h1>
-            <h1 class="uppercase text-primary text-8xl font-black">solar</h1>
-            <h1 class="uppercase text-secondary text-5xl font-black">
+            <h1 class="uppercase text-primary text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-black">solar</h1>
+            <h1 class="uppercase text-secondary text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black">
                 comienza <span class="text-primary">aqui</span>
             </h1>
-            <h2 class="text-gray-300 text-3xl font-bold">
+            <h2 class="text-gray-300 text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold">
                 Energia solar profesional
             </h2>
         </div>
         <div>
-            <h1 class="uppercase text-3xl font-black">
-                tu factura de energia no dejara de <span class="text-red-600"
-                    >subir</span>
+            <h1 class="uppercase text-lg sm:text-xl md:text-2xl lg:text-3xl font-black">
+                tu factura de energia no dejara de <span class="text-red-600">subir</span>
             </h1>
         </div>
         <div>
-            <h1 class="uppercase text-primary text-3xl font-black">
-                descubre como puedes tomar el <span class="text-secondary"
-                    >control</span>
+            <h1 class="uppercase text-lg sm:text-xl md:text-2xl lg:text-3xl font-black">
+                descubre como puedes tomar el <span class="text-secondary">control</span>
             </h1>
         </div>
-        <div class="flex justify-center">
+        <div class="flex justify-center lg:justify-start">
             <button
-                class="uppercase px-4 py-2 rounded-lg bg-secondary font-bold text-xl"
-                >calcular mi ahorro</button
+                class="uppercase px-4 py-2 rounded-lg bg-secondary font-bold text-sm sm:text-lg lg:text-xl"
             >
+                calcular mi ahorro
+            </button>
         </div>
     </div>
-    <div class="col-span-9 relative w-full py-20">
-        {/* Fondo */}
+    <div class="col-span-12 lg:col-span-9 relative w-full py-10 lg:py-20 order-first lg:order-last">
         <img
             src="/images/fondo-solar-home.jpg"
             class="absolute inset-0 w-full h-full object-cover"
             alt=""
         />
-
-        {/* Overlay blanco suave */}
         <div class="absolute inset-0 bg-white/70"></div>
-
-        {/* Contenido */}
         <div class="relative z-10 max-w-5xl mx-auto text-center px-4">
-            <h2 class="text-3xl md:text-4xl font-bold text-blue-900 mb-10">
+            <h2 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-blue-900 mb-6 lg:mb-10">
                 CONOCE COMO IMPLEMENTAMOS <br /> SISTEMAS SOLARES
             </h2>
-
-            {/* Video */}
             <div class="rounded-2xl overflow-hidden shadow-2xl">
                 <iframe
-                    class="w-full h-62.5 md:h-100"
+                    class="w-full h-48 sm:h-56 md:h-64 lg:h-150"
                     src="https://www.youtube.com/embed/VIDEO_ID"
                     title="Video"
                     allowfullscreen></iframe>

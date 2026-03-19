@@ -1,37 +1,44 @@
 ---
 import { Icon } from "astro-icon/components";
+
 const itemsMedio = [
     {
         icon: "hogar-icon",
-        link: "home",
+        link: "#inicio",
         label: "Inicio",
     },
     {
         icon: "calculadora-icon",
-        link: "home",
-        label: "Inicio",
+        link: "#calculadora",
+        label: "Calculadora",
     },
     {
         icon: "beneficio-icon",
-        link: "home",
-        label: "Inicio",
+        link: "#beneficios",
+        label: "Beneficios",
     },
     {
         icon: "ajustes-icon",
-        link: "home",
-        label: "Inicio",
+        link: "#accion",
+        label: "Accion",
+    },
+    {
+        icon: "clasificacion-icon",
+        link: "#cases",
+        label: "Casos y proyectos",
     },
     {
         icon: "pregunta-y-respuesta-icon",
-        link: "home",
-        label: "Inicio",
+        link: "#doubts",
+        label: "Preguntas y respuestas",
     },
     {
         icon: "atencion-al-cliente-icon",
-        link: "home",
-        label: "Inicio",
+        link: "#",
+        label: "Contacto",
     },
 ];
+
 const itemsFooter = [
     {
         icon: "atencion-al-cliente-icon",
@@ -44,24 +51,28 @@ const itemsFooter = [
         label: "",
     },
 ];
+
+const mobileItems = itemsMedio.slice(0, 4);
 ---
 
 <div
-    class="fixed w-15 h-screen pt-4 shadow-lg flex items-center flex-col justify-between bg-white"
+    class="fixed left-0 top-0 h-screen w-15 shadow-lg flex flex-col justify-between bg-white z-50 hidden lg:flex"
+    id="sidebar-desktop"
 >
-    <div class="px-2">
+    <div class="px-2 pt-4">
         <img
             src="/images/logo-wmsas.png"
             alt=""
             class="hover:scale-105 transition-all"
         />
     </div>
-    <div class="w-full">
+    <div class="w-full" id="sidebar-nav">
         {
-            itemsMedio.map((item, index) => (
+            itemsMedio.map((item) => (
                 <a
                     href={item.link}
-                    class="text-primary text-3xl border-l-6 border-primary px-2 py-4 bg-gray-200 w-full flex justify-center"
+                    data-section={item.link.replace("#", "")}
+                    class="nav-link text-primary text-3xl border-l-6 border-l-transparent px-2 py-4 bg-white w-full flex justify-center transition-all duration-300"
                 >
                     <Icon name={item.icon} />
                 </a>
@@ -70,7 +81,7 @@ const itemsFooter = [
     </div>
     <div class="w-full">
         {
-            itemsFooter.map((item, index) => (
+            itemsFooter.map((item) => (
                 <a
                     href={item.link}
                     class="text-primary text-3xl border-l-6 border-white px-2 py-4 bg-secondary w-full flex justify-center"
@@ -81,3 +92,75 @@ const itemsFooter = [
         }
     </div>
 </div>
+
+<div
+    class="fixed bottom-0 left-0 right-0 bg-white shadow-[0_-4px_20px_rgba(0,0,0,0.1)] z-50 lg:hidden"
+    id="sidebar-mobile"
+>
+    <nav class="flex justify-around items-center h-16">
+        {
+            mobileItems.map((item) => (
+                <a
+                    href={item.link}
+                    data-section={item.link.replace("#", "")}
+                    class="mobile-nav-link flex flex-col items-center justify-center gap-1 px-4 py-2 text-primary transition-all duration-300"
+                >
+                    <Icon name={item.icon} class="w-6 h-6" />
+                    <span class="text-xs font-medium">{item.label}</span>
+                </a>
+            ))
+        }
+    </nav>
+</div>
+
+<div class="h-16 lg:hidden"></div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
+
+        function setActiveLink(id) {
+            navLinks.forEach((link) => {
+                const linkId = link.getAttribute('data-section');
+                if (linkId === id) {
+                    link.classList.add('bg-gray-200', 'border-l-primary', 'text-secondary');
+                    link.classList.remove('border-l-transparent', 'bg-white', 'text-primary');
+                } else {
+                    link.classList.remove('bg-gray-200', 'border-l-primary', 'text-secondary');
+                    link.classList.add('border-l-transparent', 'bg-white', 'text-primary');
+                }
+            });
+        }
+
+        navLinks.forEach((link) => {
+            link.addEventListener('click', (e) => {
+                const href = link.getAttribute('href');
+                if (href && href.startsWith('#')) {
+                    const target = document.querySelector(href);
+                    if (target) {
+                        e.preventDefault();
+                        target.scrollIntoView({ behavior: 'smooth' });
+                        history.pushState(null, '', href);
+                    }
+                }
+            });
+        });
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        if (id) setActiveLink(id);
+                    }
+                });
+            },
+            { threshold: 0.3 }
+        );
+
+        sections.forEach((section) => observer.observe(section));
+
+        setActiveLink('inicio');
+    });
+</script>
