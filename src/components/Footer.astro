@@ -1,0 +1,36 @@
+---
+import { Icon } from "astro-icon/components";
+---
+
+<section class="py-8 lg:py-20  bg-primary px-10 text-white">
+    <div class="max-w-7xl mx-auto grid grid-cols-3">
+        <div class="px-10 border-r-2 border-white">
+            <h1 class="font-bold text-2xl">WM SAS</h1>
+            <p>Sistema de energia solar</p>
+
+            <p class="mt-8">
+                Ingenieria responsable con la sociedad y el medio ambiente.
+            </p>
+        </div>
+        <div class="px-10 border-r-2 border-white">
+            <h1 class="font-bold text-2xl">Contacto</h1>
+            <ul class="space-y-2 mt-4">
+                <li class="flex items-center gap-2"> <Icon name={'phone-icon'} class={'text-xl text-secondary'} /> +57 300 123 4567</li>
+                <li class="flex items-center gap-2"><Icon name={'mail-icon'} class={'text-xl text-secondary'} /> comercial@wmsas.co</li>
+                <li class="flex  gap-2">
+                    <Icon name={'location-icon'} class={'text-xl text-secondary'} /> <div> Carrera 20 No. 33-46 <br />
+                    Edificio Los Robles - of.301 <br />
+                    Bucaramanga, Santander </div>
+                </li>
+            </ul>
+        </div>
+        <div class="px-10 ">
+            <h1 class="font-bold text-2xl">Enlaces útiles</h1>
+            <ul class="space-y-1 mt-4">
+                <a href="#inicio" class="flex items-center gap-2"><Icon name={'link-icon'} class={'text-xl text-secondary'} /> Inicio</a>
+                <a href="#" class="flex items-center gap-2"><Icon name={'link-icon'} class={'text-xl text-secondary'} /> Proyectos</a>
+                <a href="#" class="flex items-center gap-2"><Icon name={'link-icon'} class={'text-xl text-secondary'} /> Contacto</a>
+            </ul>
+        </div>
+    </div>
+</section>
