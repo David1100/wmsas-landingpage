@@ -4,19 +4,52 @@ import Sidebar from "../components/Sidebar.astro";
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="es">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<title>WM SAS | Ingeniería Solar Inteligente</title>
+		<meta
+			name="description"
+			content="WM SAS diseña e instala sistemas de energía solar a medida para hogares y empresas en Colombia. Calcula tu ahorro y programa una asesoría gratuita."
+		/>
+		<meta property="og:title" content="WM SAS · Energía solar profesional" />
+		<meta
+			property="og:description"
+			content="Implementamos soluciones fotovoltaicas llave en mano con ingeniería certificada, financiamiento y acompañamiento integral."
+		/>
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="https://wmsas.co" />
+		<meta property="og:image" content="/images/og-cover.jpg" />
+		<meta name="theme-color" content="#1c2554" />
 	</head>
 	<body>
 		<Sidebar />
 		<main class="lg:pl-15 fondo">
 			<slot />
 		</main>
+		<script>
+			const revealElements = document.querySelectorAll('[data-reveal]');
+			const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+			if (prefersReduced) {
+				revealElements.forEach((el) => el.classList.add('is-visible'));
+			} else {
+				const observer = new IntersectionObserver(
+					(entries) => {
+						entries.forEach((entry) => {
+							if (entry.isIntersecting) {
+								entry.target.classList.add('is-visible');
+							}
+						});
+					},
+					{ threshold: 0.2 }
+				);
+
+				revealElements.forEach((el) => observer.observe(el));
+			}
+		</script>
 	</body>
 </html>

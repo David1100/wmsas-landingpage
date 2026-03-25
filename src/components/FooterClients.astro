@@ -1,23 +1,79 @@
 ---
 import { Icon } from "astro-icon/components";
+
+const partners = [
+	{ name: "Grupo Solares", logo: "/images/logo-wmsas.png" },
+	{ name: "EPM Aliados", logo: "/images/logo-wmsas.png" },
+	{ name: "Cámara Comercio", logo: "/images/logo-wmsas.png" },
+	{ name: "ProColombia", logo: "/images/logo-wmsas.png" },
+	{ name: "Fenalco", logo: "/images/logo-wmsas.png" },
+];
+
+const assurances = [
+	"RETIE 2024",
+	"Fabricantes Tier 1",
+	"Garantía 25 años",
+];
 ---
 
-<section class="py-8 lg:py-20 flex flex-col justify-center items-center space-y-8">
-    <h1 class="text-xl">Nuestros Clientes y Asociados</h1>
-    <!-- Slider de logos de clientes -->
-    <ul class="flex gap-8 justify-center items-center">
-            <img src="/images/logo-wmsas.png" class="w-20" alt="">
-            <img src="/images/logo-wmsas.png" class="w-20" alt="">
-            <img src="/images/logo-wmsas.png" class="w-20" alt="">
-            <img src="/images/logo-wmsas.png" class="w-20" alt="">
-            <img src="/images/logo-wmsas.png" class="w-20" alt="">
-            <img src="/images/logo-wmsas.png" class="w-20" alt="">
-            <img src="/images/logo-wmsas.png" class="w-20" alt="">
-    </ul>
+<section class="py-16 lg:py-24">
+	<div class="max-w-6xl mx-auto px-4 lg:px-8 grid gap-10 lg:grid-cols-[1.1fr_0.9fr] items-center">
+		<div class="space-y-6" data-reveal>
+			<p class="text-xs uppercase tracking-[0.5em] text-primary/60">confianza</p>
+			<h2 class="text-3xl sm:text-4xl font-display text-primary">Aliados estratégicos y certificaciones</h2>
+			<p class="text-sm text-primary/70 max-w-xl">
+				Trabajamos junto a constructores, empresas de servicios públicos y marcas tecnológicas para garantizar soporte postventa, repuestos y financiamiento competitivo.
+			</p>
+			<div class="relative overflow-hidden rounded-3xl border border-primary/10 bg-white/80 shadow-[0_40px_80px_-60px_rgba(0,0,0,0.5)]">
+				<div class="flex gap-8 animate-scroll-x py-6 px-6" aria-label="Logos de aliados">
+					{partners.concat(partners).map((partner, index) => (
+						<div class="flex items-center justify-center w-32 shrink-0" aria-hidden={index >= partners.length ? 'true' : 'false'}>
+							<img src={partner.logo} alt={partner.name} class="w-24 opacity-80" />
+						</div>
+					))}
+				</div>
+			</div>
+			<div class="flex flex-wrap gap-3">
+				{assurances.map((item) => (
+					<span class="px-4 py-2 rounded-full border border-primary/20 text-xs font-semibold uppercase tracking-[0.3em] text-primary/70">
+						{item}
+					</span>
+				))}
+			</div>
+		</div>
 
-    <h1 class="text-primary text-4xl font-bold">¿ Listo para evaluar tu proyecto solar ?</h1>
-    <div class="flex flex-col gap-1">
-        <button class="text-white text-xl bg-primary px-4 py-2 rounded-lg flex items-center gap-2 hover:scale-105 transition-all"><Icon name="whatsapp-icon" class={'text-3xl'}/> Agenda tu Asesoria Gratuita</button>
-        <span class="font-semibold text-sm text-center">Respuesta en menos de 24 Horas</span>
-    </div>
+		<div class="glass-panel rounded-[2rem] bg-white/90 p-8 space-y-6" data-reveal style="--reveal-delay:140ms">
+			<p class="text-xs uppercase tracking-[0.5em] text-primary/60">agenda</p>
+			<h3 class="text-2xl font-display text-primary">¿Listo para evaluar tu proyecto solar?</h3>
+			<p class="text-sm text-primary/70">
+				Agenda una asesoría gratuita y recibe un pre-diagnóstico energético con escenarios de financiamiento y cronograma de instalación.
+			</p>
+			<div class="space-y-3">
+				<a
+					href="https://wa.me/573001234567"
+					target="_blank"
+					rel="noreferrer"
+					class="w-full inline-flex items-center justify-center gap-3 px-6 py-3 rounded-full bg-primary text-white font-semibold text-sm uppercase tracking-[0.3em]"
+				>
+					<Icon name="whatsapp-icon" class="text-xl" /> Agenda tu asesoría
+				</a>
+				<p class="text-xs text-primary/60 text-center">Respondemos en menos de 24 horas hábiles.</p>
+			</div>
+		</div>
+	</div>
 </section>
+
+<style>
+	@keyframes scroll-x {
+		0% {
+			transform: translateX(0);
+		}
+		100% {
+			transform: translateX(-50%);
+		}
+	}
+
+	.animate-scroll-x {
+		animation: scroll-x 18s linear infinite;
+	}
+</style>

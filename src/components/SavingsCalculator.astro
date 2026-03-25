@@ -1,63 +1,295 @@
 ---
+const propertyTypes = [
+	{ label: "Hogar", value: "hogar" },
+	{ label: "Empresa", value: "empresa" },
+	{ label: "Agro", value: "agro" },
+];
+
+const irradiance = [
+	{ label: "Costa / Alta radiación", value: "alta" },
+	{ label: "Andina / Media", value: "media" },
+	{ label: "Interior / Baja", value: "baja" },
+];
 ---
 
-<div class="max-w-md mx-auto bg-white rounded-2xl shadow-xl p-6 space-y-4">
+<div class="max-w-5xl mx-auto" data-reveal>
+	<div class="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
+		<div class="bg-white/95 rounded-[1.8rem] p-6 sm:p-8 shadow-[0_40px_80px_-60px_rgba(12,21,39,0.9)] border border-white/60" data-reveal="left">
+			<div class="flex items-center gap-3 text-xs uppercase tracking-[0.4em] text-primary/60">
+				<span class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-semibold">01</span>
+				<span>configura tu proyecto</span>
+			</div>
+			<h2 class="text-2xl sm:text-3xl font-display text-primary mt-4">Simulador de ahorro WM SAS</h2>
+			<p class="text-sm text-primary/70 mt-2">Cuéntanos dónde consumes energía y te mostramos tu retorno estimado al instante.</p>
 
-  <!-- Header -->
-  <div class="bg-primary text-white rounded-xl p-4 flex items-center gap-3">
-    <div class="bg-secondary text-primary font-bold rounded-full w-10 h-10 flex items-center justify-center">
-      01
-    </div>
-    <div>
-      <h2 class="font-bold text-2xl">CALCULA TU AHORRO</h2>
-      <p class="text-xs  opacity-80">
-        Usaremos estos datos para estimar tu ahorro potencial.
-      </p>
-    </div>
-  </div>
+			<div class="mt-8 space-y-6">
+				<label class="block text-sm font-semibold text-primary">Dirección o municipio</label>
+				<input
+					id="input-address"
+					type="text"
+					placeholder="Ej. Barrio El Prado, Barranquilla"
+					class="w-full px-4 py-3 rounded-xl bg-primary/5 border border-primary/15 focus:border-secondary focus:ring-2 focus:ring-secondary/40"
+				/>
 
-  <!-- Dirección -->
-  <input
-    type="text"
-    placeholder="📍 Dirección Actual"
-    class="w-full bg-gray-100 rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-blue-300"
-  />
+				<div>
+					<p class="text-sm font-semibold text-primary mb-3">Tipo de propiedad</p>
+					<div class="grid grid-cols-3 gap-2">
+						{propertyTypes.map((type) => (
+							<button
+								type="button"
+								class="step-chip"
+								data-property={type.value}
+							>
+								{type.label}
+							</button>
+						))}
+					</div>
+				</div>
 
-  <!-- Tipo -->
-  <div>
-    <p class="text-gray-400 font-semibold mb-2">Tipo de Propiedad</p>
-    <div class="flex gap-2">
-      <button class="flex-1 bg-primary text-white rounded-lg py-2 font-bold border-2 border-secondary">
-        HOGAR
-      </button>
-      <button class="flex-1 bg-gray-100 text-gray-500 rounded-lg py-2 font-bold border">
-        EMPRESA
-      </button>
-    </div>
-  </div>
+				<div class="space-y-3">
+					<div class="flex items-center justify-between text-sm text-primary/70">
+						<label for="bill-range" class="font-semibold text-primary">Factura mensual (COP)</label>
+						<span id="bill-output" class="font-display text-lg text-primary">$600.000</span>
+					</div>
+					<input id="bill-range" type="range" min="200000" max="3000000" step="50000" value="600000" class="range-input" />
+				</div>
 
-  <!-- Valor -->
-  <input
-    type="number"
-    placeholder="Valor Mensual de Luz (COP)*"
-    class="w-full bg-gray-100 rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-blue-300"
-  />
+				<div class="space-y-3">
+					<div class="flex items-center justify-between text-sm text-primary/70">
+						<label for="consumption-range" class="font-semibold text-primary">Consumo mensual (kWh)</label>
+						<span id="consumption-output" class="font-display text-lg text-primary">420 kWh</span>
+					</div>
+					<input id="consumption-range" type="range" min="150" max="2500" step="10" value="420" class="range-input" />
+				</div>
 
-  <!-- Consumo -->
-  <input
-    type="number"
-    placeholder="Consumo Mensual (kWh)*"
-    class="w-full bg-gray-100 rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-blue-300"
-  />
+				<div>
+					<p class="text-sm font-semibold text-primary mb-3">Potencial solar</p>
+					<div class="grid gap-2 sm:grid-cols-3">
+						{irradiance.map((item) => (
+							<button
+								type="button"
+								class="step-chip"
+								data-irradiance={item.value}
+							>
+								{item.label}
+							</button>
+						))}
+					</div>
+				</div>
+			</div>
 
-  <p class="text-xs text-gray-400">
-    *Puedes encontrar este dato en tu factura eléctrica
-  </p>
+			<p class="text-xs text-primary/50 mt-8">
+				*Estimación preliminar. Validamos potencia disponible y requisitos RETIE durante la visita técnica.
+			</p>
+		</div>
 
-  <!-- Botón -->
-  <button class="w-full bg-primary text-white font-bold py-3 rounded-xl flex items-center justify-center gap-2 border-2 border-secondary hover:scale-105 transition">
-    VER MI PROYECCIÓN ENERGÉTICA
-    <span>➜</span>
-  </button>
+		<div class="glass-panel rounded-[1.8rem] p-6 sm:p-8 bg-white/80" data-reveal="right" style="--reveal-delay:120ms">
+			<div class="flex items-center gap-3 text-xs uppercase tracking-[0.4em] text-primary/60">
+				<span class="w-8 h-8 rounded-full bg-secondary text-primary flex items-center justify-center font-semibold">02</span>
+				<span>resultado</span>
+			</div>
+			<h3 class="text-2xl font-display text-primary mt-4">Tu proyección energética</h3>
+			<p class="text-sm text-primary/70">Actualizamos la simulación en tiempo real.</p>
 
+			<div class="mt-8 space-y-6">
+				<div class="bg-primary text-white rounded-2xl p-5 space-y-2">
+					<p class="text-xs uppercase tracking-[0.4em] text-white/70">Ahorro proyectado</p>
+					<p data-result-ahorro class="text-4xl font-display">78%</p>
+					<div class="w-full h-3 bg-white/20 rounded-full overflow-hidden">
+						<div data-progress class="h-full bg-secondary" style="width: 78%"></div>
+					</div>
+					<p class="text-sm text-white/80">Comparado con tu factura actual.</p>
+				</div>
+
+				<div class="grid gap-4 sm:grid-cols-2">
+					<div class="rounded-xl border border-primary/10 p-4">
+						<p class="text-xs uppercase tracking-[0.3em] text-primary/50">Inversión estimada</p>
+						<p data-result-inversion class="text-2xl font-display text-primary">$18.5 M</p>
+						<p class="text-xs text-primary/50">Incluye ingeniería y montaje WM SAS.</p>
+					</div>
+					<div class="rounded-xl border border-primary/10 p-4">
+						<p class="text-xs uppercase tracking-[0.3em] text-primary/50">Retorno</p>
+						<p data-result-retorno class="text-2xl font-display text-primary">36 meses</p>
+						<p class="text-xs text-primary/50">Depende de tu perfil de carga.</p>
+					</div>
+				</div>
+
+				<div class="rounded-2xl bg-primary/5 border border-primary/10 p-4">
+					<p class="text-sm text-primary/70" data-summary>
+						Hogar mediterráneo: reemplazamos el 78% de tu consumo con un arreglo de 6.2 kWp. Incluye monitoreo 24/7.
+					</p>
+				</div>
+
+				<div class="flex flex-wrap gap-3">
+					<div class="px-4 py-2 rounded-full bg-secondary/20 text-xs font-semibold text-primary" data-tier>Plan residencial solar+</div>
+					<div class="px-4 py-2 rounded-full bg-primary text-white text-xs font-semibold">Visita técnica en 48h</div>
+				</div>
+			</div>
+
+			<div class="mt-10 flex flex-col gap-3">
+				<a
+					href="https://wa.me/573001234567"
+					target="_blank"
+					rel="noreferrer"
+					class="w-full inline-flex items-center justify-center gap-3 px-6 py-3 rounded-full bg-secondary text-primary font-semibold uppercase tracking-wide text-sm"
+				>
+					Solicitar asesoría con ingeniero
+				</a>
+				<p class="text-xs text-primary/50 text-center">Prometemos responder en menos de 24 horas hábiles.</p>
+			</div>
+		</div>
+	</div>
 </div>
+
+<style>
+	.range-input {
+		width: 100%;
+		height: 0.5rem;
+		border-radius: 999px;
+		background: rgba(20, 26, 54, 0.08);
+		appearance: none;
+	}
+
+	.range-input:focus {
+		outline: none;
+	}
+
+	.range-input::-webkit-slider-thumb {
+		appearance: none;
+		width: 1.25rem;
+		height: 1.25rem;
+		border-radius: 999px;
+		background: var(--secondary);
+		border: 2px solid #fff;
+		box-shadow: 0 10px 20px rgba(20, 26, 54, 0.25);
+	}
+
+	.range-input::-moz-range-thumb {
+		width: 1.25rem;
+		height: 1.25rem;
+		border-radius: 999px;
+		background: var(--secondary);
+		border: 2px solid #fff;
+		box-shadow: 0 10px 20px rgba(20, 26, 54, 0.25);
+	}
+
+	.step-chip {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		text-transform: uppercase;
+		font-size: 0.7rem;
+		font-weight: 600;
+		letter-spacing: 0.2em;
+		padding: 0.75rem 0.5rem;
+		border-radius: 1rem;
+		border: 1px solid rgba(20, 26, 54, 0.15);
+		color: rgba(20, 26, 54, 0.6);
+		background: rgba(20, 26, 54, 0.04);
+		transition: background 0.2s ease, color 0.2s ease, border 0.2s ease;
+	}
+
+	.step-chip.active {
+		background: var(--primary);
+		color: #fff;
+		border-color: var(--primary);
+	}
+</style>
+
+<script>
+    const state = {
+        property: "hogar",
+        irradiance: "media",
+        bill: 600000,
+        consumption: 420,
+    };
+
+    const propertyButtons = document.querySelectorAll('[data-property]');
+    const irradianceButtons = document.querySelectorAll('[data-irradiance]');
+    const billInput = document.getElementById('bill-range');
+    const consumptionInput = document.getElementById('consumption-range');
+    const billOutput = document.getElementById('bill-output');
+    const consumptionOutput = document.getElementById('consumption-output');
+    const ahorroNode = document.querySelector('[data-result-ahorro]');
+    const progressBar = document.querySelector('[data-progress]');
+    const inversionNode = document.querySelector('[data-result-inversion]');
+    const retornoNode = document.querySelector('[data-result-retorno]');
+    const summaryNode = document.querySelector('[data-summary]');
+    const tierNode = document.querySelector('[data-tier]');
+
+    function activateButtons(group, valueKey, newValue) {
+        group.forEach((btn) => {
+            const value = btn.getAttribute(valueKey);
+            if (value === newValue) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        });
+    }
+
+    function currencyFormat(value) {
+        return new Intl.NumberFormat('es-CO', {
+            style: 'currency',
+            currency: 'COP',
+            maximumFractionDigits: 0,
+        }).format(value);
+    }
+
+    function updateProjection() {
+        const irradianceBoost = state.irradiance === 'alta' ? 1.08 : state.irradiance === 'media' ? 1 : 0.85;
+        const propertyBoost = state.property === 'empresa' ? 1.2 : state.property === 'agro' ? 1.1 : 1;
+        const potential = Math.min(92, Math.round((state.consumption / 8) * irradianceBoost));
+        const ahorro = Math.min(95, Math.max(40, Math.round((potential / 2) * propertyBoost)));
+        const inversion = Math.round((state.bill * 18) / 100000) / 10; // aproximación en millones
+        const retorno = Math.max(18, Math.round((state.bill / 200000) * (state.property === 'empresa' ? 24 : 30)));
+
+        ahorroNode.textContent = `${ahorro}%`;
+        progressBar.style.width = `${ahorro}%`;
+        inversionNode.textContent = `$${inversion.toFixed(1)} M`;
+        retornoNode.textContent = `${retorno} meses`;
+
+        const tierLabel = state.property === 'empresa' ? 'Plan corporativo solar pro' : state.property === 'agro' ? 'Plan agro solar adaptativo' : 'Plan residencial solar+';
+        tierNode.textContent = tierLabel;
+
+        const summary = state.property === 'empresa'
+            ? 'Sistema trifásico escalable con monitoreo 24/7 y soporte prioritario.'
+            : state.property === 'agro'
+            ? 'Diseño resistente a ambientes rurales, incluye microinversores.'
+            : 'Reemplazamos hasta el 80% de tu consumo con un arreglo compacto.';
+        summaryNode.textContent = summary;
+
+        billOutput.textContent = currencyFormat(state.bill);
+        consumptionOutput.textContent = `${state.consumption} kWh`;
+    }
+
+    propertyButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+            state.property = button.getAttribute('data-property') || 'hogar';
+            activateButtons(propertyButtons, 'data-property', state.property);
+            updateProjection();
+        });
+    });
+
+    irradianceButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+            state.irradiance = button.getAttribute('data-irradiance') || 'media';
+            activateButtons(irradianceButtons, 'data-irradiance', state.irradiance);
+            updateProjection();
+        });
+    });
+
+    billInput?.addEventListener('input', () => {
+        state.bill = parseInt(billInput.value, 10);
+        updateProjection();
+    });
+
+    consumptionInput?.addEventListener('input', () => {
+        state.consumption = parseInt(consumptionInput.value, 10);
+        updateProjection();
+    });
+
+    activateButtons(propertyButtons, 'data-property', state.property);
+    activateButtons(irradianceButtons, 'data-irradiance', state.irradiance);
+    updateProjection();
+</script>

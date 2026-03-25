@@ -2,88 +2,89 @@
 import { Icon } from "astro-icon/components";
 
 const items = [
-    {
-        icon: "ahorrar-dinero-icon",
-        title: "ahorro inmediato",
-        description1: "Reduce tu factura mensual.",
-        description2: "Disminuye tu pago de energía",
-        button: "Hasta un 100% menos",
-    },
-    {
-        icon: "ventas-icon",
-        title: "rol garantizado",
-        description1: "Recupera tu inversion con ahorro",
-        description2: "energetico proyectado y sostenido.",
-        button: "2 - 5 años",
-    },
-    {
-        icon: "verificado-icon",
-        title: "protección contra alzas",
-        description1: "Disminuye tu exposición a",
-        description2: "futuros incrementos tarifarios",
-        button: "Proyecto financiera a largo plazo",
-    },
-    {
-        icon: "tecnologia-icon",
-        title: "tecnologia",
-        description1: "Equipos certificados con bajo",
-        description2: "mantenimiento requerido",
-        button: "Componentes TIER 1 certificados",
-    },
-    {
-        icon: "hogar-icon",
-        title: "valoriza tu inmueble",
-        description1: "Incrementa el atractivo y valor",
-        description2: "comercial de tu propiedad",
-        button: "Hasta +10% valor",
-    },
-    {
-        icon: "hojas-icon",
-        title: "reduce impacto ambiental",
-        description1: "Reducción de la huella de carbono.",
-        description2: "Genera energia limpia",
-        button: "Hasta -10% emisiones C02",
-    },
+	{
+		icon: "ahorrar-dinero-icon",
+		title: "Ahorro inmediato",
+		copy: "Reduce tu factura desde el primer mes gracias al autoconsumo sincronizado",
+		metric: "Hasta 100% menos",
+		accent: "from-secondary/50",
+	},
+	{
+		icon: "ventas-icon",
+		title: "ROI garantizado",
+		copy: "Recupera tu inversión en 24 a 48 meses con contratos de energía estabilizada",
+		metric: "ROI 2-4 años",
+		accent: "from-primary/40",
+	},
+	{
+		icon: "verificado-icon",
+		title: "Escudo tarifario",
+		copy: "Protege tu operación ante incrementos inesperados y apagones",
+		metric: "+15 años cobertura",
+		accent: "from-secondary/30",
+	},
+	{
+		icon: "tecnologia-icon",
+		title: "Tecnología TIER 1",
+		copy: "Paneles certificados, microinversores inteligentes y monitoreo 24/7",
+		metric: "Garantía 25 años",
+		accent: "from-primary/30",
+	},
+	{
+		icon: "hogar-icon",
+		title: "Valorización",
+		copy: "Aumenta el valor comercial y la categoría energética de tu inmueble",
+		metric: "+10% valor",
+		accent: "from-secondary/40",
+	},
+	{
+		icon: "hojas-icon",
+		title: "Impacto ambiental",
+		copy: "Mitiga hasta 10 toneladas de CO₂ por sistema instalado",
+		metric: "-10 t CO₂/año",
+		accent: "from-primary/20",
+	},
 ];
 ---
 
-<section id="beneficios" class="py-8 lg:py-20 flex flex-col justify-center items-center min-h-screen">
-    <h1 class="text-3xl sm:text-4xl lg:text-6xl text-secondary font-bold uppercase text-center">beneficios</h1>
-    <p class="text-xs sm:text-sm font-semibold text-center px-4">
-        Lo que cambias cuando tomas control energetico
-    </p>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 py-6 lg:py-12 px-4">
-        {
-            items.map((item, index) => (
-                <div class="w-full bg-white rounded-2xl sm:rounded-3xl px-4 sm:px-6 lg:px-8 py-3 sm:py-4 shadow-[0_10px_40px_-15px_rgba(0,0,0,0.3)] border border-gray-100 hover:scale-105 transition-all">
-                    <div class="flex items-center gap-2 sm:gap-4 mb-3 sm:mb-4">
-                        <div class="bg-primary p-1.5 sm:p-2 rounded-lg flex items-center justify-center shrink-0">
-                            <Icon name={item.icon} class={'text-white text-2xl sm:text-3xl lg:text-4xl'}/>
-                        </div>
+<section id="beneficios" class="py-12 lg:py-24 relative">
+	<div
+		class="absolute inset-0 -z-10"
+		style="background: linear-gradient(145deg, color-mix(in srgb, var(--primary) 90%, black 10%), color-mix(in srgb, var(--primary) 65%, black 35%));"
+	></div>
+	<div class="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-secondary/20 to-transparent"></div>
+	<div class="max-w-6xl mx-auto px-4 lg:px-8 text-white" data-reveal>
+		<div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
+			<div>
+				<p class="text-xs uppercase tracking-[0.5em] text-secondary/80">Beneficios</p>
+				<h2 class="text-3xl sm:text-4xl lg:text-5xl font-display leading-tight">Lo que cambia cuando controlas tu energía</h2>
+				<p class="text-sm text-white/70 mt-4 max-w-xl">
+					Cada proyecto WM SAS combina ingeniería certificada, monitoreo permanente y modelos financieros realistas para garantizar retornos medibles.
+				</p>
+			</div>
+			<a href="#cases" class="inline-flex items-center gap-2 text-sm font-semibold text-secondary">Ver casos reales →</a>
+		</div>
 
-                        <h2 class="text-[#C5D33A] font-semibold text-lg sm:text-xl lg:text-2xl leading-tight uppercase tracking-tight">
-                            {item.title.split(" ")[0]}
-                            <br />
-                            {item.title.split(" ")[1] +' '+ item.title.split(" ")[2]}
-                        </h2>
-                    </div>
-
-                    <div class="mb-3 sm:mb-5">
-                        <p class="text-gray-400 font-semibold text-sm sm:text-base lg:text-xl leading-snug">
-                            {item.description1}
-                        </p>
-                        <p class="text-gray-400 font-semibold text-sm sm:text-base lg:text-xl leading-snug">
-                            {item.description2}
-                        </p>
-                    </div>
-
-                    <div class="bg-primary py-1.5 sm:py-2 px-4 sm:px-6 rounded-lg text-center">
-                        <button class="text-white font-bold text-xs sm:text-base lg:text-lg">
-                            {item.button}
-                        </button>
-                    </div>
-                </div>
-            ))
-        }
-    </div>
+		<div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 mt-12">
+			{items.map((item, index) => (
+				<div class="relative rounded-[1.75rem] p-6 border border-white/10 bg-white/5" data-reveal style={`--reveal-delay:${index * 80}ms`}>
+					<div class={`absolute inset-0 rounded-[1.75rem] bg-gradient-to-br ${item.accent} to-transparent opacity-60`}></div>
+					<div class="relative space-y-5">
+						<div class="inline-flex items-center gap-3">
+							<div class="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center text-2xl">
+								<Icon name={item.icon} class="text-secondary text-3xl" />
+							</div>
+							<p class="text-xs uppercase tracking-[0.4em] text-white/60">WM beneficio</p>
+						</div>
+						<h3 class="text-2xl font-display">{item.title}</h3>
+						<p class="text-sm text-white/80">{item.copy}</p>
+						<div class="flex items-center justify-between">
+							<span class="text-xs uppercase tracking-[0.3em] text-white/60">Indicador</span>
+							<span class="text-lg font-display">{item.metric}</span>
+						</div>
+					</div>
+				</div>
+			))}
+		</div>
+	</div>
 </section>

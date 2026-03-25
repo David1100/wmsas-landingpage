@@ -1,65 +1,131 @@
 ---
+const highlights = [
+	{
+		label: "kW instalados",
+		value: "+280",
+		detail: "en techos residenciales y empresariales",
+	},
+	{
+		label: "Ton CO₂ evitadas",
+		value: "1.2k",
+		detail: "impacto medible en 2024",
+	},
+	{
+		label: "Tiempo de retorno",
+		value: "36 m",
+		detail: "promedio proyectos WM SAS",
+	},
+];
 
+const badges = [
+	"RETIE 2024",
+	"Equipos Tier 1",
+	"Garantía 25 años",
+];
 ---
-<header class="flex justify-end px-8 py-2 bg-white">
-    <div class="flex items-center gap-4">
-        <div class="text-end -space-y-1">
-            <h1 class="text-xl text-primary font-semibold">+57 300 123 4567</h1>
-            <h2 class="text-sm uppercase font-bold">asesoria gratuita</h2>
-        </div>
-        <button class="uppercase font-semibold bg-primary rounded-lg px-2 py-1 text-white">contáctacnos</button>  
-    </div>
+
+<header class="bg-white/80 border-b border-primary/10 backdrop-blur-sm" data-reveal style="--reveal-delay:0ms">
+	<div class="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-4 px-4 py-4">
+		<div class="flex items-center gap-3 text-sm text-primary">
+			<div class="w-2 h-2 rounded-full bg-secondary animate-pulse"></div>
+			<p class="uppercase font-semibold tracking-[0.2em] text-xs">ingeniería solar wm sas</p>
+		</div>
+		<div class="flex flex-wrap items-center gap-3 text-sm">
+			<a href="tel:+573001234567" class="flex items-center gap-2 text-primary font-semibold">
+				<span class="w-2 h-2 rounded-full bg-secondary"></span>
+				+57 300 123 4567
+			</a>
+			<span class="hidden sm:block text-primary/50">|</span>
+			<a
+				href="https://wa.me/573001234567"
+				target="_blank"
+				rel="noreferrer"
+				class="flex items-center gap-2 px-3 py-1 rounded-full bg-primary text-white text-xs font-semibold uppercase tracking-wide"
+			>
+				<span class="text-secondary">●</span> asesoría inmediata
+			</a>
+		</div>
+	</div>
 </header>
-<section id="inicio" class="grid lg:grid-cols-12 h-screen gap-4 bg-white">
-    <div class="col-span-12 lg:col-span-3 space-y-4 lg:space-y-8 pt-20 lg:pt-0 px-4 lg:px-4 flex flex-col justify-center">
-        <div>
-            <h1 class="uppercase text-secondary text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black">
-                tu camino
-            </h1>
-            <h1 class="uppercase text-primary text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-black">solar</h1>
-            <h1 class="uppercase text-secondary text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black">
-                comienza <span class="text-primary">aqui</span>
-            </h1>
-            <h2 class="text-gray-300 text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold">
-                Energia solar profesional
-            </h2>
-        </div>
-        <div>
-            <h1 class="uppercase text-lg sm:text-xl md:text-2xl lg:text-3xl font-black">
-                tu factura de energia no dejara de <span class="text-red-600">subir</span>
-            </h1>
-        </div>
-        <div>
-            <h1 class="uppercase text-lg sm:text-xl md:text-2xl lg:text-3xl font-black">
-                descubre como puedes tomar el <span class="text-secondary">control</span>
-            </h1>
-        </div>
-        <div class="flex justify-center lg:justify-start">
-            <button
-                class="uppercase px-4 py-2 rounded-lg bg-secondary font-bold text-sm sm:text-lg lg:text-xl"
-            >
-                calcular mi ahorro
-            </button>
-        </div>
-    </div>
-    <div class="col-span-12 lg:col-span-9 relative w-full py-10 lg:py-20 order-first lg:order-last">
-        <img
-            src="/images/fondo-solar-home.jpg"
-            class="absolute inset-0 w-full h-full object-cover"
-            alt=""
-        />
-        <div class="absolute inset-0 bg-white/70"></div>
-        <div class="relative z-10 max-w-5xl mx-auto text-center px-4">
-            <h2 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-blue-900 mb-6 lg:mb-10">
-                CONOCE COMO IMPLEMENTAMOS <br /> SISTEMAS SOLARES
-            </h2>
-            <div class="rounded-2xl overflow-hidden shadow-2xl">
-                <iframe
-                    class="w-full h-48 sm:h-56 md:h-64 lg:h-150"
-                    src="https://www.youtube.com/embed/VIDEO_ID"
-                    title="Video"
-                    allowfullscreen></iframe>
-            </div>
-        </div>
-    </div>
+
+<section id="inicio" class="relative overflow-hidden">
+	<div class="absolute inset-0 solar-grid opacity-40"></div>
+	<div class="max-w-6xl mx-auto px-4 lg:px-8 py-12 lg:py-24 grid gap-12 lg:grid-cols-[1.05fr_0.95fr] items-center relative">
+		<div class="space-y-8" data-reveal="left">
+			<div class="space-y-3">
+				<p class="uppercase text-secondary font-semibold tracking-[0.3em] text-xs">Colombia · energía distribuida</p>
+				<h1 class="text-4xl sm:text-5xl lg:text-6xl font-semibold font-display text-primary leading-tight">
+					Tu transición solar comienza
+					<span class="text-secondary"> hoy.</span>
+				</h1>
+				<p class="text-lg text-primary/80 max-w-xl">
+					Diseñamos, financiamos e instalamos sistemas fotovoltaicos llave en mano para hogares y compañías.
+					Controla tu factura y protege tus operaciones frente a futuras alzas.
+				</p>
+			</div>
+			<div class="flex flex-wrap items-center gap-4" data-reveal style="--reveal-delay:120ms">
+				<a
+					href="#calculadora"
+					class="group inline-flex items-center gap-3 px-6 py-3 rounded-full bg-secondary text-primary font-semibold uppercase tracking-wide text-sm shadow-[0_12px_60px_-30px_rgba(243,199,70,0.9)]"
+				>
+					Calcular mi ahorro
+					<span class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center group-hover:translate-x-1 transition-transform">→</span>
+				</a>
+				<a
+					href="#doubts"
+					class="inline-flex items-center gap-2 px-5 py-2 text-sm font-semibold text-primary/70 hover:text-primary border border-primary/20 rounded-full"
+				>
+					Ver dudas frecuentes
+				</a>
+			</div>
+			<div class="grid sm:grid-cols-3 gap-4">
+				{highlights.map((item, index) => (
+					<div class="bg-white/80 border border-white/60 rounded-2xl p-4 shadow-[0_25px_60px_-50px_rgba(12,21,39,0.8)]" data-reveal style={`--reveal-delay:${index * 80}ms`}>
+						<p class="text-3xl font-display text-primary">{item.value}</p>
+						<p class="text-xs uppercase tracking-[0.2em] text-primary/60">{item.label}</p>
+						<p class="text-sm text-primary/70 mt-2">{item.detail}</p>
+					</div>
+				))}
+			</div>
+			<div class="flex flex-wrap gap-2" data-reveal style="--reveal-delay:260ms">
+				{badges.map((badge) => (
+					<span class="text-xs font-semibold uppercase tracking-wide px-3 py-1 rounded-full bg-white/70 border border-primary/10 text-primary/70">
+						{badge}
+					</span>
+				))}
+			</div>
+		</div>
+		<div class="relative" data-reveal="right">
+			<div
+				class="absolute inset-0 rounded-[2.5rem] rotate-6 opacity-50 animate-glow"
+				style="background: linear-gradient(140deg, color-mix(in srgb, var(--primary) 85%, black 15%), color-mix(in srgb, var(--primary) 60%, black 40%));"
+			></div>
+			<div class="relative bg-white glass-panel rounded-[2rem] p-8 space-y-6 animate-float">
+				<div class="flex items-center justify-between">
+					<p class="text-xs uppercase tracking-[0.3em] text-primary/60">Simulación WM</p>
+					<p class="text-primary text-sm font-semibold">Actualizado 2025</p>
+				</div>
+				<div>
+					<p class="text-sm text-primary/60">Consumo mensual</p>
+					<p class="text-4xl font-display text-primary">$620.000</p>
+					<p class="text-xs text-primary/50 mt-1">Datos de clientes reales</p>
+				</div>
+				<div class="space-y-3">
+					<p class="text-sm text-primary/60">Ahorro proyectado</p>
+					<div class="w-full h-3 rounded-full bg-primary/10 overflow-hidden">
+						<div class="h-full w-[78%] bg-gradient-to-r from-secondary via-yellow-300 to-orange-300"></div>
+					</div>
+					<p class="text-3xl font-display text-primary">78% <span class="text-base font-sans text-primary/60">en 24 meses</span></p>
+				</div>
+				<div class="bg-primary/5 border border-primary/10 rounded-xl p-4">
+					<p class="text-sm text-primary/70">"El modelo híbrido de WM SAS nos permitió blindar la operación frente a apagones y bajar la factura 68%."</p>
+					<p class="text-xs text-primary/50 mt-2">Laura Beltrán · Directora Financiera</p>
+				</div>
+				<div class="flex flex-wrap gap-3">
+					<div class="px-3 py-2 rounded-lg bg-secondary/20 text-xs font-semibold text-primary">Diagnóstico en sitio</div>
+					<div class="px-3 py-2 rounded-lg bg-primary text-white text-xs font-semibold">Garantía 25 años</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </section>

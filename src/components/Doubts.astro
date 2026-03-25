@@ -2,100 +2,165 @@
 import { Icon } from "astro-icon/components";
 
 const items = [
-    {
-        category: "ahorro",
-        question: "¿Ahorraré desde el primer día?",
-        response: "Sí, desde el primer día que tu sistema solar comience a funcionar comenzarás a ver reducción en tu factura de electricidad. Nuestro equipo de expertos evalúa tu consumo para dimensionar correctamente tu instalación.",
-    },
-    {
-        category: "instalación",
-        question: "¿Cuánto tiempo toma la instalación?",
-        response: "La instalación típica de un sistema solar residencial toma entre 1 y 3 días, dependiendo del tamaño del sistema y la complejidad del techo. Nos encargamos de todo el proceso de principio a fin.",
-    },
-    {
-        category: "mantenimiento",
-        question: "¿Qué mantenimiento requiere?",
-        response: "Los paneles solares requieren muy poco mantenimiento. Recomendamos una limpieza básica semestral y una revisión técnica anual. Nuestros paneles tienen garantía de 25 años y ofrecemos planes de mantenimiento preventivo.",
-    },
-    {
-        category: "trámites",
-        question: "¿Necesito permisos especiales?",
-        response: "Nosotros nos encargamos de todos los trámites y permisos necesarios para la instalación, incluyendo el registro ante la CFE y los permisos municipales. Solo necesitas proporcionar la documentación básica.",
-    },
+	{
+		category: "ahorro",
+		question: "¿Ahorraré desde el primer día?",
+		response: "Sí, desde el primer día que tu sistema solar comience a funcionar comenzarás a ver reducción en tu factura de electricidad. Nuestro equipo de expertos evalúa tu consumo para dimensionar correctamente tu instalación.",
+	},
+	{
+		category: "instalación",
+		question: "¿Cuánto tiempo toma la instalación?",
+		response: "La instalación típica de un sistema solar residencial toma entre 1 y 3 días, dependiendo del tamaño del sistema y la complejidad del techo. Nos encargamos de todo el proceso de principio a fin.",
+	},
+	{
+		category: "mantenimiento",
+		question: "¿Qué mantenimiento requiere?",
+		response: "Los paneles solares requieren muy poco mantenimiento. Recomendamos una limpieza básica semestral y una revisión técnica anual. Nuestros paneles tienen garantía de 25 años y ofrecemos planes de mantenimiento preventivo.",
+	},
+	{
+		category: "trámites",
+		question: "¿Necesito permisos especiales?",
+		response: "Nosotros nos encargamos de todos los trámites y permisos necesarios para la instalación, incluyendo el registro ante la CFE y los permisos municipales. Solo necesitas proporcionar la documentación básica.",
+	},
 ];
+
+const categories = [...new Set(items.map((item) => item.category))];
+const defaultCategory = categories[0];
 ---
 
-<section id="doubts" class="py-8 lg:py-20 min-h-screen fondo-doubts space-y-8">
-    <div class="text-center">
-        <h1 class="text-4xl text-primary font-black">Resolvemos tus dudas</h1>
-        <h1 class="text-4xl font-bold">
-            sobre <strong class="uppercase">energía solar</strong>
-        </h1>
-    </div>
+<section id="doubts" class="py-12 lg:py-24 fondo-doubts space-y-10" data-default-category={defaultCategory}>
+	<div class="text-center space-y-3" data-reveal>
+		<p class="text-xs uppercase tracking-[0.5em] text-primary/60">preguntas</p>
+		<h2 class="text-4xl font-display text-primary">Resolvemos tus dudas sobre energía solar</h2>
+		<p class="text-primary/70 max-w-2xl mx-auto text-sm">
+			Si no encuentras tu pregunta, agenda una videollamada y aclaramos todo en menos de 24 horas.
+		</p>
+	</div>
 
-    <ul class="max-w-6xl mx-auto space-y-6">
-        {
-            items.map((item, index) => (
-                <li class="bg-white shadow-lg rounded-lg overflow-hidden" data-index={index}>
-                    <div class="flex items-center gap-4 p-4 cursor-pointer" data-toggle>
-                        <div class="bg-primary p-1.5 sm:p-2 rounded-lg shrink-0">
-                            <Icon
-                                name="bombilla-icon"
-                                class="text-white text-2xl sm:text-3xl lg:text-4xl"
-                            />
-                        </div>
-                        <div class="flex-1 min-w-0">
-                            <span class="bg-secondary rounded-lg px-4 py-1 text-primary uppercase font-semibold text-sm">
-                                {item.category}
-                            </span>
-                            <h2 class="text-lg font-bold mt-1">{item.question}</h2>
-                        </div>
-                        <button
-                            class="shrink-0 w-10 h-10 rounded-full bg-primary flex items-center justify-center"
-                            aria-label="Desplegar respuesta"
-                            data-btn
-                        >
-                            <Icon
-                                name="arrow-open-down-icon"
-                                class="text-white w-5 h-5 [&_path]:fill-white doubt-toggle-icon"
-                            />
-                        </button>
-                    </div>
-                    <div class="doubt-response px-4 pb-0" data-response>
-                        <div>
-                            <p class="text-gray-600 leading-relaxed pb-4">{item.response}</p>
-                        </div>
-                    </div>
-                </li>
-            ))
-        }
-    </ul>
+	<div class="max-w-5xl mx-auto" data-reveal>
+		<div class="flex flex-wrap gap-3 justify-center mb-8">
+			{categories.map((category) => (
+				<button
+					type="button"
+					class={`faq-tab px-4 py-2 rounded-full border border-primary/20 text-xs font-semibold uppercase tracking-[0.3em] ${category === defaultCategory ? 'active' : ''}`}
+					data-tab={category}
+				>
+					{category}
+				</button>
+			))}
+		</div>
+
+		<ul class="space-y-4" data-faq-list>
+			{items.map((item, index) => (
+				<li
+					class="bg-white/90 shadow-[0_20px_60px_-40px_rgba(0,0,0,0.4)] rounded-2xl border border-primary/10"
+					data-faq-item
+					data-category={item.category}
+					data-index={index}
+					data-reveal
+					style={`--reveal-delay:${index * 60}ms`}
+				>
+					<div class="flex items-center gap-4 p-5 cursor-pointer" data-toggle>
+						<div class="bg-primary/10 text-primary rounded-2xl p-3">
+							<Icon
+								name="bombilla-icon"
+								class="text-2xl"
+							/>
+						</div>
+						<div class="flex-1 min-w-0">
+							<span class="inline-flex items-center gap-2 text-xs uppercase tracking-[0.4em] text-primary/60">
+								{item.category}
+							</span>
+							<h3 class="text-lg font-semibold text-primary mt-1">{item.question}</h3>
+						</div>
+						<button
+							class="shrink-0 w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center"
+							aria-label="Desplegar respuesta"
+							data-btn
+						>
+							<Icon
+								name="arrow-open-down-icon"
+								class="w-5 h-5 [&_path]:fill-white doubt-toggle-icon"
+							/>
+						</button>
+					</div>
+					<div class="doubt-response px-5 pb-0" data-response>
+						<div>
+							<p class="text-sm text-primary/80 leading-relaxed pb-4">{item.response}</p>
+						</div>
+					</div>
+				</li>
+			))}
+		</ul>
+	</div>
+
+	<div class="text-center" data-reveal>
+		<p class="text-sm text-primary/70">¿Aún tienes dudas?</p>
+		<a href="https://wa.me/573001234567" target="_blank" rel="noreferrer" class="inline-flex items-center gap-2 px-5 py-3 bg-primary text-white rounded-full text-xs font-semibold uppercase tracking-[0.3em]">
+			Habla con un ingeniero
+		</a>
+	</div>
 </section>
 
+<style>
+	.faq-tab.active {
+		background: var(--primary);
+		color: #fff;
+		border-color: var(--primary);
+	}
+</style>
+
 <script>
-    document.querySelectorAll("[data-toggle]").forEach((row) => {
-        row.addEventListener("click", (e) => {
-            const li = row.closest("li");
-            const btn = li.querySelector("[data-btn]");
-            const response = li.querySelector("[data-response]");
-            const icon = btn.querySelector("Icon");
-            const isOpen = response.classList.contains("open");
+const tabs = document.querySelectorAll('[data-tab]');
+const faqItems = document.querySelectorAll('[data-faq-item]');
+const section = document.getElementById('doubts');
 
-            document
-                .querySelectorAll(".doubt-response.open")
-                .forEach((openResponse) => {
-                    const openBtn = openResponse
-                        .closest("li")
-                        .querySelector("[data-btn]");
-                    const openIcon = openBtn.querySelector("Icon");
-                    openResponse.classList.remove("open");
-                    if (openIcon) openIcon.classList.remove("open");
-                });
+	function activateTab(category) {
+		tabs.forEach((tab) => {
+			if (tab.getAttribute('data-tab') === category) {
+				tab.classList.add('active');
+			} else {
+				tab.classList.remove('active');
+			}
+		});
 
-            if (!isOpen) {
-                response.classList.add("open");
-                if (icon) icon.classList.add("open");
-            }
-        });
-    });
+		faqItems.forEach((item) => {
+			const itemCategory = item.getAttribute('data-category');
+			if (!category || category === itemCategory) {
+				item.classList.remove('hidden');
+			} else {
+				item.classList.add('hidden');
+			}
+		});
+	}
+
+	tabs.forEach((tab) => {
+		tab.addEventListener('click', () => {
+			activateTab(tab.getAttribute('data-tab')); 
+		});
+	});
+
+	const toggleRows = document.querySelectorAll('[data-toggle]');
+
+	toggleRows.forEach((row) => {
+		row.addEventListener('click', () => {
+			const li = row.closest('li');
+			const response = li?.querySelector('[data-response]');
+			const icon = li?.querySelector('.doubt-toggle-icon');
+			const isOpen = response?.classList.contains('open');
+
+			document.querySelectorAll('.doubt-response.open').forEach((openResponse) => {
+				openResponse.classList.remove('open');
+			});
+			document.querySelectorAll('.doubt-toggle-icon.open').forEach((openIcon) => openIcon.classList.remove('open'));
+
+			if (!isOpen) {
+				response?.classList.add('open');
+				icon?.classList.add('open');
+			}
+		});
+	});
+
+	const initialCategory = section?.getAttribute('data-default-category') || '';
+	activateTab(initialCategory);
 </script>

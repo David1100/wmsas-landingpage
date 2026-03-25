@@ -1,0 +1,59 @@
+---
+const stats = [
+	{ label: "Proyectos llave en mano", value: "+120" },
+	{ label: "Ingenieros en campo", value: "8" },
+	{ label: "Ahorro promedio", value: "78%" },
+];
+---
+
+<section id="tour" class="py-16 lg:py-24 relative overflow-hidden">
+	<div class="absolute inset-0 bg-gradient-to-b from-white to-transparent -z-10"></div>
+	<div class="max-w-6xl mx-auto px-4 lg:px-8 grid gap-10 lg:grid-cols-[0.9fr_1.1fr] items-center">
+		<div class="space-y-6" data-reveal>
+			<p class="text-xs uppercase tracking-[0.5em] text-primary/60">Experiencia</p>
+			<h2 class="text-3xl sm:text-4xl font-display text-primary leading-tight">
+				Mira cómo vivimos una instalación solar WM SAS
+			</h2>
+			<p class="text-sm text-primary/70 max-w-xl">
+				Capturamos el paso a paso de una obra real: levantamiento, montaje y puesta en marcha. Este video resume el compromiso del equipo y la calidad de los equipos que instalamos en techos colombianos.
+			</p>
+			<div class="grid gap-4 sm:grid-cols-3">
+				{stats.map((stat, index) => (
+					<div class="rounded-2xl border border-primary/10 bg-white/80 p-4 text-center" data-reveal style={`--reveal-delay:${index * 80}ms`}>
+						<p class="text-2xl font-display text-primary">{stat.value}</p>
+						<p class="text-[10px] uppercase tracking-[0.4em] text-primary/60">{stat.label}</p>
+					</div>
+				))}
+			</div>
+			<div class="flex flex-wrap gap-4" data-reveal style="--reveal-delay:260ms">
+				<a href="https://wa.me/573001234567" target="_blank" rel="noreferrer" class="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-secondary text-primary text-xs font-semibold uppercase tracking-[0.3em]">
+					Agenda visita en sitio
+				</a>
+				<a href="#cases" class="text-xs uppercase tracking-[0.3em] text-primary/70">Ver más proyectos →</a>
+			</div>
+		</div>
+
+		<div class="relative" data-reveal="right">
+			<div class="absolute -inset-4 bg-primary/10 rounded-[2.5rem] blur-3xl"></div>
+			<div class="relative rounded-[2.5rem] overflow-hidden border border-white/60 glass-panel">
+				<div class="absolute inset-0 pointer-events-none bg-gradient-to-t from-primary/40 to-transparent mix-blend-multiply"></div>
+				<div class="relative aspect-video">
+					<iframe
+						title="Tour instalación WM SAS"
+						src="https://www.youtube.com/embed/VIDEO_ID?autoplay=0&rel=0&controls=1"
+						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+						allowfullscreen
+						class="w-full h-full"
+					></iframe>
+				</div>
+				<div class="absolute top-4 left-4 px-4 py-2 rounded-full bg-primary text-white text-[10px] uppercase tracking-[0.4em]">
+					Behind the scenes
+				</div>
+				<div class="absolute bottom-4 left-4 right-4 flex flex-wrap items-center justify-between gap-2 text-white">
+					<p class="text-sm font-semibold">Instalación híbrida 6.2 kWp · Bucaramanga</p>
+					<span class="text-xs text-white/70">Duración: 2:31 min</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

@@ -1,254 +1,104 @@
 ---
-
+const steps = [
+	{
+		phase: "A",
+		title: "Asesoría",
+		description: "Evaluamos consumo, infraestructura y normativa para definir alcance real",
+		points: ["Levantamiento energético", "Inspección en sitio", "Modelado inicial"],
+	},
+	{
+		phase: "C",
+		title: "Cotización",
+		description: "Escogemos tecnología y planteamos escenarios financieros",
+		points: ["Diseño 3D + simulación", "CapEx / OpEx", "Opciones de financiamiento"],
+	},
+	{
+		phase: "C",
+		title: "Contratación",
+		description: "Formalizamos alcance, garantías y cronograma",
+		points: ["Firma digital", "Cronograma ejecutivo", "Gestión documental"],
+	},
+	{
+		phase: "I",
+		title: "Implementación",
+		description: "Instalamos, probamos y dejamos operando el sistema",
+		points: ["Obra civil y eléctrica", "Interconexión", "Pruebas RETIE"],
+	},
+	{
+		phase: "O",
+		title: "Operación",
+		description: "Monitoreamos en tiempo real y ajustamos el performance",
+		points: ["Plataforma 24/7", "Alertas", "Mantenimiento"],
+	},
+	{
+		phase: "N",
+		title: "Normalización",
+		description: "Gestionamos certificaciones, conexión a red y garantías",
+		points: ["Trámites con comercializador", "Certificados RETIE", "Capacitación"],
+	},
+];
 ---
 
-<section class="py-8 lg:py-20 min-h-screen relative">
-    <div class="text-center mb-10">
-        <h2 class="text-xl md:text-2xl font-semibold text-blue-900">
-            Así implementamos tu sistema solar paso a paso
-        </h2>
-        <p class="text-gray-600">
-            Un proceso estructurado en <span class="text-green-500 font-bold"
-                >6 etapas</span
-            >
-        </p>
-    </div>
+<section id="accion" class="py-12 lg:py-24 relative overflow-hidden">
+	<div class="absolute inset-0 bg-gradient-to-b from-white via-white to-transparent"></div>
+	<div class="max-w-6xl mx-auto px-4 lg:px-8 relative" data-reveal>
+		<div class="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
+			<div class="bg-primary text-white rounded-[2rem] p-8 space-y-6 shadow-[0_50px_80px_-60px_rgba(10,15,41,1)]" data-reveal="left">
+				<p class="text-xs uppercase tracking-[0.5em] text-secondary/80">Metodología WM</p>
+				<h2 class="text-3xl lg:text-4xl font-display leading-tight">
+					Así implementamos tu sistema solar paso a paso
+				</h2>
+				<p class="text-sm text-white/80">
+					Seis etapas claras, responsables y auditables. Nos encargamos de ingeniería, trámites y acompañamiento para que solo te concentres en ver tu factura bajar.
+				</p>
+				<div class="flex flex-wrap gap-4">
+					<div class="px-4 py-3 rounded-2xl bg-white/10">
+						<p class="text-xs uppercase tracking-[0.4em] text-white/60">Duración promedio</p>
+						<p class="text-2xl font-display">45 días</p>
+					</div>
+					<div class="px-4 py-3 rounded-2xl bg-white/10">
+						<p class="text-xs uppercase tracking-[0.4em] text-white/60">Equipo dedicado</p>
+						<p class="text-2xl font-display">+8 especialistas</p>
+					</div>
+				</div>
+				<a href="https://wa.me/573001234567" class="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-secondary text-primary font-semibold text-sm uppercase tracking-wide">
+					Hablar con un ingeniero
+					<span class="text-lg">→</span>
+				</a>
+			</div>
 
-    <div
-        id="timeline"
-        class="flex justify-center items-center mb-12 flex-wrap"
-    >
-    </div>
-    <div class="flex items-center justify-center gap-10">
-        <img src="/images/solar-icon.svg" class="w-40" alt="" id="solar-icon" />
-        <div
-            class="w-xl bg-white rounded-2xl shadow-lg p-6 relative transition-all duration-500"
-            id="card"
-        >
-            <h3 id="title" class="text-2xl font-bold text-blue-900 mb-2"></h3>
-
-            <p id="desc" class="text-sm text-gray-600 mb-4"></p>
-
-            <hr class="mb-4" />
-
-            <ul id="list" class="space-y-2 mb-6"></ul>
-
-            <div id="progress" class="flex items-center gap-2"></div>
-        </div>
-        <img src="/images/energia-solar-icon.svg" class="w-40" alt="" />
-    </div>
-    
-    <div id="connector-line" class="absolute pointer-events-none z-10"></div>
+			<div class="overflow-hidden" data-reveal="right" style="--reveal-delay:160ms">
+				<div class="overflow-x-auto pb-6" aria-label="Línea de tiempo WM">
+					<ol class="flex gap-6 min-w-max">
+					{steps.map((step, index) => (
+						<li class="relative flex-1 min-w-[240px]" data-reveal style={`--reveal-delay:${index * 90}ms`}>
+								<div class="h-1 bg-primary/10 rounded-full mb-6 overflow-hidden">
+									<div class="h-full bg-gradient-to-r from-secondary to-transparent" style={`width: ${(index + 1) * (100 / steps.length)}%`}></div>
+								</div>
+								<div class="rounded-[1.7rem] border border-primary/10 bg-white/90 p-6 shadow-[0_20px_40px_-40px_rgba(10,15,41,1)]">
+									<div class="flex items-center gap-3">
+										<div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-display text-lg">
+											{step.phase}
+										</div>
+										<p class="text-xs uppercase tracking-[0.4em] text-primary/50">Etapa {index + 1}</p>
+									</div>
+									<h3 class="text-xl font-display text-primary mt-4">{step.title}</h3>
+									<p class="text-sm text-primary/70">{step.description}</p>
+									<ul class="mt-4 space-y-2 text-sm text-primary/80">
+										{step.points.map((point) => (
+											<li class="flex items-center gap-2">
+												<span class="w-2 h-2 rounded-full bg-secondary"></span>
+												{point}
+											</li>
+										))}
+									</ul>
+								</div>
+							</li>
+						))}
+					</ol>
+				</div>
+				<p class="text-xs text-primary/60 text-center">Documentamos cada fase y compartimos avances en un panel digital.</p>
+			</div>
+		</div>
+	</div>
 </section>
-
-<script>
-    const steps = [
-        {
-            letter: "A",
-            title: "ASESORÍA",
-            desc: "Evaluación técnica y energética personalizada",
-            items: [
-                "Análisis de consumo eléctrico",
-                "Evaluación de espacio disponible",
-                "Revisión de viabilidad técnica",
-                "Estimación preliminar de ahorro",
-            ],
-        },
-        {
-            letter: "C",
-            title: "COTIZACIÓN",
-            desc: "Propuesta económica detallada",
-            items: [
-                "Costos del sistema",
-                "Opciones de financiamiento",
-                "Retorno de inversión",
-            ],
-        },
-        {
-            letter: "C",
-            title: "CONTRATACIÓN",
-            desc: "Formalización del proyecto",
-            items: [
-                "Firma de contrato",
-                "Definición de tiempos",
-                "Inicio del proyecto",
-            ],
-        },
-        {
-            letter: "I",
-            title: "IMPLEMENTACIÓN",
-            desc: "Instalación del sistema",
-            items: [
-                "Montaje de paneles",
-                "Instalación eléctrica",
-                "Pruebas del sistema",
-            ],
-        },
-        {
-            letter: "O",
-            title: "OPERACIÓN",
-            desc: "Sistema en funcionamiento",
-            items: ["Monitoreo", "Optimización", "Seguimiento"],
-        },
-        {
-            letter: "N",
-            title: "NORMALIZACIÓN",
-            desc: "Legalización del sistema",
-            items: ["Trámites", "Certificaciones", "Conexión a red"],
-        },
-    ];
-
-    let current = 0;
-
-    const timeline = document.getElementById("timeline");
-    const title = document.getElementById("title");
-    const desc = document.getElementById("desc");
-    const list = document.getElementById("list");
-    const progress = document.getElementById("progress");
-
-    function renderTimeline() {
-        timeline.innerHTML = "";
-
-        steps.forEach((step, i) => {
-            const wrapper = document.createElement("div");
-            wrapper.className = "flex items-center cursor-pointer";
-
-            const circleInner = document.createElement("div");
-            circleInner.className = "flex items-center justify-center flex-col";
-
-            const circle = document.createElement("div");
-            circle.className = `
-        w-10 h-10 flex items-center justify-center rounded-full border-1 text-3xl p-6
-        ${i === current ? "bg-yellow-300 border-2 border-secondary scale-110 shadow-secondary/50 shadow-xl text-primary" : "bg-white text-blue-900 border-primary"}
-        transition-all duration-300
-      `;
-            circle.innerText = step.letter;
-            if (step.letter === 'A') {
-                circle.id = 'letter-A';
-            }
-
-            circle.onclick = () => {
-                current = i;
-                render();
-            };
-
-            circleInner.appendChild(circle);
-
-            const circleTitle = document.createElement("span");
-            circleTitle.className = `block mt-2 text-[9px] font-semibold text-center max-w-16 ${i === current ? "text-primary" : "text-gray-600"}`;
-            circleTitle.innerText = step.title;
-            circleInner.appendChild(circleTitle);
-
-            wrapper.appendChild(circleInner);
-
-            if (i < steps.length - 1) {
-                const connector = document.createElement("div");
-                connector.className = "flex items-center -mt-4";
-
-                const lineLeft = document.createElement("div");
-                lineLeft.className = "w-6 h-[2px] bg-primary";
-                
-                const arrowIcon = document.createElement("img");
-                arrowIcon.src = "/images/energy-icon.svg";
-                arrowIcon.className = "w-5 h-5 text-primary mx-1";
-                arrowIcon.alt = "";
-
-                const lineRight = document.createElement("div");
-                lineRight.className = "w-6 h-[2px] bg-primary";
-
-                connector.appendChild(lineLeft);
-                connector.appendChild(arrowIcon);
-                connector.appendChild(lineRight);
-                wrapper.appendChild(connector);
-            }
-
-            timeline.appendChild(wrapper);
-        });
-    }
-
-    function renderContent() {
-        const step = steps[current];
-
-        title.innerText = step.title;
-        desc.innerText = step.desc;
-
-        list.innerHTML = "";
-        step.items.forEach((item) => {
-            const li = document.createElement("li");
-            li.className =
-                "flex items-center gap-2 opacity-0 translate-y-2 transition-all duration-500";
-
-            li.innerHTML = `
-        <span class="w-2 h-2 bg-green-500 rounded-full"></span>
-        ${item}
-      `;
-
-            list.appendChild(li);
-
-            setTimeout(() => {
-                li.classList.remove("opacity-0", "translate-y-2");
-            }, 100);
-        });
-    }
-
-    function renderProgress() {
-        progress.innerHTML = "";
-
-        steps.forEach((_, i) => {
-            const bar = document.createElement("div");
-            bar.className = `
-        h-2 flex-1 rounded-full transition-all duration-500
-        ${i <= current ? "bg-yellow-400" : "bg-gray-300"}
-      `;
-           progress.appendChild(bar);
-        });
-    }
-
-    function render() {
-        renderTimeline();
-        renderContent();
-        renderProgress();
-        setTimeout(drawConnector, 0);
-    }
-
-    function drawConnector() {
-        const solarIcon = document.getElementById('solar-icon');
-        const letterA = document.getElementById('letter-A');
-        
-        if (!solarIcon || !letterA) return;
-        
-        const iconRect = solarIcon.getBoundingClientRect();
-        const letterRect = letterA.getBoundingClientRect();
-        
-        const startX = iconRect.right;
-        const startY = iconRect.top + iconRect.height / 2;
-        const endX = letterRect.left;
-        const endY = letterRect.top + letterRect.height / 2;
-        
-        const midX = (startX + endX) / 2;
-        const cornerY = endY;
-        
-        const connector = document.getElementById('connector-line');
-        connector.style.left = '0';
-        connector.style.top = '0';
-        connector.style.width = '100%';
-        connector.style.height = '100%';
-        connector.style.position = 'fixed';
-        connector.style.pointerEvents = 'none';
-        connector.style.zIndex = '10';
-        
-        connector.innerHTML = `
-            <svg width="100%" height="100%" style="position:absolute;top:0;left:0;">
-                <path d="M ${startX} ${startY} L ${startX} ${cornerY} L ${endX} ${cornerY}" 
-                      stroke="var(--primary)" stroke-width="2" fill="none"/>
-            </svg>
-            <div style="position:absolute; left:${midX}px; top:${cornerY}px; transform:translate(-50%,-50%); 
-                        background:white; padding:4px; border-radius:50%;">
-                <img src="/images/energy-icon.svg" style="width:20px;height:20px;" />
-            </div>
-        `;
-    }
-
-    window.addEventListener('resize', drawConnector);
-    render();
-</script>

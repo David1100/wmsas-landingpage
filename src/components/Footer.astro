@@ -1,36 +1,86 @@
 ---
 import { Icon } from "astro-icon/components";
+
+const year = new Date().getFullYear();
+const links = [
+	{ label: "Inicio", href: "#inicio" },
+	{ label: "Calculadora", href: "#calculadora" },
+	{ label: "Casos", href: "#cases" },
+	{ label: "Contacto", href: "https://wa.me/573001234567", external: true },
+];
+
+const socials = [
+	{ icon: "whatsapp-icon", href: "https://wa.me/573001234567" },
+	{ icon: "link-icon", href: "https://www.linkedin.com" },
+];
 ---
 
-<section class="py-8 lg:py-20  bg-primary px-10 text-white">
-    <div class="max-w-7xl mx-auto grid grid-cols-3">
-        <div class="px-10 border-r-2 border-white">
-            <h1 class="font-bold text-2xl">WM SAS</h1>
-            <p>Sistema de energia solar</p>
+<section class="bg-primary text-white py-16">
+	<div class="max-w-6xl mx-auto px-4 lg:px-8 space-y-10">
+		<div class="grid gap-6 lg:grid-cols-[1.2fr_0.8fr] items-center bg-white/10 rounded-3xl p-8 border border-white/10" data-reveal>
+			<div>
+				<p class="text-xs uppercase tracking-[0.5em] text-secondary">asesoría</p>
+				<h2 class="text-3xl font-display mt-3">Ingresa tus datos y agenda un diagnóstico solar gratuito</h2>
+				<p class="text-sm text-white/70 mt-3 max-w-xl">
+					Hablemos de tu consumo real, plazos y alternativas de financiamiento. Nuestro equipo técnico responde en menos de 24 horas hábiles.
+				</p>
+			</div>
+			<div class="flex flex-col gap-3">
+				<a href="https://wa.me/573001234567" target="_blank" rel="noreferrer" class="inline-flex items-center justify-center gap-3 px-6 py-3 rounded-full bg-secondary text-primary font-semibold uppercase tracking-[0.3em] text-xs">
+					<Icon name="whatsapp-icon" class="text-lg" /> Hablar con un ingeniero
+				</a>
+				<p class="text-xs text-white/60 text-center">Horario: Lun-Vie 8:00 am - 6:00 pm</p>
+			</div>
+		</div>
 
-            <p class="mt-8">
-                Ingenieria responsable con la sociedad y el medio ambiente.
-            </p>
-        </div>
-        <div class="px-10 border-r-2 border-white">
-            <h1 class="font-bold text-2xl">Contacto</h1>
-            <ul class="space-y-2 mt-4">
-                <li class="flex items-center gap-2"> <Icon name={'phone-icon'} class={'text-xl text-secondary'} /> +57 300 123 4567</li>
-                <li class="flex items-center gap-2"><Icon name={'mail-icon'} class={'text-xl text-secondary'} /> comercial@wmsas.co</li>
-                <li class="flex  gap-2">
-                    <Icon name={'location-icon'} class={'text-xl text-secondary'} /> <div> Carrera 20 No. 33-46 <br />
-                    Edificio Los Robles - of.301 <br />
-                    Bucaramanga, Santander </div>
-                </li>
-            </ul>
-        </div>
-        <div class="px-10 ">
-            <h1 class="font-bold text-2xl">Enlaces útiles</h1>
-            <ul class="space-y-1 mt-4">
-                <a href="#inicio" class="flex items-center gap-2"><Icon name={'link-icon'} class={'text-xl text-secondary'} /> Inicio</a>
-                <a href="#" class="flex items-center gap-2"><Icon name={'link-icon'} class={'text-xl text-secondary'} /> Proyectos</a>
-                <a href="#" class="flex items-center gap-2"><Icon name={'link-icon'} class={'text-xl text-secondary'} /> Contacto</a>
-            </ul>
-        </div>
-    </div>
+		<div class="grid gap-8 md:grid-cols-3" data-reveal style="--reveal-delay:160ms">
+			<div class="space-y-4">
+				<img src="/images/logo-wmsas.png" alt="Logo WM SAS" class="w-36" />
+				<p class="text-sm text-white/70">
+					Ingeniería responsable con la sociedad y el medio ambiente. Soluciones llave en mano para hogares, comercio e industria.
+				</p>
+			</div>
+			<div>
+				<h3 class="font-semibold uppercase tracking-[0.4em] text-xs text-secondary">Contacto</h3>
+				<ul class="space-y-3 mt-4 text-sm">
+					<li class="flex items-center gap-3"><Icon name="phone-icon" class="text-secondary" /> +57 300 123 4567</li>
+					<li class="flex items-center gap-3"><Icon name="mail-icon" class="text-secondary" /> comercial@wmsas.co</li>
+					<li class="flex items-start gap-3">
+						<Icon name="location-icon" class="text-secondary mt-1" />
+						<div>
+							Carrera 20 No. 33-46 <br />Edificio Los Robles - Of. 301<br />Bucaramanga, Santander
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div>
+				<h3 class="font-semibold uppercase tracking-[0.4em] text-xs text-secondary">Navegación</h3>
+				<ul class="mt-4 space-y-2 text-sm">
+					{links.map((link) => (
+						<li>
+							<a
+								href={link.href}
+								target={link.external ? "_blank" : undefined}
+								rel={link.external ? "noreferrer" : undefined}
+								class="inline-flex items-center gap-2 text-white/70 hover:text-white"
+							>
+								<Icon name="link-icon" class="text-secondary" /> {link.label}
+							</a>
+						</li>
+					))}
+				</ul>
+			</div>
+		</div>
+
+		<div class="border-t border-white/20 pt-6 flex flex-wrap items-center justify-between gap-4 text-xs text-white/60" data-reveal style="--reveal-delay:260ms">
+			<p>© {year} WM SAS. Todos los derechos reservados.</p>
+			<div class="flex items-center gap-3">
+				{socials.map((social) => (
+					<a href={social.href} target="_blank" rel="noreferrer" class="w-9 h-9 rounded-full border border-white/30 flex items-center justify-center text-secondary">
+						<Icon name={social.icon} class="text-base" />
+					</a>
+				))}
+			</div>
+		</div>
+	</div>
 </section>
