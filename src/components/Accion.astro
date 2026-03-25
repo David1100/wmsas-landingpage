@@ -41,64 +41,312 @@ const steps = [
 
 <section id="accion" class="py-12 lg:py-24 relative overflow-hidden">
 	<div class="absolute inset-0 bg-gradient-to-b from-white via-white to-transparent"></div>
-	<div class="max-w-6xl mx-auto px-4 lg:px-8 relative" data-reveal>
-		<div class="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
-			<div class="bg-primary text-white rounded-[2rem] p-8 space-y-6 shadow-[0_50px_80px_-60px_rgba(10,15,41,1)]" data-reveal="left">
-				<p class="text-xs uppercase tracking-[0.5em] text-secondary/80">Metodología WM</p>
-				<h2 class="text-3xl lg:text-4xl font-display leading-tight">
-					Así implementamos tu sistema solar paso a paso
-				</h2>
-				<p class="text-sm text-white/80">
-					Seis etapas claras, responsables y auditables. Nos encargamos de ingeniería, trámites y acompañamiento para que solo te concentres en ver tu factura bajar.
-				</p>
-				<div class="flex flex-wrap gap-4">
-					<div class="px-4 py-3 rounded-2xl bg-white/10">
-						<p class="text-xs uppercase tracking-[0.4em] text-white/60">Duración promedio</p>
-						<p class="text-2xl font-display">45 días</p>
-					</div>
-					<div class="px-4 py-3 rounded-2xl bg-white/10">
-						<p class="text-xs uppercase tracking-[0.4em] text-white/60">Equipo dedicado</p>
-						<p class="text-2xl font-display">+8 especialistas</p>
+	<div class="max-w-6xl mx-auto px-4 lg:px-8 relative space-y-12">
+		<div class="text-center" data-reveal>
+			<p class="text-xs uppercase tracking-[0.5em] text-primary/60">Proceso WM SAS</p>
+			<h2 class="text-3xl sm:text-4xl font-display text-primary">Así implementamos tu sistema solar paso a paso</h2>
+			<p class="text-sm text-primary/70">Un proceso estructurado en <span class="text-secondary font-semibold">6 etapas</span></p>
+		</div>
+
+		<div class="accion-stage relative space-y-10" id="accion-stage">
+			<div class="flex flex-col gap-6" data-reveal>
+				<div class="flex flex-col gap-4">
+					<div class="flex items-center gap-6 lg:gap-10">
+						<div class="accion-terminal" data-terminal="start">
+							<div class="accion-terminal__icon">
+								<img src="/images/solar-icon.svg" alt="Icono solar" class="w-16" />
+							</div>
+							<span class="accion-terminal__label">Inicio</span>
+						</div>
+						<div class="flex-1 relative" id="accion-track">
+							<div class="h-2 bg-primary/10 rounded-full"></div>
+							<div class="h-2 bg-secondary rounded-full absolute inset-y-0 left-0 transition-all duration-700" id="accion-progress" style="width:0%"></div>
+							<div class="absolute inset-x-0 top-1/2 -translate-y-1/2 flex justify-between" id="accion-steps">
+								{steps.map((step, index) => (
+									<button type="button" class="accion-node" data-step={index}>
+										<span>{step.phase}</span>
+										<small>{step.title}</small>
+									</button>
+								))}
+							</div>
+						</div>
+						<div class="accion-terminal" data-terminal="end">
+							<div class="accion-terminal__icon">
+								<img src="/images/energia-solar-icon.svg" alt="Casa WM" class="w-16" />
+							</div>
+							<span class="accion-terminal__label">Normalización</span>
+						</div>
 					</div>
 				</div>
-				<a href="https://wa.me/573001234567" class="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-secondary text-primary font-semibold text-sm uppercase tracking-wide">
-					Hablar con un ingeniero
-					<span class="text-lg">→</span>
-				</a>
 			</div>
 
-			<div class="overflow-hidden" data-reveal="right" style="--reveal-delay:160ms">
-				<div class="overflow-x-auto pb-6" aria-label="Línea de tiempo WM">
-					<ol class="flex gap-6 min-w-max">
-					{steps.map((step, index) => (
-						<li class="relative flex-1 min-w-[240px]" data-reveal style={`--reveal-delay:${index * 90}ms`}>
-								<div class="h-1 bg-primary/10 rounded-full mb-6 overflow-hidden">
-									<div class="h-full bg-gradient-to-r from-secondary to-transparent" style={`width: ${(index + 1) * (100 / steps.length)}%`}></div>
-								</div>
-								<div class="rounded-[1.7rem] border border-primary/10 bg-white/90 p-6 shadow-[0_20px_40px_-40px_rgba(10,15,41,1)]">
-									<div class="flex items-center gap-3">
-										<div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-display text-lg">
-											{step.phase}
-										</div>
-										<p class="text-xs uppercase tracking-[0.4em] text-primary/50">Etapa {index + 1}</p>
-									</div>
-									<h3 class="text-xl font-display text-primary mt-4">{step.title}</h3>
-									<p class="text-sm text-primary/70">{step.description}</p>
-									<ul class="mt-4 space-y-2 text-sm text-primary/80">
-										{step.points.map((point) => (
-											<li class="flex items-center gap-2">
-												<span class="w-2 h-2 rounded-full bg-secondary"></span>
-												{point}
-											</li>
-										))}
-									</ul>
-								</div>
-							</li>
-						))}
-					</ol>
+			<div class="accion-vertical" id="accion-connector-left" aria-hidden="true"></div>
+			<div class="accion-vertical" id="accion-connector-right" aria-hidden="true"></div>
+
+			<div class="glass-panel rounded-[2rem] bg-white/90 p-8 space-y-6" data-reveal id="accion-card">
+				<div class="flex items-center justify-between">
+					<p class="text-xs uppercase tracking-[0.4em] text-primary/60">Etapa <span id="accion-step-number">1</span> / 6</p>
+					<span class="text-sm text-primary/60">Duración promedio: 45 días</span>
 				</div>
-				<p class="text-xs text-primary/60 text-center">Documentamos cada fase y compartimos avances en un panel digital.</p>
+				<h3 class="text-3xl font-display text-primary" id="accion-title">Asesoría</h3>
+				<p class="text-sm text-primary/70" id="accion-description">Evaluación técnica y energética personalizada antes de cualquier decisión.</p>
+				<ul class="space-y-3 text-sm text-primary/80" id="accion-points"></ul>
+				<div class="flex items-center gap-2" id="accion-progress-dots"></div>
+				<button id="accion-next" class="ml-auto inline-flex items-center gap-2 px-6 py-2 rounded-full bg-primary text-white font-semibold text-sm">
+					Siguiente etapa
+					<span>→</span>
+				</button>
 			</div>
 		</div>
 	</div>
 </section>
+
+<style>
+	.accion-stage {
+		position: relative;
+	}
+
+	.accion-terminal {
+		position: relative;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		padding-bottom: 2.2rem;
+	}
+
+	.accion-terminal__icon {
+		width: 7rem;
+		height: 7rem;
+		border-radius: 999px;
+		border: 2px solid var(--color-primary);
+		background: #fff;
+		box-shadow: 0 30px 70px -40px rgba(17, 24, 39, 0.6);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		position: relative;
+	}
+
+	.accion-terminal__label {
+		position: absolute;
+		top: calc(100% - 0.4rem);
+		left: 50%;
+		transform: translateX(-50%);
+		font-size: 0.65rem;
+		letter-spacing: 0.35em;
+		text-transform: uppercase;
+		color: rgba(57, 60, 122, 0.7);
+		white-space: nowrap;
+	}
+
+	.accion-terminal[data-terminal="start"]::after,
+	.accion-terminal[data-terminal="end"]::after {
+		content: "";
+		position: absolute;
+		top: 50%;
+		width: 2.5rem;
+		height: 2px;
+		background: rgba(57, 60, 122, 0.25);
+		transform: translateY(-50%);
+	}
+
+	.accion-terminal[data-terminal="start"]::after {
+		right: -2.5rem;
+	}
+
+	.accion-terminal[data-terminal="end"]::after {
+		left: -2.5rem;
+	}
+
+	.accion-node {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 0.35rem;
+		text-transform: uppercase;
+		font-weight: 600;
+		font-size: 0.75rem;
+		color: rgba(57, 60, 122, 0.55);
+		transition: transform 0.2s ease, color 0.2s ease;
+	}
+
+	.accion-node span {
+		display: inline-flex;
+		width: 3rem;
+		height: 3rem;
+		border-radius: 999px;
+		align-items: center;
+		justify-content: center;
+		background: white;
+		border: 2px solid rgba(57, 60, 122, 0.2);
+		font-size: 1.2rem;
+		color: var(--color-primary);
+		box-shadow: 0 10px 30px -20px rgba(0, 0, 0, 0.6);
+	}
+
+	.accion-node small {
+		font-size: 0.6rem;
+		letter-spacing: 0.2em;
+	}
+
+	.accion-node.active {
+		color: var(--color-primary);
+		transform: translateY(-8px);
+	}
+
+	.accion-node.active span {
+		border-color: var(--color-secondary);
+		box-shadow: 0 15px 40px -20px rgba(208, 216, 23, 0.8);
+		color: var(--color-secondary);
+	}
+
+	#accion-progress-dots div {
+		flex: 1;
+		height: 0.5rem;
+		border-radius: 999px;
+		background: rgba(57, 60, 122, 0.15);
+		transition: background 0.3s ease;
+	}
+
+	#accion-progress-dots div.active {
+		background: var(--color-secondary);
+	}
+
+	.accion-vertical {
+		position: absolute;
+		width: 2px;
+		background: linear-gradient(to bottom, var(--color-secondary), transparent);
+		pointer-events: none;
+		border-radius: 999px;
+		transform: translateX(-50%);
+	}
+</style>
+
+<script is:inline>
+	const stepsData = {JSON.stringify(steps)};
+	window.addEventListener('DOMContentLoaded', () => {
+		let accionCurrent = 0;
+		const cardTitle = document.getElementById('accion-title');
+		const cardDesc = document.getElementById('accion-description');
+		const cardList = document.getElementById('accion-points');
+		const stepNumber = document.getElementById('accion-step-number');
+		const dotContainer = document.getElementById('accion-progress-dots');
+		const progressLine = document.getElementById('accion-progress');
+		const nodes = document.querySelectorAll('.accion-node');
+		const nextButton = document.getElementById('accion-next');
+		const connectorLeft = document.getElementById('accion-connector-left');
+		const connectorRight = document.getElementById('accion-connector-right');
+		const terminalStart = document.querySelector('[data-terminal="start"] .accion-terminal__icon');
+		const terminalEnd = document.querySelector('[data-terminal="end"] .accion-terminal__icon');
+		const card = document.getElementById('accion-card');
+		const stage = document.getElementById('accion-stage');
+		let lastPercent = 0;
+		let currentAnimation = null;
+		const progressColors = [
+			'var(--color-secondary)',
+			'#8da8ff',
+			'#7cc3ff',
+			'#6fd8d5',
+			'#5fd99f',
+			'#f3b86b',
+		];
+
+		function renderDots() {
+			dotContainer.innerHTML = '';
+			stepsData.forEach((_, index) => {
+				const segment = document.createElement('div');
+				segment.className = index <= accionCurrent ? 'active' : '';
+				dotContainer.appendChild(segment);
+			});
+		}
+
+		function animateProgress(nextPercent) {
+			const color = progressColors[accionCurrent] || 'var(--color-secondary)';
+			progressLine.style.background = color;
+			if (!progressLine) return;
+			if (currentAnimation) currentAnimation.cancel();
+			if (progressLine.animate) {
+				currentAnimation = progressLine.animate(
+					[
+						{ width: `${lastPercent}%` },
+						{ width: `${nextPercent}%` },
+					],
+					{ duration: 900, easing: 'cubic-bezier(0.16, 1, 0.3, 1)' }
+				);
+				currentAnimation.onfinish = () => {
+					progressLine.style.width = `${nextPercent}%`;
+					lastPercent = nextPercent;
+					currentAnimation = null;
+				};
+			} else {
+				progressLine.style.transition = 'width 0.9s cubic-bezier(0.16, 1, 0.3, 1)';
+				progressLine.style.width = `${nextPercent}%`;
+				lastPercent = nextPercent;
+			}
+		}
+
+		function renderStep() {
+			const step = stepsData[accionCurrent];
+			stepNumber.textContent = accionCurrent + 1;
+			cardTitle.textContent = step.title;
+			cardDesc.textContent = step.description;
+			cardList.innerHTML = '';
+			step.points.forEach((point) => {
+				const item = document.createElement('li');
+				item.className = 'flex items-center gap-3';
+				item.innerHTML = `<span class="w-3 h-3 rounded-full bg-secondary"></span>${point}`;
+				cardList.appendChild(item);
+			});
+			nodes.forEach((node, index) => {
+				node.classList.toggle('active', index === accionCurrent);
+			});
+			const progressPercent = (accionCurrent / (stepsData.length - 1)) * 100;
+			animateProgress(progressPercent);
+			renderDots();
+			requestAnimationFrame(positionConnectors);
+		}
+
+		function positionConnectors() {
+			if (!(connectorLeft && connectorRight && terminalStart && terminalEnd && card && stage)) return;
+			const stageRect = stage.getBoundingClientRect();
+			const startRect = terminalStart.getBoundingClientRect();
+			const endRect = terminalEnd.getBoundingClientRect();
+			const cardRect = card.getBoundingClientRect();
+			const gap = 16;
+			const leftX = startRect.left + startRect.width / 2 - stageRect.left;
+			const rightX = endRect.left + endRect.width / 2 - stageRect.left;
+			const leftHeight = Math.max(cardRect.top - startRect.bottom + gap, 0);
+			const rightHeight = Math.max(cardRect.top - endRect.bottom + gap, 0);
+			connectorLeft.style.left = `${leftX}px`;
+			connectorLeft.style.top = `${startRect.bottom - stageRect.top}px`;
+			connectorLeft.style.height = `${leftHeight}px`;
+			connectorRight.style.left = `${rightX}px`;
+			connectorRight.style.top = `${endRect.bottom - stageRect.top}px`;
+			connectorRight.style.height = `${rightHeight}px`;
+		}
+
+		nodes.forEach((node) => {
+			node.addEventListener('click', () => {
+				accionCurrent = parseInt(node.getAttribute('data-step') || '0', 10);
+				renderStep();
+			});
+		});
+
+		nextButton?.addEventListener('click', () => {
+			accionCurrent = (accionCurrent + 1) % stepsData.length;
+			renderStep();
+		});
+
+		window.addEventListener('resize', () => {
+			positionConnectors();
+		});
+
+		if (stepsData.length) {
+			renderDots();
+			progressLine.style.width = '0%';
+			lastPercent = 0;
+			renderStep();
+			setTimeout(positionConnectors, 50);
+		}
+	});
+</script>
