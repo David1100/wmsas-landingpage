@@ -48,19 +48,19 @@ const steps = [
 			<p class="text-sm text-primary/70">Un proceso estructurado en <span class="text-secondary font-semibold">6 etapas</span></p>
 		</div>
 
-		<div class="accion-stage relative space-y-10" id="accion-stage">
+		<div class="accion-stage relative space-y-10">
 			<div class="flex flex-col gap-6" data-reveal>
 				<div class="flex flex-col gap-4">
-					<div class="flex items-center gap-6 lg:gap-10">
+					<div class="flex items-center gap-4 md:gap-6 lg:gap-10">
 						<div class="accion-terminal" data-terminal="start">
 							<div class="accion-terminal__icon">
 								<img src="/images/solar-icon.svg" alt="Icono solar" class="w-16" />
 							</div>
 							<span class="accion-terminal__label">Inicio</span>
 						</div>
-						<div class="flex-1 relative" id="accion-track">
-							<div class="h-2 bg-primary/10 rounded-full"></div>
-							<div class="h-2 bg-secondary rounded-full absolute inset-y-0 left-0 transition-all duration-700" id="accion-progress" style="width:0%"></div>
+						<div class="flex-1 min-w-0 lg:max-w-4xl mx-auto relative" id="accion-track">
+							<div class="track-base h-2 bg-primary/10 rounded-full w-full"></div>
+							<div class="h-2 bg-secondary rounded-full transition-all duration-700" id="accion-progress" style="width:0%"></div>
 							<div class="absolute inset-x-0 top-1/2 -translate-y-1/2 flex justify-between" id="accion-steps">
 								{steps.map((step, index) => (
 									<button type="button" class="accion-node" data-step={index}>
@@ -80,9 +80,6 @@ const steps = [
 				</div>
 			</div>
 
-			<div class="accion-vertical" id="accion-connector-left" aria-hidden="true"></div>
-			<div class="accion-vertical" id="accion-connector-right" aria-hidden="true"></div>
-
 			<div class="glass-panel rounded-[2rem] bg-white/90 p-8 space-y-6" data-reveal id="accion-card">
 				<div class="flex items-center justify-between">
 					<p class="text-xs uppercase tracking-[0.4em] text-primary/60">Etapa <span id="accion-step-number">1</span> / 6</p>
@@ -101,6 +98,7 @@ const steps = [
 	</div>
 </section>
 
+<script type="application/json" id="accion-data" set:html={JSON.stringify(steps)}></script>
 <style>
 	.accion-stage {
 		position: relative;
@@ -125,6 +123,14 @@ const steps = [
 		align-items: center;
 		justify-content: center;
 		position: relative;
+		animation: float-y 10s ease-in-out infinite;
+		transition: transform 0.4s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+	}
+
+	.accion-terminal__icon.is-complete {
+		transform: scale(1.08);
+		border-color: var(--color-secondary);
+		box-shadow: 0 25px 60px -30px rgba(208, 216, 23, 0.5);
 	}
 
 	.accion-terminal__label {
@@ -141,21 +147,7 @@ const steps = [
 
 	.accion-terminal[data-terminal="start"]::after,
 	.accion-terminal[data-terminal="end"]::after {
-		content: "";
-		position: absolute;
-		top: 50%;
-		width: 2.5rem;
-		height: 2px;
-		background: rgba(57, 60, 122, 0.25);
-		transform: translateY(-50%);
-	}
-
-	.accion-terminal[data-terminal="start"]::after {
-		right: -2.5rem;
-	}
-
-	.accion-terminal[data-terminal="end"]::after {
-		left: -2.5rem;
+		display: none;
 	}
 
 	.accion-node {
@@ -168,6 +160,8 @@ const steps = [
 		font-size: 0.75rem;
 		color: rgba(57, 60, 122, 0.55);
 		transition: transform 0.2s ease, color 0.2s ease;
+		position: relative;
+		z-index: 2;
 	}
 
 	.accion-node span {
@@ -212,19 +206,75 @@ const steps = [
 		background: var(--color-secondary);
 	}
 
-	.accion-vertical {
+	#accion-track {
+		position: relative;
+		min-height: 4.5rem;
+		padding: 2.5rem 0 1.5rem;
+	}
+
+	#accion-track .track-base,
+	#accion-progress {
 		position: absolute;
-		width: 2px;
-		background: linear-gradient(to bottom, var(--color-secondary), transparent);
+		left: 0;
+		right: 0;
+		top: 50%;
+		transform: translateY(-50%);
+		height: 0.35rem;
 		pointer-events: none;
-		border-radius: 999px;
-		transform: translateX(-50%);
+	}
+
+	#accion-track .track-base {
+		z-index: 0;
+	}
+
+	#accion-progress {
+		z-index: 1;
+	}
+
+	@media (max-width: 768px) {
+		.accion-terminal__icon {
+			width: 5.2rem;
+			height: 5.2rem;
+		}
+		#accion-track {
+			padding: 1.5rem 0 0;
+		}
+		#accion-track .track-base,
+		#accion-progress {
+			display: none;
+		}
+		#accion-steps {
+			position: static;
+			transform: none;
+			flex-wrap: wrap;
+			gap: 0.75rem;
+			justify-content: center;
+		}
+		.accion-node span {
+			width: 2.5rem;
+			height: 2.5rem;
+			font-size: 1rem;
+		}
+		.accion-node small {
+			font-size: 0.55rem;
+			letter-spacing: 0.16em;
+		}
 	}
 </style>
 
+
 <script is:inline>
-	const stepsData = {JSON.stringify(steps)};
-	window.addEventListener('DOMContentLoaded', () => {
+	function initAccionTimeline() {
+		const dataTag = document.getElementById('accion-data');
+		let stepsData = [];
+		try {
+			stepsData = dataTag?.textContent ? JSON.parse(dataTag.textContent) : [];
+		} catch (error) {
+			console.error('No se pudo leer el flujo ACCION', error);
+			return;
+		}
+		if (!Array.isArray(stepsData) || !stepsData.length) return;
+
 		let accionCurrent = 0;
 		const cardTitle = document.getElementById('accion-title');
 		const cardDesc = document.getElementById('accion-description');
@@ -234,12 +284,8 @@ const steps = [
 		const progressLine = document.getElementById('accion-progress');
 		const nodes = document.querySelectorAll('.accion-node');
 		const nextButton = document.getElementById('accion-next');
-		const connectorLeft = document.getElementById('accion-connector-left');
-		const connectorRight = document.getElementById('accion-connector-right');
 		const terminalStart = document.querySelector('[data-terminal="start"] .accion-terminal__icon');
 		const terminalEnd = document.querySelector('[data-terminal="end"] .accion-terminal__icon');
-		const card = document.getElementById('accion-card');
-		const stage = document.getElementById('accion-stage');
 		let lastPercent = 0;
 		let currentAnimation = null;
 		const progressColors = [
@@ -300,29 +346,14 @@ const steps = [
 			nodes.forEach((node, index) => {
 				node.classList.toggle('active', index === accionCurrent);
 			});
+			if (accionCurrent === stepsData.length - 1) {
+				terminalEnd?.classList.add('is-complete');
+			} else {
+				terminalEnd?.classList.remove('is-complete');
+			}
 			const progressPercent = (accionCurrent / (stepsData.length - 1)) * 100;
 			animateProgress(progressPercent);
 			renderDots();
-			requestAnimationFrame(positionConnectors);
-		}
-
-		function positionConnectors() {
-			if (!(connectorLeft && connectorRight && terminalStart && terminalEnd && card && stage)) return;
-			const stageRect = stage.getBoundingClientRect();
-			const startRect = terminalStart.getBoundingClientRect();
-			const endRect = terminalEnd.getBoundingClientRect();
-			const cardRect = card.getBoundingClientRect();
-			const gap = 16;
-			const leftX = startRect.left + startRect.width / 2 - stageRect.left;
-			const rightX = endRect.left + endRect.width / 2 - stageRect.left;
-			const leftHeight = Math.max(cardRect.top - startRect.bottom + gap, 0);
-			const rightHeight = Math.max(cardRect.top - endRect.bottom + gap, 0);
-			connectorLeft.style.left = `${leftX}px`;
-			connectorLeft.style.top = `${startRect.bottom - stageRect.top}px`;
-			connectorLeft.style.height = `${leftHeight}px`;
-			connectorRight.style.left = `${rightX}px`;
-			connectorRight.style.top = `${endRect.bottom - stageRect.top}px`;
-			connectorRight.style.height = `${rightHeight}px`;
 		}
 
 		nodes.forEach((node) => {
@@ -333,20 +364,20 @@ const steps = [
 		});
 
 		nextButton?.addEventListener('click', () => {
+            alert('asdadas')
 			accionCurrent = (accionCurrent + 1) % stepsData.length;
 			renderStep();
 		});
 
-		window.addEventListener('resize', () => {
-			positionConnectors();
-		});
+		renderDots();
+		progressLine.style.width = '0%';
+		lastPercent = 0;
+		renderStep();
+	}
 
-		if (stepsData.length) {
-			renderDots();
-			progressLine.style.width = '0%';
-			lastPercent = 0;
-			renderStep();
-			setTimeout(positionConnectors, 50);
-		}
-	});
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', initAccionTimeline, { once: true });
+	} else {
+		initAccionTimeline();
+	}
 </script>
