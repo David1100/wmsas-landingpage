@@ -9,16 +9,18 @@ import Home from '../components/Home.astro';
 import Profit from '../components/Profit.astro';
 import VideoShowcase from '../components/VideoShowcase.astro';
 import Layout from '../layouts/Layout.astro';
+
+const lang = 'es';
 ---
 
-<Layout>
-	<Home />
-	<VideoShowcase />
-	<Calculator />
-	<Profit />
-	<Accion />
-	<Cases />
-	<Doubts />
-	<FooterClients />
-	<Footer />
+<Layout lang={lang}>
+	<Home lang={lang} />
+	<VideoShowcase lang={lang} />
+	<Calculator lang={lang} />
+	<Profit lang={lang} />
+	<Accion lang={lang} />
+	<Cases lang={lang} />
+	<Doubts lang={lang} />
+	<FooterClients lang={lang} />
+	<Footer lang={lang} />
 </Layout>

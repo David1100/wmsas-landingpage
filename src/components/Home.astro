@@ -1,34 +1,79 @@
 ---
-const highlights = [
-	{
-		label: "kW instalados",
-		value: "+280",
-		detail: "en techos residenciales y empresariales",
-	},
-	{
-		label: "Ton CO₂ evitadas",
-		value: "1.2k",
-		detail: "impacto medible en 2024",
-	},
-	{
-		label: "Tiempo de retorno",
-		value: "36 m",
-		detail: "promedio proyectos WM SAS",
-	},
-];
+const { lang = 'es' } = Astro.props;
 
-const badges = [
-	"RETIE 2024",
-	"Equipos Tier 1",
-	"Garantía 25 años",
-];
+const highlightsData = {
+	es: [
+		{ label: 'kW instalados', value: '+280', detail: 'en techos residenciales y empresariales' },
+		{ label: 'Ton CO₂ evitadas', value: '1.2k', detail: 'impacto medible en 2024' },
+		{ label: 'Tiempo de retorno', value: '36 m', detail: 'promedio proyectos WM SAS' },
+	],
+	en: [
+		{ label: 'Installed kW', value: '+280', detail: 'rooftops for homes and companies' },
+		{ label: 'CO₂ avoided', value: '1.2k', detail: 'measured impact in 2024' },
+		{ label: 'Payback time', value: '36 mo', detail: 'average WM SAS projects' },
+	],
+};
+
+const badgesData = {
+	es: ['RETIE 2024', 'Equipos Tier 1', 'Garantía 25 años'],
+	en: ['RETIE 2024', 'Tier 1 equipment', '25-year warranty'],
+};
+
+const copy = {
+	es: {
+		ticker: 'ingeniería solar wm sas',
+		heroTag: 'Colombia · energía distribuida',
+		heroTitle: 'Tu transición solar comienza',
+		heroAccent: 'hoy.',
+		heroDescription:
+			'Diseñamos, financiamos e instalamos sistemas fotovoltaicos llave en mano para hogares y compañías. Controla tu factura y protege tus operaciones frente a futuras alzas.',
+		primaryCta: 'Calcular mi ahorro',
+		secondaryCta: 'Ver dudas frecuentes',
+		rightBadge: 'Simulación WM',
+		rightUpdated: 'Actualizado 2025',
+		monthlyBill: 'Consumo mensual',
+		dataNote: 'Datos de clientes reales',
+		savingsLabel: 'Ahorro proyectado',
+		savingsNote: 'en 24 meses',
+		quote: '"El modelo híbrido de WM SAS nos permitió blindar la operación frente a apagones y bajar la factura 68%."',
+		quoteAuthor: 'Laura Beltrán · Directora Financiera',
+		chipOne: 'Diagnóstico en sitio',
+		chipTwo: 'Garantía 25 años',
+		badgesTitle: 'ingeniería solar wm sas',
+	},
+	en: {
+		ticker: 'wm sas solar engineering',
+		heroTag: 'Colombia · distributed energy',
+		heroTitle: 'Your solar transition starts',
+		heroAccent: 'today.',
+		heroDescription:
+			'We design, finance, and install turnkey PV systems for homes and businesses. Control your energy bill and protect your operations from future hikes.',
+		primaryCta: 'Estimate my savings',
+		secondaryCta: 'See common questions',
+		rightBadge: 'WM simulation',
+		rightUpdated: 'Updated 2025',
+		monthlyBill: 'Monthly bill',
+		dataNote: 'Based on real clients',
+		savingsLabel: 'Projected savings',
+		savingsNote: 'in 24 months',
+		quote: '"WM SAS hybrid design shielded our operations from outages and cut the bill by 68%."',
+		quoteAuthor: 'Laura Beltrán · CFO',
+		chipOne: 'On-site assessment',
+		chipTwo: '25-year warranty',
+		badgesTitle: 'wm sas solar engineering',
+	},
+};
+
+const highlights = highlightsData[lang];
+const badges = badgesData[lang];
+const text = copy[lang];
 ---
 
 <header class="bg-white/80 border-b border-primary/10 backdrop-blur-sm" data-reveal style="--reveal-delay:0ms">
 	<div class="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-4 px-4 py-4">
 		<div class="flex items-center gap-3 text-sm text-primary">
 			<div class="w-2 h-2 rounded-full bg-secondary animate-pulse"></div>
-			<p class="uppercase font-semibold tracking-[0.2em] text-xs">ingeniería solar wm sas</p>
+			<p class="uppercase font-semibold tracking-[0.2em] text-xs">{text.badgesTitle}</p>
 		</div>
 		<div class="flex flex-col sm:flex-row items-center gap-3 text-sm w-full sm:w-auto">
 			<a href="tel:+573001234567" class="flex items-center gap-2 text-primary font-semibold w-full sm:w-auto justify-center">
@@ -42,7 +87,7 @@ const badges = [
 				rel="noreferrer"
 				class="flex items-center gap-2 px-3 py-1 rounded-full bg-primary text-white text-xs font-semibold uppercase tracking-wide w-full sm:w-auto justify-center"
 			>
-				<span class="text-secondary">●</span> asesoría inmediata
+				<span class="text-secondary">●</span> {lang === 'es' ? 'asesoría inmediata' : 'instant consult'}
 			</a>
 		</div>
 	</div>
@@ -53,14 +98,13 @@ const badges = [
 	<div class="max-w-6xl mx-auto px-4 lg:px-8 py-12 lg:py-24 grid gap-12 lg:grid-cols-[1.05fr_0.95fr] items-center relative">
 		<div class="space-y-8" data-reveal="left">
 			<div class="space-y-3">
-				<p class="uppercase text-secondary font-semibold tracking-[0.3em] text-xs">Colombia · energía distribuida</p>
+				<p class="uppercase text-secondary font-semibold tracking-[0.3em] text-xs">{text.heroTag}</p>
 				<h1 class="text-4xl sm:text-5xl lg:text-6xl font-semibold font-display text-primary leading-tight">
-					Tu transición solar comienza
-					<span class="text-secondary"> hoy.</span>
+					{text.heroTitle}
+					<span class="text-secondary"> {text.heroAccent}</span>
 				</h1>
 				<p class="text-lg text-primary/80 max-w-xl">
-					Diseñamos, financiamos e instalamos sistemas fotovoltaicos llave en mano para hogares y compañías.
-					Controla tu factura y protege tus operaciones frente a futuras alzas.
+					{text.heroDescription}
 				</p>
 			</div>
 			<div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4" data-reveal style="--reveal-delay:120ms">
@@ -68,14 +112,14 @@ const badges = [
 					href="#calculadora"
 					class="group inline-flex items-center justify-center gap-3 px-6 py-3 rounded-full bg-secondary text-primary font-semibold uppercase tracking-wide text-sm shadow-[0_12px_60px_-30px_rgba(243,199,70,0.9)] w-full sm:w-auto"
 				>
-					Calcular mi ahorro
+					{text.primaryCta}
 					<span class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center group-hover:translate-x-1 transition-transform">→</span>
 				</a>
 				<a
 					href="#doubts"
 					class="inline-flex items-center justify-center gap-2 px-5 py-2 text-sm font-semibold text-primary/70 hover:text-primary border border-primary/20 rounded-full w-full sm:w-auto"
 				>
-					Ver dudas frecuentes
+					{text.secondaryCta}
 				</a>
 			</div>
 			<div class="grid grid-cols-1 min-[420px]:grid-cols-2 sm:grid-cols-3 gap-4">
@@ -102,28 +146,28 @@ const badges = [
 			></div>
 			<div class="relative bg-white glass-panel rounded-[2rem] p-8 space-y-6 animate-float">
 				<div class="flex items-center justify-between">
-					<p class="text-xs uppercase tracking-[0.3em] text-primary/60">Simulación WM</p>
-					<p class="text-primary text-sm font-semibold">Actualizado 2025</p>
+					<p class="text-xs uppercase tracking-[0.3em] text-primary/60">{text.rightBadge}</p>
+					<p class="text-primary text-sm font-semibold">{text.rightUpdated}</p>
 				</div>
 				<div>
-					<p class="text-sm text-primary/60">Consumo mensual</p>
+					<p class="text-sm text-primary/60">{text.monthlyBill}</p>
 					<p class="text-4xl font-display text-primary">$620.000</p>
-					<p class="text-xs text-primary/50 mt-1">Datos de clientes reales</p>
+					<p class="text-xs text-primary/50 mt-1">{text.dataNote}</p>
 				</div>
 				<div class="space-y-3">
-					<p class="text-sm text-primary/60">Ahorro proyectado</p>
+					<p class="text-sm text-primary/60">{text.savingsLabel}</p>
 					<div class="w-full h-3 rounded-full bg-primary/10 overflow-hidden">
 						<div class="h-full w-[78%] bg-gradient-to-r from-secondary via-yellow-300 to-orange-300"></div>
 					</div>
-					<p class="text-3xl font-display text-primary">78% <span class="text-base font-sans text-primary/60">en 24 meses</span></p>
+					<p class="text-3xl font-display text-primary">78% <span class="text-base font-sans text-primary/60">{text.savingsNote}</span></p>
 				</div>
 				<div class="bg-primary/5 border border-primary/10 rounded-xl p-4">
-					<p class="text-sm text-primary/70">"El modelo híbrido de WM SAS nos permitió blindar la operación frente a apagones y bajar la factura 68%."</p>
-					<p class="text-xs text-primary/50 mt-2">Laura Beltrán · Directora Financiera</p>
+					<p class="text-sm text-primary/70">{text.quote}</p>
+					<p class="text-xs text-primary/50 mt-2">{text.quoteAuthor}</p>
 				</div>
 				<div class="flex flex-wrap gap-3">
-					<div class="px-3 py-2 rounded-lg bg-secondary/20 text-xs font-semibold text-primary">Diagnóstico en sitio</div>
-					<div class="px-3 py-2 rounded-lg bg-primary text-white text-xs font-semibold">Garantía 25 años</div>
+					<div class="px-3 py-2 rounded-lg bg-secondary/20 text-xs font-semibold text-primary">{text.chipOne}</div>
+					<div class="px-3 py-2 rounded-lg bg-primary text-white text-xs font-semibold">{text.chipTwo}</div>
 				</div>
 			</div>
 		</div>

@@ -1,0 +1,26 @@
+---
+import Accion from '../../components/Accion.astro';
+import Calculator from '../../components/Calculator.astro';
+import Cases from '../../components/Cases.astro';
+import Doubts from '../../components/Doubts.astro';
+import Footer from '../../components/Footer.astro';
+import FooterClients from '../../components/FooterClients.astro';
+import Home from '../../components/Home.astro';
+import Profit from '../../components/Profit.astro';
+import VideoShowcase from '../../components/VideoShowcase.astro';
+import Layout from '../../layouts/Layout.astro';
+
+const lang = 'en';
+---
+
+<Layout lang={lang}>
+	<Home lang={lang} />
+	<VideoShowcase lang={lang} />
+	<Calculator lang={lang} />
+	<Profit lang={lang} />
+	<Accion lang={lang} />
+	<Cases lang={lang} />
+	<Doubts lang={lang} />
+	<FooterClients lang={lang} />
+	<Footer lang={lang} />
+</Layout>

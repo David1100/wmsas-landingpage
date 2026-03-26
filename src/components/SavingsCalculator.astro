@@ -1,38 +1,129 @@
 ---
-const propertyTypes = [
-	{ label: "Hogar", value: "hogar" },
-	{ label: "Empresa", value: "empresa" },
-	{ label: "Agro", value: "agro" },
-];
+const { lang = 'es' } = Astro.props;
 
-const irradiance = [
-	{ label: "Costa / Alta radiación", value: "alta" },
-	{ label: "Andina / Media", value: "media" },
-	{ label: "Interior / Baja", value: "baja" },
-];
+const copy = {
+	es: {
+		leftStep: 'configura tu proyecto',
+		leftTitle: 'Simulador de ahorro WM SAS',
+		leftSubtitle: 'Cuéntanos dónde consumes energía y te mostramos tu retorno estimado al instante.',
+		addressLabel: 'Dirección o municipio',
+		addressPlaceholder: 'Ej. Barrio El Prado, Barranquilla',
+		propertyLabel: 'Tipo de propiedad',
+		propertyTypes: [
+			{ label: 'Hogar', value: 'hogar' },
+			{ label: 'Empresa', value: 'empresa' },
+			{ label: 'Agro', value: 'agro' },
+		],
+		billLabel: 'Factura mensual (COP)',
+		consumptionLabel: 'Consumo mensual (kWh)',
+		irradianceLabel: 'Potencial solar',
+		irradianceOptions: [
+			{ label: 'Costa / Alta radiación', value: 'alta' },
+			{ label: 'Andina / Media', value: 'media' },
+			{ label: 'Interior / Baja', value: 'baja' },
+		],
+		disclaimer: '*Estimación preliminar. Validamos potencia disponible y requisitos RETIE durante la visita técnica.',
+		rightStep: 'resultado',
+		rightTitle: 'Tu proyección energética',
+		rightSubtitle: 'Actualizamos la simulación en tiempo real.',
+		savingsCard: 'Ahorro proyectado',
+		savingsNote: 'Comparado con tu factura actual.',
+		investmentLabel: 'Inversión estimada',
+		investmentNote: 'Incluye ingeniería y montaje WM SAS.',
+		retornoLabel: 'Retorno',
+		retornoNote: 'Depende de tu perfil de carga.',
+		defaultSummary: 'Hogar mediterráneo: reemplazamos el 78% de tu consumo con un arreglo de 6.2 kWp. Incluye monitoreo 24/7.',
+		planLabels: {
+			hogar: 'Plan residencial solar+',
+			empresa: 'Plan corporativo solar pro',
+			agro: 'Plan agro solar adaptativo',
+		},
+		planSummaries: {
+			hogar: 'Reemplazamos hasta el 80% de tu consumo con un arreglo compacto.',
+			empresa: 'Sistema trifásico escalable con monitoreo 24/7 y soporte prioritario.',
+			agro: 'Diseño resistente a ambientes rurales, incluye microinversores.',
+		},
+		serviceBadge: 'Visita técnica en 48h',
+		cta: 'Solicitar asesoría con ingeniero',
+		ctaNote: 'Prometemos responder en menos de 24 horas hábiles.',
+		tierNote: 'Comparado con tu factura actual.',
+	},
+	en: {
+		leftStep: 'set up your project',
+		leftTitle: 'WM SAS savings simulator',
+		leftSubtitle: 'Tell us where you consume energy and we will estimate your ROI instantly.',
+		addressLabel: 'Address or city',
+		addressPlaceholder: 'E.g. El Prado neighborhood, Barranquilla',
+		propertyLabel: 'Property type',
+		propertyTypes: [
+			{ label: 'Home', value: 'hogar' },
+			{ label: 'Business', value: 'empresa' },
+			{ label: 'Agro', value: 'agro' },
+		],
+		billLabel: 'Monthly bill (COP)',
+		consumptionLabel: 'Monthly consumption (kWh)',
+		irradianceLabel: 'Solar potential',
+		irradianceOptions: [
+			{ label: 'Coast / High irradiance', value: 'alta' },
+			{ label: 'Andean / Medium', value: 'media' },
+			{ label: 'Interior / Low', value: 'baja' },
+		],
+		disclaimer: '*Preliminary estimation. We validate available capacity and RETIE requirements during the site visit.',
+		rightStep: 'results',
+		rightTitle: 'Your energy projection',
+		rightSubtitle: 'We update the simulation in real time.',
+		savingsCard: 'Projected savings',
+		savingsNote: 'Compared with your current bill.',
+		investmentLabel: 'Estimated investment',
+		investmentNote: 'Includes WM SAS engineering and installation.',
+		retornoLabel: 'Payback',
+		retornoNote: 'Depends on your load profile.',
+		defaultSummary: 'Mediterranean home: we offset 78% of your use with a 6.2 kWp array plus 24/7 monitoring.',
+		planLabels: {
+			hogar: 'Residential solar+ plan',
+			empresa: 'Corporate solar pro plan',
+			agro: 'Agro adaptive solar plan',
+		},
+		planSummaries: {
+			hogar: 'We offset up to 80% of your demand with a compact array.',
+			empresa: 'Scalable three-phase system with 24/7 monitoring and priority support.',
+			agro: 'Rugged design for rural settings, includes microinverters.',
+		},
+		serviceBadge: 'Site visit within 48h',
+		cta: 'Request an engineer consult',
+		ctaNote: 'We reply in under 24 business hours.',
+		tierNote: 'Compared with your current bill.',
+	},
+};
+
+const propertyTypes = copy[lang].propertyTypes;
+const irradiance = copy[lang].irradianceOptions;
+const text = copy[lang];
 ---
+---
+
 
 <div class="max-w-5xl mx-auto" data-reveal>
 	<div class="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
 		<div class="bg-white/95 rounded-[1.8rem] p-6 sm:p-8 shadow-[0_40px_80px_-60px_rgba(12,21,39,0.9)] border border-white/60" data-reveal="left">
 			<div class="flex items-center gap-3 text-xs uppercase tracking-[0.4em] text-primary/60">
 				<span class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-semibold">01</span>
-				<span>configura tu proyecto</span>
+				<span>{text.leftStep}</span>
 			</div>
-			<h2 class="text-2xl sm:text-3xl font-display text-primary mt-4">Simulador de ahorro WM SAS</h2>
-			<p class="text-sm text-primary/70 mt-2">Cuéntanos dónde consumes energía y te mostramos tu retorno estimado al instante.</p>
+			<h2 class="text-2xl sm:text-3xl font-display text-primary mt-4">{text.leftTitle}</h2>
+			<p class="text-sm text-primary/70 mt-2">{text.leftSubtitle}</p>
 
 			<div class="mt-8 space-y-6">
-				<label class="block text-sm font-semibold text-primary">Dirección o municipio</label>
+				<label class="block text-sm font-semibold text-primary">{text.addressLabel}</label>
 				<input
 					id="input-address"
 					type="text"
-					placeholder="Ej. Barrio El Prado, Barranquilla"
+					placeholder={text.addressPlaceholder}
 					class="w-full px-4 py-3 rounded-xl bg-primary/5 border border-primary/15 focus:border-secondary focus:ring-2 focus:ring-secondary/40"
 				/>
 
 				<div>
-					<p class="text-sm font-semibold text-primary mb-3">Tipo de propiedad</p>
+					<p class="text-sm font-semibold text-primary mb-3">{text.propertyLabel}</p>
 					<div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
 						{propertyTypes.map((type) => (
 							<button
@@ -48,7 +139,7 @@ const irradiance = [
 
 				<div class="space-y-3">
 					<div class="flex items-center justify-between text-sm text-primary/70">
-						<label for="bill-range" class="font-semibold text-primary">Factura mensual (COP)</label>
+						<label for="bill-range" class="font-semibold text-primary">{text.billLabel}</label>
 						<span id="bill-output" class="font-display text-lg text-primary">$600.000</span>
 					</div>
 					<input id="bill-range" type="range" min="200000" max="3000000" step="50000" value="600000" class="range-input" />
@@ -56,14 +147,14 @@ const irradiance = [
 
 				<div class="space-y-3">
 					<div class="flex items-center justify-between text-sm text-primary/70">
-						<label for="consumption-range" class="font-semibold text-primary">Consumo mensual (kWh)</label>
+						<label for="consumption-range" class="font-semibold text-primary">{text.consumptionLabel}</label>
 						<span id="consumption-output" class="font-display text-lg text-primary">420 kWh</span>
 					</div>
 					<input id="consumption-range" type="range" min="150" max="2500" step="10" value="420" class="range-input" />
 				</div>
 
 				<div>
-					<p class="text-sm font-semibold text-primary mb-3">Potencial solar</p>
+					<p class="text-sm font-semibold text-primary mb-3">{text.irradianceLabel}</p>
 					<div class="grid gap-2 sm:grid-cols-3">
 						{irradiance.map((item) => (
 							<button
@@ -79,50 +170,50 @@ const irradiance = [
 			</div>
 
 			<p class="text-xs text-primary/50 mt-8">
-				*Estimación preliminar. Validamos potencia disponible y requisitos RETIE durante la visita técnica.
+				{text.disclaimer}
 			</p>
 		</div>
 
 		<div class="glass-panel rounded-[1.8rem] p-6 sm:p-8 bg-white/80" data-reveal="right" style="--reveal-delay:120ms">
 			<div class="flex items-center gap-3 text-xs uppercase tracking-[0.4em] text-primary/60">
 				<span class="w-8 h-8 rounded-full bg-secondary text-primary flex items-center justify-center font-semibold">02</span>
-				<span>resultado</span>
+				<span>{text.rightStep}</span>
 			</div>
-			<h3 class="text-2xl font-display text-primary mt-4">Tu proyección energética</h3>
-			<p class="text-sm text-primary/70">Actualizamos la simulación en tiempo real.</p>
+			<h3 class="text-2xl font-display text-primary mt-4">{text.rightTitle}</h3>
+			<p class="text-sm text-primary/70">{text.rightSubtitle}</p>
 
 			<div class="mt-8 space-y-6">
 				<div class="bg-primary text-white rounded-2xl p-5 space-y-2">
-					<p class="text-xs uppercase tracking-[0.4em] text-white/70">Ahorro proyectado</p>
+					<p class="text-xs uppercase tracking-[0.4em] text-white/70">{text.savingsCard}</p>
 					<p data-result-ahorro class="text-4xl font-display">78%</p>
 					<div class="w-full h-3 bg-white/20 rounded-full overflow-hidden">
 						<div data-progress class="h-full bg-secondary" style="width: 78%"></div>
 					</div>
-					<p class="text-sm text-white/80">Comparado con tu factura actual.</p>
+					<p class="text-sm text-white/80">{text.savingsNote}</p>
 				</div>
 
 				<div class="grid gap-4 sm:grid-cols-2">
 					<div class="rounded-xl border border-primary/10 p-4">
-						<p class="text-xs uppercase tracking-[0.3em] text-primary/50">Inversión estimada</p>
+						<p class="text-xs uppercase tracking-[0.3em] text-primary/50">{text.investmentLabel}</p>
 						<p data-result-inversion class="text-2xl font-display text-primary">$18.5 M</p>
-						<p class="text-xs text-primary/50">Incluye ingeniería y montaje WM SAS.</p>
+						<p class="text-xs text-primary/50">{text.investmentNote}</p>
 					</div>
 					<div class="rounded-xl border border-primary/10 p-4">
-						<p class="text-xs uppercase tracking-[0.3em] text-primary/50">Retorno</p>
+						<p class="text-xs uppercase tracking-[0.3em] text-primary/50">{text.retornoLabel}</p>
 						<p data-result-retorno class="text-2xl font-display text-primary">36 meses</p>
-						<p class="text-xs text-primary/50">Depende de tu perfil de carga.</p>
+						<p class="text-xs text-primary/50">{text.retornoNote}</p>
 					</div>
 				</div>
 
 				<div class="rounded-2xl bg-primary/5 border border-primary/10 p-4">
 					<p class="text-sm text-primary/70" data-summary>
-						Hogar mediterráneo: reemplazamos el 78% de tu consumo con un arreglo de 6.2 kWp. Incluye monitoreo 24/7.
+						{text.planSummaries.hogar}
 					</p>
 				</div>
 
 				<div class="flex flex-wrap gap-3">
-					<div class="px-4 py-2 rounded-full bg-secondary/20 text-xs font-semibold text-primary" data-tier>Plan residencial solar+</div>
-					<div class="px-4 py-2 rounded-full bg-primary text-white text-xs font-semibold">Visita técnica en 48h</div>
+					<div class="px-4 py-2 rounded-full bg-secondary/20 text-xs font-semibold text-primary" data-tier>{text.planLabels.hogar}</div>
+					<div class="px-4 py-2 rounded-full bg-primary text-white text-xs font-semibold">{text.serviceBadge}</div>
 				</div>
 			</div>
 
@@ -133,9 +224,9 @@ const irradiance = [
 					rel="noreferrer"
 					class="w-full inline-flex items-center justify-center gap-3 px-6 py-3 rounded-full bg-secondary text-primary font-semibold uppercase tracking-wide text-sm"
 				>
-					Solicitar asesoría con ingeniero
+					{text.cta}
 				</a>
-				<p class="text-xs text-primary/50 text-center">Prometemos responder en menos de 24 horas hábiles.</p>
+				<p class="text-xs text-primary/50 text-center">{text.ctaNote}</p>
 			</div>
 		</div>
 	</div>
@@ -197,7 +288,10 @@ const irradiance = [
 	}
 </style>
 
-<script>
+<script is:inline>
+    const planLabels = ${JSON.stringify(text.planLabels)};
+    const planSummaries = ${JSON.stringify(text.planSummaries)};
+
     const state = {
         property: "hogar",
         irradiance: "media",
@@ -250,14 +344,10 @@ const irradiance = [
         inversionNode.textContent = `$${inversion.toFixed(1)} M`;
         retornoNode.textContent = `${retorno} meses`;
 
-        const tierLabel = state.property === 'empresa' ? 'Plan corporativo solar pro' : state.property === 'agro' ? 'Plan agro solar adaptativo' : 'Plan residencial solar+';
+        const tierLabel = planLabels[state.property] || planLabels.hogar;
         tierNode.textContent = tierLabel;
 
-        const summary = state.property === 'empresa'
-            ? 'Sistema trifásico escalable con monitoreo 24/7 y soporte prioritario.'
-            : state.property === 'agro'
-            ? 'Diseño resistente a ambientes rurales, incluye microinversores.'
-            : 'Reemplazamos hasta el 80% de tu consumo con un arreglo compacto.';
+        const summary = planSummaries[state.property] || planSummaries.hogar;
         summaryNode.textContent = summary;
 
         billOutput.textContent = currencyFormat(state.bill);

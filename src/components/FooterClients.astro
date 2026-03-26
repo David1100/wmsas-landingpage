@@ -1,28 +1,56 @@
 ---
 import { Icon } from "astro-icon/components";
 
+const { lang = 'es' } = Astro.props;
+
 const partners = [
-	{ name: "Grupo Solares", logo: "/images/logo-wmsas.png" },
-	{ name: "EPM Aliados", logo: "/images/logo-wmsas.png" },
-	{ name: "Cámara Comercio", logo: "/images/logo-wmsas.png" },
-	{ name: "ProColombia", logo: "/images/logo-wmsas.png" },
-	{ name: "Fenalco", logo: "/images/logo-wmsas.png" },
+	{ name: 'Grupo Solares', logo: '/images/logo-wmsas.png' },
+	{ name: 'EPM Aliados', logo: '/images/logo-wmsas.png' },
+	{ name: 'Cámara Comercio', logo: '/images/logo-wmsas.png' },
+	{ name: 'ProColombia', logo: '/images/logo-wmsas.png' },
+	{ name: 'Fenalco', logo: '/images/logo-wmsas.png' },
 ];
 
-const assurances = [
-	"RETIE 2024",
-	"Fabricantes Tier 1",
-	"Garantía 25 años",
-];
+const assurances = {
+	es: ['RETIE 2024', 'Fabricantes Tier 1', 'Garantía 25 años'],
+	en: ['RETIE 2024', 'Tier 1 manufacturers', '25-year warranty'],
+};
+
+const copy = {
+	es: {
+		badge: 'confianza',
+		title: 'Aliados estratégicos y certificaciones',
+		description: 'Trabajamos junto a constructores, empresas de servicios públicos y marcas tecnológicas para garantizar soporte postventa, repuestos y financiamiento competitivo.',
+		chips: assurances.es,
+		cardBadge: 'agenda',
+		cardTitle: '¿Listo para evaluar tu proyecto solar?',
+		cardDescription: 'Agenda una asesoría gratuita y recibe un pre-diagnóstico energético con escenarios de financiamiento y cronograma de instalación.',
+		cta: 'Agenda tu asesoría',
+		ctaNote: 'Respondemos en menos de 24 horas hábiles.',
+	},
+	en: {
+		badge: 'trust',
+		title: 'Strategic partners & certifications',
+		description: 'We collaborate with builders, utilities, and technology brands to guarantee post-sale support, spare parts, and competitive financing.',
+		chips: assurances.en,
+		cardBadge: 'book',
+		cardTitle: 'Ready to evaluate your solar project?',
+		cardDescription: 'Schedule a free consultation and receive a pre-diagnostic with financing scenarios and installation timeline.',
+		cta: 'Book your consult',
+		ctaNote: 'We reply in under 24 business hours.',
+	},
+};
+
+const text = copy[lang];
 ---
 
-<section class="py-16 lg:py-24">
-    <div class="max-w-6xl w-full mx-auto px-4 lg:px-8 grid gap-10 lg:grid-cols-[1.1fr_0.9fr] items-center">
+<section class="py-16 lg:py-24 overflow-x-hidden">
+	<div class="max-w-6xl w-full mx-auto px-4 lg:px-8 grid gap-10 lg:grid-cols-[1.1fr_0.9fr] items-center">
 		<div class="space-y-6" data-reveal>
-			<p class="text-xs uppercase tracking-[0.5em] text-primary/60">confianza</p>
-			<h2 class="text-3xl sm:text-4xl font-display text-primary">Aliados estratégicos y certificaciones</h2>
+			<p class="text-xs uppercase tracking-[0.5em] text-primary/60">{text.badge}</p>
+			<h2 class="text-3xl sm:text-4xl font-display text-primary">{text.title}</h2>
 			<p class="text-sm text-primary/70 max-w-xl">
-				Trabajamos junto a constructores, empresas de servicios públicos y marcas tecnológicas para garantizar soporte postventa, repuestos y financiamiento competitivo.
+				{text.description}
 			</p>
 			<div class="relative overflow-hidden rounded-3xl border border-primary/10 bg-white/80 shadow-[0_40px_80px_-60px_rgba(0,0,0,0.5)]">
 				<div class="partners-track flex gap-6 sm:gap-8 animate-scroll-x py-6 px-4 sm:px-6" aria-label="Logos de aliados">
@@ -34,7 +62,7 @@ const assurances = [
 				</div>
 			</div>
 			<div class="flex flex-wrap gap-3">
-				{assurances.map((item) => (
+				{text.chips.map((item) => (
 					<span class="px-4 py-2 rounded-full border border-primary/20 text-xs font-semibold uppercase tracking-[0.3em] text-primary/70">
 						{item}
 					</span>
@@ -43,10 +71,10 @@ const assurances = [
 		</div>
 
 		<div class="glass-panel rounded-[2rem] bg-white/90 p-8 space-y-6" data-reveal style="--reveal-delay:140ms">
-			<p class="text-xs uppercase tracking-[0.5em] text-primary/60">agenda</p>
-			<h3 class="text-2xl font-display text-primary">¿Listo para evaluar tu proyecto solar?</h3>
+			<p class="text-xs uppercase tracking-[0.5em] text-primary/60">{text.cardBadge}</p>
+			<h3 class="text-2xl font-display text-primary">{text.cardTitle}</h3>
 			<p class="text-sm text-primary/70">
-				Agenda una asesoría gratuita y recibe un pre-diagnóstico energético con escenarios de financiamiento y cronograma de instalación.
+				{text.cardDescription}
 			</p>
 			<div class="space-y-3">
 				<a
@@ -55,9 +83,9 @@ const assurances = [
 					rel="noreferrer"
 					class="w-full inline-flex items-center justify-center gap-3 px-6 py-3 rounded-full bg-primary text-white font-semibold text-sm uppercase tracking-[0.3em]"
 				>
-					<Icon name="whatsapp-icon" class="text-xl" /> Agenda tu asesoría
+					<Icon name="whatsapp-icon" class="text-xl" /> {text.cta}
 				</a>
-				<p class="text-xs text-primary/60 text-center">Respondemos en menos de 24 horas hábiles.</p>
+				<p class="text-xs text-primary/60 text-center">{text.ctaNote}</p>
 			</div>
 		</div>
 	</div>

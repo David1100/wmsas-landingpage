@@ -1,21 +1,58 @@
 ---
-const stats = [
-	{ label: "Proyectos llave en mano", value: "+120" },
-	{ label: "Ingenieros en campo", value: "8" },
-	{ label: "Ahorro promedio", value: "78%" },
-];
+const { lang = 'es' } = Astro.props;
+
+const statsByLang = {
+	es: [
+		{ label: 'Proyectos llave en mano', value: '+120' },
+		{ label: 'Ingenieros en campo', value: '8' },
+		{ label: 'Ahorro promedio', value: '78%' },
+	],
+	en: [
+		{ label: 'Turnkey projects', value: '+120' },
+		{ label: 'Engineers on site', value: '8' },
+		{ label: 'Avg. savings', value: '78%' },
+	],
+};
+
+const copy = {
+	es: {
+		badge: 'Experiencia',
+		title: 'Mira cómo vivimos una instalación solar WM SAS',
+		description:
+			'Capturamos el paso a paso de una obra real: levantamiento, montaje y puesta en marcha. Este video resume el compromiso del equipo y la calidad de los equipos que instalamos en techos colombianos.',
+		cta: 'Agenda visita en sitio',
+		link: 'Ver más proyectos →',
+		badgeVideo: 'Behind the scenes',
+		caption: 'Instalación híbrida 6.2 kWp · Bucaramanga',
+		duration: 'Duración: 2:31 min',
+	},
+	en: {
+		badge: 'Experience',
+		title: 'Watch a real WM SAS solar installation',
+		description:
+			'We documented every step of a real project: site survey, assembly, and commissioning. This video showcases our team commitment and Tier 1 hardware across Colombian rooftops.',
+		cta: 'Schedule a site visit',
+		link: 'See more projects →',
+		badgeVideo: 'Behind the scenes',
+		caption: 'Hybrid 6.2 kWp system · Bucaramanga',
+		duration: 'Length: 2:31 min',
+	},
+};
+
+const stats = statsByLang[lang];
+const text = copy[lang];
 ---
 
 <section id="tour" class="py-16 lg:py-24 relative overflow-hidden">
 	<div class="absolute inset-0 bg-gradient-to-b from-white to-transparent -z-10"></div>
 	<div class="max-w-6xl mx-auto px-4 lg:px-8 grid gap-10 lg:grid-cols-[0.9fr_1.1fr] items-center">
 		<div class="space-y-6" data-reveal>
-			<p class="text-xs uppercase tracking-[0.5em] text-primary/60">Experiencia</p>
+			<p class="text-xs uppercase tracking-[0.5em] text-primary/60">{text.badge}</p>
 			<h2 class="text-3xl sm:text-4xl font-display text-primary leading-tight">
-				Mira cómo vivimos una instalación solar WM SAS
+				{text.title}
 			</h2>
 			<p class="text-sm text-primary/70 max-w-xl">
-				Capturamos el paso a paso de una obra real: levantamiento, montaje y puesta en marcha. Este video resume el compromiso del equipo y la calidad de los equipos que instalamos en techos colombianos.
+				{text.description}
 			</p>
 			<div class="grid gap-4 sm:grid-cols-3">
 				{stats.map((stat, index) => (
@@ -27,9 +64,9 @@ const stats = [
 			</div>
 			<div class="flex flex-col sm:flex-row gap-4" data-reveal style="--reveal-delay:260ms">
 				<a href="https://wa.me/573001234567" target="_blank" rel="noreferrer" class="inline-flex items-center justify-center gap-3 px-6 py-3 rounded-full bg-secondary text-primary text-xs font-semibold uppercase tracking-[0.3em] w-full sm:w-auto">
-					Agenda visita en sitio
+					{text.cta}
 				</a>
-				<a href="#cases" class="text-xs uppercase tracking-[0.3em] text-primary/70 text-center w-full sm:w-auto">Ver más proyectos →</a>
+				<a href="#cases" class="text-xs uppercase tracking-[0.3em] text-primary/70 text-center w-full sm:w-auto">{text.link}</a>
 			</div>
 		</div>
 
@@ -46,13 +83,13 @@ const stats = [
 						class="w-full h-full"
 					></iframe>
 				</div>
-				<div class="absolute top-4 left-4 px-4 py-2 rounded-full bg-primary text-white text-[10px] uppercase tracking-[0.4em]">
-					Behind the scenes
-				</div>
-				<div class="absolute bottom-4 left-4 right-4 flex flex-wrap items-center justify-between gap-2 text-white">
-					<p class="text-sm font-semibold">Instalación híbrida 6.2 kWp · Bucaramanga</p>
-					<span class="text-xs text-white/70">Duración: 2:31 min</span>
-				</div>
+			<div class="absolute top-4 left-4 px-4 py-2 rounded-full bg-primary text-white text-[10px] uppercase tracking-[0.4em]">
+				{text.badgeVideo}
+			</div>
+			<div class="absolute bottom-4 left-4 right-4 flex flex-wrap items-center justify-between gap-2 text-white">
+				<p class="text-sm font-semibold">{text.caption}</p>
+				<span class="text-xs text-white/70">{text.duration}</span>
+			</div>
 			</div>
 		</div>
 	</div>

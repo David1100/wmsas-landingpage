@@ -1,11 +1,25 @@
 ---
 import SavingsCalculator from "./SavingsCalculator.astro";
+
+const { lang = 'es' } = Astro.props;
+
+const copy = {
+	es: {
+		title: 'Descubre cuánto puedes <span class="uppercase text-secondary">ahorrar</span> <br class="hidden sm:block" /> con <span class="text-secondary">energía</span> solar',
+		subtitle: 'Simula tu escenario energético en menos de <strong class="uppercase">30 segundos</strong>',
+	},
+	en: {
+		title: 'See how much you can <span class="uppercase text-secondary">save</span> <br class="hidden sm:block" /> with <span class="text-secondary">solar</span> energy',
+		subtitle: 'Simulate your energy scenario in under <strong class="uppercase">30 seconds</strong>',
+	},
+};
+---
 ---
 
 <section id="calculadora" class="py-8 lg:py-20 min-h-screen">
-    <h1 class="text-primary font-bold text-2xl sm:text-3xl lg:text-4xl text-center px-4">Descubre cuánto puedes <span class="uppercase text-secondary">ahorrar</span> <br class="hidden sm:block" /> con <span class="text-secondary">energía</span> solar</h1>
-    <p class="text-center font-bold text-base sm:text-lg lg:text-xl pt-4 px-4">Simula tu escenario energético en menos de <strong class="uppercase">30 segundos</strong></p>
-    <div class="py-6 lg:py-8 px-4">
-        <SavingsCalculator />
-    </div>
+	<h1 class="text-primary font-bold text-2xl sm:text-3xl lg:text-4xl text-center px-4" set:html={copy[lang].title}></h1>
+	<p class="text-center font-bold text-base sm:text-lg lg:text-xl pt-4 px-4" set:html={copy[lang].subtitle}></p>
+	<div class="py-6 lg:py-8 px-4">
+		<SavingsCalculator lang={lang} />
+	</div>
 </section>

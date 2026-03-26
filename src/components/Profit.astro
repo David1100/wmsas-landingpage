@@ -1,50 +1,44 @@
 ---
 import { Icon } from "astro-icon/components";
 
-const items = [
-	{
-		icon: "ahorrar-dinero-icon",
-		title: "Ahorro inmediato",
-		copy: "Reduce tu factura desde el primer mes gracias al autoconsumo sincronizado",
-		metric: "Hasta 100% menos",
-		accent: "from-secondary/50",
+const { lang = 'es' } = Astro.props;
+
+const itemsByLang = {
+	es: [
+		{ icon: 'ahorrar-dinero-icon', title: 'Ahorro inmediato', copy: 'Reduce tu factura desde el primer mes gracias al autoconsumo sincronizado', metric: 'Hasta 100% menos', accent: 'from-secondary/50' },
+		{ icon: 'ventas-icon', title: 'ROI garantizado', copy: 'Recupera tu inversión en 24 a 48 meses con contratos de energía estabilizada', metric: 'ROI 2-4 años', accent: 'from-primary/40' },
+		{ icon: 'verificado-icon', title: 'Escudo tarifario', copy: 'Protege tu operación ante incrementos inesperados y apagones', metric: '+15 años cobertura', accent: 'from-secondary/30' },
+		{ icon: 'tecnologia-icon', title: 'Tecnología TIER 1', copy: 'Paneles certificados, microinversores inteligentes y monitoreo 24/7', metric: 'Garantía 25 años', accent: 'from-primary/30' },
+		{ icon: 'hogar-icon', title: 'Valorización', copy: 'Aumenta el valor comercial y la categoría energética de tu inmueble', metric: '+10% valor', accent: 'from-secondary/40' },
+		{ icon: 'hojas-icon', title: 'Impacto ambiental', copy: 'Mitiga hasta 10 toneladas de CO₂ por sistema instalado', metric: '-10 t CO₂/año', accent: 'from-primary/20' },
+	],
+	en: [
+		{ icon: 'ahorrar-dinero-icon', title: 'Immediate savings', copy: 'Cut your bill from month one through synchronized self-consumption', metric: 'Up to 100% less', accent: 'from-secondary/50' },
+		{ icon: 'ventas-icon', title: 'Guaranteed ROI', copy: 'Recover the investment in 24–48 months with stabilized energy contracts', metric: 'ROI in 2-4 years', accent: 'from-primary/40' },
+		{ icon: 'verificado-icon', title: 'Tariff shield', copy: 'Protect operations from unexpected increases and outages', metric: '+15 years coverage', accent: 'from-secondary/30' },
+		{ icon: 'tecnologia-icon', title: 'Tier 1 technology', copy: 'Certified panels, smart microinverters, and 24/7 monitoring', metric: '25-year warranty', accent: 'from-primary/30' },
+		{ icon: 'hogar-icon', title: 'Added value', copy: 'Increase property value and energy rating', metric: '+10% property value', accent: 'from-secondary/40' },
+		{ icon: 'hojas-icon', title: 'Environmental impact', copy: 'Offset up to 10 tons of CO₂ per system installed', metric: '-10 t CO₂/year', accent: 'from-primary/20' },
+	],
+};
+
+const sectionCopy = {
+	es: {
+		badge: 'Beneficios',
+		title: 'Lo que cambia cuando controlas tu energía',
+		description: 'Cada proyecto WM SAS combina ingeniería certificada, monitoreo permanente y modelos financieros realistas para garantizar retornos medibles.',
+		link: 'Ver casos reales →',
 	},
-	{
-		icon: "ventas-icon",
-		title: "ROI garantizado",
-		copy: "Recupera tu inversión en 24 a 48 meses con contratos de energía estabilizada",
-		metric: "ROI 2-4 años",
-		accent: "from-primary/40",
+	en: {
+		badge: 'Benefits',
+		title: 'What changes when you control your energy',
+		description: 'Every WM SAS project blends certified engineering, continuous monitoring, and realistic financial models to ensure measurable returns.',
+		link: 'See real cases →',
 	},
-	{
-		icon: "verificado-icon",
-		title: "Escudo tarifario",
-		copy: "Protege tu operación ante incrementos inesperados y apagones",
-		metric: "+15 años cobertura",
-		accent: "from-secondary/30",
-	},
-	{
-		icon: "tecnologia-icon",
-		title: "Tecnología TIER 1",
-		copy: "Paneles certificados, microinversores inteligentes y monitoreo 24/7",
-		metric: "Garantía 25 años",
-		accent: "from-primary/30",
-	},
-	{
-		icon: "hogar-icon",
-		title: "Valorización",
-		copy: "Aumenta el valor comercial y la categoría energética de tu inmueble",
-		metric: "+10% valor",
-		accent: "from-secondary/40",
-	},
-	{
-		icon: "hojas-icon",
-		title: "Impacto ambiental",
-		copy: "Mitiga hasta 10 toneladas de CO₂ por sistema instalado",
-		metric: "-10 t CO₂/año",
-		accent: "from-primary/20",
-	},
-];
+};
+
+const items = itemsByLang[lang];
+const text = sectionCopy[lang];
 ---
 
 <section id="beneficios" class="py-12 lg:py-24 relative">
@@ -56,13 +50,13 @@ const items = [
 	<div class="max-w-6xl mx-auto px-4 lg:px-8 text-white" data-reveal>
 		<div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
 			<div>
-				<p class="text-xs uppercase tracking-[0.5em] text-secondary/80">Beneficios</p>
-				<h2 class="text-3xl sm:text-4xl lg:text-5xl font-display leading-tight">Lo que cambia cuando controlas tu energía</h2>
+				<p class="text-xs uppercase tracking-[0.5em] text-secondary/80">{text.badge}</p>
+				<h2 class="text-3xl sm:text-4xl lg:text-5xl font-display leading-tight">{text.title}</h2>
 				<p class="text-sm text-white/70 mt-4 max-w-xl">
-					Cada proyecto WM SAS combina ingeniería certificada, monitoreo permanente y modelos financieros realistas para garantizar retornos medibles.
+					{text.description}
 				</p>
 			</div>
-			<a href="#cases" class="inline-flex items-center gap-2 text-sm font-semibold text-secondary">Ver casos reales →</a>
+			<a href="#cases" class="inline-flex items-center gap-2 text-sm font-semibold text-secondary">{text.link}</a>
 		</div>
 
 		<div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 mt-12">

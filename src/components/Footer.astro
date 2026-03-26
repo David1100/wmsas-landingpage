@@ -2,16 +2,54 @@
 import { Icon } from "astro-icon/components";
 
 const year = new Date().getFullYear();
-const links = [
-	{ label: "Inicio", href: "#inicio" },
-	{ label: "Calculadora", href: "#calculadora" },
-	{ label: "Casos", href: "#cases" },
-	{ label: "Contacto", href: "https://wa.me/573001234567", external: true },
-];
+const { lang = 'es' } = Astro.props;
+
+const linksByLang = {
+	es: [
+		{ label: 'Inicio', href: '#inicio' },
+		{ label: 'Calculadora', href: '#calculadora' },
+		{ label: 'Casos', href: '#cases' },
+		{ label: 'Contacto', href: 'https://wa.me/573001234567', external: true },
+	],
+	en: [
+		{ label: 'Home', href: '#inicio' },
+		{ label: 'Calculator', href: '#calculadora' },
+		{ label: 'Cases', href: '#cases' },
+		{ label: 'Contact', href: 'https://wa.me/573001234567', external: true },
+	],
+};
+
+const copy = {
+	es: {
+		badge: 'asesoría',
+		title: 'Ingresa tus datos y agenda un diagnóstico solar gratuito',
+		subtitle: 'Hablemos de tu consumo real, plazos y alternativas de financiamiento. Nuestro equipo técnico responde en menos de 24 horas hábiles.',
+		cta: 'Hablar con un ingeniero',
+		ctaNote: 'Horario: Lun-Vie 8:00 am - 6:00 pm',
+		logoText: 'Ingeniería responsable con la sociedad y el medio ambiente. Soluciones llave en mano para hogares, comercio e industria.',
+		contactTitle: 'Contacto',
+		navigationTitle: 'Navegación',
+		copyright: `© ${year} WM SAS. Todos los derechos reservados.`,
+	},
+	en: {
+		badge: 'consultation',
+		title: 'Share your details and book a free solar assessment',
+		subtitle: 'Let’s talk about your real consumption, timelines, and financing alternatives. Our technical team replies within 24 business hours.',
+		cta: 'Talk with an engineer',
+		ctaNote: 'Hours: Mon–Fri 8:00 am - 6:00 pm',
+		logoText: 'Engineering committed to society and the environment. Turnkey solutions for homes, commerce, and industry.',
+		contactTitle: 'Contact',
+		navigationTitle: 'Navigation',
+		copyright: `© ${year} WM SAS. All rights reserved.`,
+	},
+};
+
+const text = copy[lang];
+const links = linksByLang[lang];
 
 const socials = [
-	{ icon: "whatsapp-icon", href: "https://wa.me/573001234567" },
-	{ icon: "link-icon", href: "https://www.linkedin.com" },
+	{ icon: 'whatsapp-icon', href: 'https://wa.me/573001234567' },
+	{ icon: 'link-icon', href: 'https://www.linkedin.com' },
 ];
 ---
 
@@ -19,17 +57,17 @@ const socials = [
 	<div class="max-w-6xl mx-auto px-4 lg:px-8 space-y-10">
 		<div class="grid gap-6 lg:grid-cols-[1.2fr_0.8fr] items-center bg-white/10 rounded-3xl p-8 border border-white/10" data-reveal>
 			<div>
-				<p class="text-xs uppercase tracking-[0.5em] text-secondary">asesoría</p>
-				<h2 class="text-3xl font-display mt-3">Ingresa tus datos y agenda un diagnóstico solar gratuito</h2>
+				<p class="text-xs uppercase tracking-[0.5em] text-secondary">{text.badge}</p>
+				<h2 class="text-3xl font-display mt-3">{text.title}</h2>
 				<p class="text-sm text-white/70 mt-3 max-w-xl">
-					Hablemos de tu consumo real, plazos y alternativas de financiamiento. Nuestro equipo técnico responde en menos de 24 horas hábiles.
+					{text.subtitle}
 				</p>
 			</div>
 			<div class="flex flex-col gap-3">
 				<a href="https://wa.me/573001234567" target="_blank" rel="noreferrer" class="inline-flex items-center justify-center gap-3 px-6 py-3 rounded-full bg-secondary text-primary font-semibold uppercase tracking-[0.3em] text-xs w-full">
-					<Icon name="whatsapp-icon" class="text-lg" /> Hablar con un ingeniero
+					<Icon name="whatsapp-icon" class="text-lg" /> {text.cta}
 				</a>
-				<p class="text-xs text-white/60 text-center">Horario: Lun-Vie 8:00 am - 6:00 pm</p>
+				<p class="text-xs text-white/60 text-center">{text.ctaNote}</p>
 			</div>
 		</div>
 
@@ -37,11 +75,11 @@ const socials = [
 			<div class="space-y-4">
 				<img src="/images/logo-wmsas.png" alt="Logo WM SAS" class="w-36" />
 				<p class="text-sm text-white/70">
-					Ingeniería responsable con la sociedad y el medio ambiente. Soluciones llave en mano para hogares, comercio e industria.
+					{text.logoText}
 				</p>
 			</div>
 			<div>
-				<h3 class="font-semibold uppercase tracking-[0.4em] text-xs text-secondary">Contacto</h3>
+				<h3 class="font-semibold uppercase tracking-[0.4em] text-xs text-secondary">{text.contactTitle}</h3>
 				<ul class="space-y-3 mt-4 text-sm">
 					<li class="flex items-center gap-3"><Icon name="phone-icon" class="text-secondary" /> +57 300 123 4567</li>
 					<li class="flex items-center gap-3"><Icon name="mail-icon" class="text-secondary" /> comercial@wmsas.co</li>
@@ -54,7 +92,7 @@ const socials = [
 				</ul>
 			</div>
 			<div>
-				<h3 class="font-semibold uppercase tracking-[0.4em] text-xs text-secondary">Navegación</h3>
+				<h3 class="font-semibold uppercase tracking-[0.4em] text-xs text-secondary">{text.navigationTitle}</h3>
 				<ul class="mt-4 space-y-2 text-sm">
 					{links.map((link) => (
 						<li>
@@ -73,7 +111,7 @@ const socials = [
 		</div>
 
 		<div class="border-t border-white/20 pt-6 flex flex-wrap items-center justify-between gap-4 text-xs text-white/60" data-reveal style="--reveal-delay:260ms">
-			<p>© {year} WM SAS. Todos los derechos reservados.</p>
+			<p>{text.copyright}</p>
 			<div class="flex items-center gap-3">
 				{socials.map((social) => (
 					<a href={social.href} target="_blank" rel="noreferrer" class="w-9 h-9 rounded-full border border-white/30 flex items-center justify-center text-secondary">

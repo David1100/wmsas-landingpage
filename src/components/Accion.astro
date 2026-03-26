@@ -1,55 +1,111 @@
 ---
-const steps = [
-	{
-		phase: "A",
-		title: "Asesoría",
-		description:
-			"Evaluamos consumo, infraestructura y normativa para definir alcance real",
-		points: [
-			"Levantamiento energético",
-			"Inspección en sitio",
-			"Modelado inicial",
-		],
+const { lang = 'es' } = Astro.props;
+
+const stepsByLang = {
+	es: [
+		{
+			phase: 'A',
+			title: 'Asesoría',
+			description:
+				'Evaluamos consumo, infraestructura y normativa para definir alcance real',
+			points: ['Levantamiento energético', 'Inspección en sitio', 'Modelado inicial'],
+		},
+		{
+			phase: 'C',
+			title: 'Cotización',
+			description: 'Escogemos tecnología y planteamos escenarios financieros',
+			points: ['Diseño 3D + simulación', 'CapEx / OpEx', 'Opciones de financiamiento'],
+		},
+		{
+			phase: 'C',
+			title: 'Contratación',
+			description: 'Formalizamos alcance, garantías y cronograma',
+			points: ['Firma digital', 'Cronograma ejecutivo', 'Gestión documental'],
+		},
+		{
+			phase: 'I',
+			title: 'Implementación',
+			description: 'Instalamos, probamos y dejamos operando el sistema',
+			points: ['Obra civil y eléctrica', 'Interconexión', 'Pruebas RETIE'],
+		},
+		{
+			phase: 'O',
+			title: 'Operación',
+			description: 'Monitoreamos en tiempo real y ajustamos el performance',
+			points: ['Plataforma 24/7', 'Alertas', 'Mantenimiento'],
+		},
+		{
+			phase: 'N',
+			title: 'Normalización',
+			description: 'Gestionamos certificaciones, conexión a red y garantías',
+			points: ['Trámites con comercializador', 'Certificados RETIE', 'Capacitación'],
+		},
+	],
+	en: [
+		{
+			phase: 'A',
+			title: 'Assessment',
+			description: 'We analyze load, infrastructure, and regulations to define real scope',
+			points: ['Energy survey', 'On-site inspection', 'Initial modeling'],
+		},
+		{
+			phase: 'C',
+			title: 'Costing',
+			description: 'We select technology and build financial scenarios',
+			points: ['3D design + simulation', 'CapEx / OpEx', 'Financing options'],
+		},
+		{
+			phase: 'C',
+			title: 'Contracting',
+			description: 'We formalize scope, warranties, and schedule',
+			points: ['Digital signing', 'Executive schedule', 'Document management'],
+		},
+		{
+			phase: 'I',
+			title: 'Implementation',
+			description: 'We install, test, and commission the system',
+			points: ['Civil & electrical works', 'Interconnection', 'RETIE tests'],
+		},
+		{
+			phase: 'O',
+			title: 'Operation',
+			description: 'We monitor in real time and fine-tune performance',
+			points: ['24/7 platform', 'Alerts', 'Maintenance'],
+		},
+		{
+			phase: 'N',
+			title: 'Normalization',
+			description: 'We manage certifications, grid tie-in, and warranties',
+			points: ['Utility paperwork', 'RETIE certificates', 'Training'],
+		},
+	],
+};
+
+const copy = {
+	es: {
+		badge: 'Proceso WM SAS',
+		title: 'Así implementamos tu sistema solar paso a paso',
+		subtitle: 'Un proceso estructurado en <span class="text-secondary font-semibold">6 etapas</span>',
+		start: 'Inicio',
+		end: 'Normalización',
+		stageLabel: 'Etapa',
+		duration: 'Duración promedio: 45 días',
+		button: 'Siguiente etapa',
 	},
-	{
-		phase: "C",
-		title: "Cotización",
-		description: "Escogemos tecnología y planteamos escenarios financieros",
-		points: [
-			"Diseño 3D + simulación",
-			"CapEx / OpEx",
-			"Opciones de financiamiento",
-		],
+	en: {
+		badge: 'WM SAS process',
+		title: 'How we implement your solar system step by step',
+		subtitle: 'A structured process in <span class="text-secondary font-semibold">6 stages</span>',
+		start: 'Start',
+		end: 'Normalization',
+		stageLabel: 'Stage',
+		duration: 'Average duration: 45 days',
+		button: 'Next stage',
 	},
-	{
-		phase: "C",
-		title: "Contratación",
-		description: "Formalizamos alcance, garantías y cronograma",
-		points: ["Firma digital", "Cronograma ejecutivo", "Gestión documental"],
-	},
-	{
-		phase: "I",
-		title: "Implementación",
-		description: "Instalamos, probamos y dejamos operando el sistema",
-		points: ["Obra civil y eléctrica", "Interconexión", "Pruebas RETIE"],
-	},
-	{
-		phase: "O",
-		title: "Operación",
-		description: "Monitoreamos en tiempo real y ajustamos el performance",
-		points: ["Plataforma 24/7", "Alertas", "Mantenimiento"],
-	},
-	{
-		phase: "N",
-		title: "Normalización",
-		description: "Gestionamos certificaciones, conexión a red y garantías",
-		points: [
-			"Trámites con comercializador",
-			"Certificados RETIE",
-			"Capacitación",
-		],
-	},
-];
+};
+
+const steps = stepsByLang[lang];
+const text = copy[lang];
 ---
 
 <section id="accion" class="py-12 lg:py-24 relative overflow-hidden">
@@ -60,23 +116,19 @@ const steps = [
 	<div class="max-w-6xl mx-auto px-4 lg:px-8 relative space-y-12">
 		<div class="text-center" data-reveal>
 			<p class="text-xs uppercase tracking-[0.5em] text-primary/60">
-				Proceso WM SAS
+				{text.badge}
 			</p>
 			<h2 class="text-3xl sm:text-4xl font-display text-primary">
-				Así implementamos tu sistema solar paso a paso
+				{text.title}
 			</h2>
-			<p class="text-sm text-primary/70">
-				Un proceso estructurado en <span
-					class="text-secondary font-semibold">6 etapas</span
-				>
-			</p>
+			<p class="text-sm text-primary/70" set:html={text.subtitle}></p>
 		</div>
 
 		<div class="accion-stage relative space-y-10">
 			<div class="flex flex-col gap-6" data-reveal>
 				<div class="flex flex-col gap-4">
 					<div class="flex items-center gap-4 md:gap-6 lg:gap-10">
-						<div class="accion-terminal" data-terminal="start">
+					<div class="accion-terminal" data-terminal="start">
 							<div class="accion-terminal__icon">
 								<img
 									src="/images/solar-icon.svg"
@@ -84,7 +136,7 @@ const steps = [
 									class="w-16"
 								/>
 							</div>
-							<span class="accion-terminal__label">Inicio</span>
+						<span class="accion-terminal__label">{text.start}</span>
 						</div>
 						<div
 							class="flex-1 min-w-0 lg:max-w-4xl mx-auto relative"
@@ -118,7 +170,7 @@ const steps = [
 								}
 							</div>
 						</div>
-						<div class="accion-terminal" data-terminal="end">
+					<div class="accion-terminal" data-terminal="end">
 							<div class="accion-terminal__icon">
 								<img
 									src="/images/energia-solar-icon.svg"
@@ -126,41 +178,29 @@ const steps = [
 									class="w-16"
 								/>
 							</div>
-							<span class="accion-terminal__label"
-								>Normalización</span
-							>
+						<span class="accion-terminal__label">{text.end}</span>
 						</div>
 					</div>
 				</div>
 			</div>
 
-		<div
-			class="glass-panel rounded-[2rem] bg-white/90 p-6 sm:p-8 space-y-6"
-			data-reveal
-			id="accion-card"
-		>
 			<div
-				class="flex flex-col sm:flex-row sm:items-center gap-2 justify-between"
+				class="glass-panel rounded-[2rem] bg-white/90 p-6 sm:p-8 space-y-6"
+				data-reveal
+				id="accion-card"
 			>
-				<p
-					class="text-xs uppercase tracking-[0.4em] text-primary/60"
-				>
-					Etapa <span id="accion-step-number">1</span> / 6
+			<div class="flex flex-col sm:flex-row sm:items-center gap-2 justify-between">
+				<p class="text-xs uppercase tracking-[0.4em] text-primary/60">
+					{text.stageLabel} <span id="accion-step-number">1</span> / 6
 				</p>
-				<span class="text-sm text-primary/60"
-					>Duración promedio: 45 días</span
-				>
+				<span class="text-sm text-primary/60">{text.duration}</span>
 			</div>
-			<h3
-				class="text-2xl sm:text-3xl font-display text-primary"
-				id="accion-title"
-			>
-				Asesoría
-			</h3>
-			<p class="text-base text-primary/70" id="accion-description">
-				Evaluación técnica y energética personalizada antes de
-				cualquier decisión.
-			</p>
+				<h3 class="text-2xl sm:text-3xl font-display text-primary" id="accion-title">
+					{steps[0].title}
+				</h3>
+				<p class="text-base text-primary/70" id="accion-description">
+					{steps[0].description}
+				</p>
 			<ul
 				class="space-y-3 text-sm text-primary/80"
 				id="accion-points"
@@ -168,13 +208,13 @@ const steps = [
 			</ul>
 			<div class="flex items-center gap-2" id="accion-progress-dots">
 			</div>
-			<button
-				id="accion-next"
-				class="ml-auto inline-flex items-center justify-center gap-2 px-6 py-2 rounded-full bg-primary text-white font-semibold text-sm w-full sm:w-auto"
-			>
-				Siguiente etapa
-				<span>→</span>
-			</button>
+				<button
+					id="accion-next"
+					class="ml-auto inline-flex items-center justify-center gap-2 px-6 py-2 rounded-full bg-primary text-white font-semibold text-sm w-full sm:w-auto"
+				>
+					{text.button}
+					<span>→</span>
+				</button>
 		</div>
 		</div>
 	</div>
@@ -496,4 +536,3 @@ const steps = [
 		initAccionTimeline();
 	}
 </script>
-

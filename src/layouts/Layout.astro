@@ -1,25 +1,31 @@
 ---
 import '../styles/global.css'
 import Sidebar from "../components/Sidebar.astro";
+
+const { lang = 'es' } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang={lang}>
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
-		<title>WM SAS | Ingeniería Solar Inteligente</title>
+		<title>{lang === 'es' ? 'WM SAS | Ingeniería Solar Inteligente' : 'WM SAS | Smart Solar Engineering'}</title>
 		<meta
 			name="description"
-			content="WM SAS diseña e instala sistemas de energía solar a medida para hogares y empresas en Colombia. Calcula tu ahorro y programa una asesoría gratuita."
+			content={lang === 'es'
+				? 'WM SAS diseña e instala sistemas de energía solar a medida para hogares y empresas en Colombia. Calcula tu ahorro y programa una asesoría gratuita.'
+				: 'WM SAS designs and installs tailored solar systems for homes and companies in Colombia. Estimate your savings and book a free consultation.'}
 		/>
-		<meta property="og:title" content="WM SAS · Energía solar profesional" />
+		<meta property="og:title" content={lang === 'es' ? 'WM SAS · Energía solar profesional' : 'WM SAS · Professional Solar Energy'} />
 		<meta
 			property="og:description"
-			content="Implementamos soluciones fotovoltaicas llave en mano con ingeniería certificada, financiamiento y acompañamiento integral."
+			content={lang === 'es'
+				? 'Implementamos soluciones fotovoltaicas llave en mano con ingeniería certificada, financiamiento y acompañamiento integral.'
+				: 'We deliver turnkey PV solutions with certified engineering, financing options, and end-to-end support.'}
 		/>
 		<meta property="og:type" content="website" />
 		<meta property="og:url" content="https://wmsas.co" />
@@ -27,7 +33,7 @@ import Sidebar from "../components/Sidebar.astro";
 		<meta name="theme-color" content="#1c2554" />
 	</head>
 	<body>
-		<Sidebar />
+		<Sidebar lang={lang} />
 		<main class="lg:pl-15 fondo">
 			<slot />
 		</main>
@@ -50,6 +56,36 @@ import Sidebar from "../components/Sidebar.astro";
 
 				revealElements.forEach((el) => observer.observe(el));
 			}
+
+			const currentLang = "{lang}";
+			const langToggleTargets = document.querySelectorAll('[data-lang-toggle]');
+			const getPathForLang = (code) => (code === 'en' ? '/en/' : '/');
+			try {
+				const storedLang = localStorage.getItem('preferredLang');
+				if (!storedLang) {
+					localStorage.setItem('preferredLang', currentLang);
+				} else if (storedLang !== currentLang) {
+					const target = getPathForLang(storedLang);
+					if (!window.location.pathname.startsWith(target)) {
+						window.location.href = target;
+					}
+				}
+			} catch (error) {
+				/* ignore storage errors */
+			}
+
+			langToggleTargets.forEach((trigger) => {
+				trigger.addEventListener('click', (event) => {
+					event.preventDefault();
+					const nextLang = currentLang === 'es' ? 'en' : 'es';
+					try {
+						localStorage.setItem('preferredLang', nextLang);
+					} catch (error) {
+						/* ignore storage errors */
+					}
+					window.location.href = getPathForLang(nextLang);
+				});
+			});
 		</script>
 	</body>
 </html>

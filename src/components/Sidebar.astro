@@ -1,55 +1,54 @@
 ---
 import { Icon } from "astro-icon/components";
 
+const { lang = 'es' } = Astro.props;
+
+const labels = {
+    es: {
+        inicio: 'Inicio',
+        calc: 'Calculadora',
+        benefits: 'Beneficios',
+        action: 'Acción',
+        cases: 'Casos y proyectos',
+        faq: 'Preguntas y respuestas',
+        contact: 'Contacto',
+        language: 'English',
+    },
+    en: {
+        inicio: 'Home',
+        calc: 'Calculator',
+        benefits: 'Benefits',
+        action: 'Action',
+        cases: 'Cases & projects',
+        faq: 'FAQs',
+        contact: 'Contact',
+        language: 'Español',
+    },
+};
+
 const itemsMedio = [
-    {
-        icon: "hogar-icon",
-        link: "#inicio",
-        label: "Inicio",
-    },
-    {
-        icon: "calculadora-icon",
-        link: "#calculadora",
-        label: "Calculadora",
-    },
-    {
-        icon: "beneficio-icon",
-        link: "#beneficios",
-        label: "Beneficios",
-    },
-    {
-        icon: "ajustes-icon",
-        link: "#accion",
-        label: "Accion",
-    },
-    {
-        icon: "clasificacion-icon",
-        link: "#cases",
-        label: "Casos y proyectos",
-    },
-    {
-        icon: "pregunta-y-respuesta-icon",
-        link: "#doubts",
-        label: "Preguntas y respuestas",
-    },
-    {
-        icon: "atencion-al-cliente-icon",
-        link: "#",
-        label: "Contacto",
-    },
+    { icon: 'hogar-icon', link: '#inicio', label: labels[lang].inicio },
+    { icon: 'calculadora-icon', link: '#calculadora', label: labels[lang].calc },
+    { icon: 'beneficio-icon', link: '#beneficios', label: labels[lang].benefits },
+    { icon: 'ajustes-icon', link: '#accion', label: labels[lang].action },
+    { icon: 'clasificacion-icon', link: '#cases', label: labels[lang].cases },
+    { icon: 'pregunta-y-respuesta-icon', link: '#doubts', label: labels[lang].faq },
+    { icon: 'atencion-al-cliente-icon', link: '#', label: labels[lang].contact },
 ];
 
-const itemsFooter = [
-    {
-        icon: "atencion-al-cliente-icon",
-        link: "",
-        label: "",
-    },
-    {
-        icon: "atencion-al-cliente-icon",
-        link: "",
-        label: "",
-    },
+const footerActions = [
+	{
+		icon: 'atencion-al-cliente-icon',
+		href: 'https://wa.me/573001234567',
+		title: labels[lang].contact,
+		type: 'link',
+	},
+	{
+		icon: 'language-icon',
+		href: lang === 'es' ? '/en/' : '/',
+		title: labels[lang].language,
+		type: 'lang',
+	},
 ];
 
 const mobileItems = itemsMedio.slice(0, 4);
@@ -80,37 +79,49 @@ const mobileItems = itemsMedio.slice(0, 4);
         }
     </div>
     <div class="w-full">
-        {
-            itemsFooter.map((item) => (
-                <a
-                    href={item.link}
-                    class="text-primary text-3xl border-l-6 border-white px-2 py-4 bg-secondary w-full flex justify-center"
-                >
-                    <Icon name={item.icon} />
-                </a>
-            ))
-        }
-    </div>
+		{
+			footerActions.map((action) => (
+				<a
+					href={action.href}
+					class="text-primary text-3xl border-l-6 border-white px-2 py-4 bg-secondary w-full flex justify-center"
+					title={action.title}
+					aria-label={action.title}
+					data-lang-toggle={action.type === 'lang' ? 'true' : undefined}
+				>
+					<Icon name={action.icon} />
+				</a>
+			))
+		}
+	</div>
 </div>
 
 <div
     class="fixed bottom-0 left-0 right-0 bg-white shadow-[0_-4px_20px_rgba(0,0,0,0.1)] z-50 lg:hidden"
     id="sidebar-mobile"
 >
-    <nav class="flex justify-around items-center h-16">
-        {
-            mobileItems.map((item) => (
-                <a
-                    href={item.link}
-                    data-section={item.link.replace("#", "")}
-                    class="mobile-nav-link flex flex-col items-center justify-center gap-1 px-4 py-2 text-primary transition-all duration-300"
-                >
-                    <Icon name={item.icon} class="w-6 h-6" />
-                    <span class="text-xs font-medium">{item.label}</span>
-                </a>
-            ))
-        }
-    </nav>
+	<nav class="flex justify-around items-center h-16">
+		{
+			mobileItems.map((item) => (
+				<a
+					href={item.link}
+					data-section={item.link.replace("#", "")}
+					class="mobile-nav-link flex flex-col items-center justify-center gap-1 px-4 py-2 text-primary transition-all duration-300"
+				>
+					<Icon name={item.icon} class="w-6 h-6" />
+					<span class="text-xs font-medium">{item.label}</span>
+				</a>
+			))
+		}
+		<button
+			type="button"
+			class="flex flex-col items-center justify-center gap-1 px-4 py-2 text-primary transition-all duration-300"
+			data-lang-toggle
+			aria-label={labels[lang].language}
+		>
+			<Icon name="language-icon" class="w-6 h-6" />
+			<span class="text-xs font-medium">{labels[lang].language}</span>
+		</button>
+	</nav>
 </div>
 
 <div class="h-16 lg:hidden"></div>

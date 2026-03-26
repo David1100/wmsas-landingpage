@@ -1,39 +1,122 @@
 ---
 import { Icon } from "astro-icon/components";
 
-const items = [
+const { lang = 'es' } = Astro.props;
+
+const rawItems = [
 	{
-		category: "ahorro",
-		question: "¿Ahorraré desde el primer día?",
-		response: "Sí, desde el primer día que tu sistema solar comience a funcionar comenzarás a ver reducción en tu factura de electricidad. Nuestro equipo de expertos evalúa tu consumo para dimensionar correctamente tu instalación.",
+		category: 'ahorro',
+		text: {
+			es: {
+				question: '¿Ahorraré desde el primer día?',
+				response:
+					'Sí, desde el primer día que tu sistema solar comience a funcionar comenzarás a ver reducción en tu factura de electricidad. Nuestro equipo de expertos evalúa tu consumo para dimensionar correctamente tu instalación.',
+			},
+			en: {
+				question: 'Will I save money from day one?',
+				response:
+					'Yes. From the first day your solar system operates you will notice a lower bill. Our engineers size the installation according to your demand.',
+			},
+		},
 	},
 	{
-		category: "instalación",
-		question: "¿Cuánto tiempo toma la instalación?",
-		response: "La instalación típica de un sistema solar residencial toma entre 1 y 3 días, dependiendo del tamaño del sistema y la complejidad del techo. Nos encargamos de todo el proceso de principio a fin.",
+		category: 'instalacion',
+		text: {
+			es: {
+				question: '¿Cuánto tiempo toma la instalación?',
+				response:
+					'La instalación típica de un sistema solar residencial toma entre 1 y 3 días, dependiendo del tamaño del sistema y la complejidad del techo. Nos encargamos de todo el proceso de principio a fin.',
+			},
+			en: {
+				question: 'How long does installation take?',
+				response:
+					'A typical residential system takes 1 to 3 days depending on size and roof complexity. We handle the entire process from start to finish.',
+			},
+		},
 	},
 	{
-		category: "mantenimiento",
-		question: "¿Qué mantenimiento requiere?",
-		response: "Los paneles solares requieren muy poco mantenimiento. Recomendamos una limpieza básica semestral y una revisión técnica anual. Nuestros paneles tienen garantía de 25 años y ofrecemos planes de mantenimiento preventivo.",
+		category: 'mantenimiento',
+		text: {
+			es: {
+				question: '¿Qué mantenimiento requiere?',
+				response:
+					'Los paneles solares requieren muy poco mantenimiento. Recomendamos una limpieza básica semestral y una revisión técnica anual. Nuestros paneles tienen garantía de 25 años y ofrecemos planes de mantenimiento preventivo.',
+			},
+			en: {
+				question: 'What maintenance is needed?',
+				response:
+					'Solar panels need very little maintenance. We suggest basic cleaning twice a year and an annual technical check. Panels carry a 25-year warranty and we offer preventive plans.',
+			},
+		},
 	},
 	{
-		category: "trámites",
-		question: "¿Necesito permisos especiales?",
-		response: "Nosotros nos encargamos de todos los trámites y permisos necesarios para la instalación, incluyendo el registro ante la CFE y los permisos municipales. Solo necesitas proporcionar la documentación básica.",
+		category: 'tramites',
+		text: {
+			es: {
+				question: '¿Necesito permisos especiales?',
+				response:
+					'Nosotros nos encargamos de todos los trámites y permisos necesarios para la instalación, incluyendo el registro ante el comercializador y los permisos municipales. Solo necesitas proporcionar la documentación básica.',
+			},
+			en: {
+				question: 'Do I need special permits?',
+				response:
+					'We handle every permit and paperwork required, including utility registration and municipal approvals. You just provide the basic documentation.',
+			},
+		},
 	},
 ];
 
-const categories = [...new Set(items.map((item) => item.category))];
+const categoryLabels = {
+	es: {
+		ahorro: 'ahorro',
+		instalacion: 'instalación',
+		mantenimiento: 'mantenimiento',
+		tramites: 'trámites',
+	},
+	en: {
+		ahorro: 'savings',
+		instalacion: 'installation',
+		mantenimiento: 'maintenance',
+		tramites: 'permits',
+	},
+};
+
+const items = rawItems.map((item) => ({
+	category: item.category,
+	question: item.text[lang].question,
+	response: item.text[lang].response,
+}));
+
+const categories = [...new Set(rawItems.map((item) => item.category))];
 const defaultCategory = categories[0];
+
+const copy = {
+	es: {
+		badge: 'preguntas',
+		title: 'Resolvemos tus dudas sobre energía solar',
+		intro: 'Si no encuentras tu pregunta, agenda una videollamada y aclaramos todo en menos de 24 horas.',
+		ctaLabel: '¿Aún tienes dudas?',
+		ctaButton: 'Habla con un ingeniero',
+	},
+	en: {
+		badge: 'questions',
+		title: 'We answer your solar energy questions',
+		intro: 'Book a video call if you do not see your question—we respond in under 24 hours.',
+		ctaLabel: 'Still have questions?',
+		ctaButton: 'Talk to an engineer',
+	},
+};
+
+const text = copy[lang];
+
 ---
 
 <section id="doubts" class="py-12 lg:py-24 fondo-doubts space-y-10" data-default-category={defaultCategory}>
 	<div class="text-center space-y-3" data-reveal>
-		<p class="text-xs uppercase tracking-[0.5em] text-primary/60">preguntas</p>
-		<h2 class="text-4xl font-display text-primary">Resolvemos tus dudas sobre energía solar</h2>
+		<p class="text-xs uppercase tracking-[0.5em] text-primary/60">{text.badge}</p>
+		<h2 class="text-4xl font-display text-primary">{text.title}</h2>
 		<p class="text-primary/70 max-w-2xl mx-auto text-sm">
-			Si no encuentras tu pregunta, agenda una videollamada y aclaramos todo en menos de 24 horas.
+			{text.intro}
 		</p>
 	</div>
 
@@ -45,7 +128,7 @@ const defaultCategory = categories[0];
 					class={`faq-tab px-4 py-2 rounded-full border border-primary/20 text-xs font-semibold uppercase tracking-[0.3em] ${category === defaultCategory ? 'active' : ''}`}
 					data-tab={category}
 				>
-					{category}
+					{categoryLabels[lang][category]}
 				</button>
 			))}
 		</div>
@@ -95,9 +178,9 @@ const defaultCategory = categories[0];
 	</div>
 
 	<div class="text-center" data-reveal>
-		<p class="text-sm text-primary/70">¿Aún tienes dudas?</p>
+		<p class="text-sm text-primary/70">{text.ctaLabel}</p>
 		<a href="https://wa.me/573001234567" target="_blank" rel="noreferrer" class="inline-flex items-center justify-center gap-2 px-5 py-3 bg-primary text-white rounded-full text-xs font-semibold uppercase tracking-[0.3em] w-full max-w-xs mx-auto">
-			Habla con un ingeniero
+			{text.ctaButton}
 		</a>
 	</div>
 </section>
