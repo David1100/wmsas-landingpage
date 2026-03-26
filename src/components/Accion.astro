@@ -134,46 +134,48 @@ const steps = [
 				</div>
 			</div>
 
+		<div
+			class="glass-panel rounded-[2rem] bg-white/90 p-6 sm:p-8 space-y-6"
+			data-reveal
+			id="accion-card"
+		>
 			<div
-				class="glass-panel rounded-[2rem] bg-white/90 p-8 space-y-6"
-				data-reveal
-				id="accion-card"
+				class="flex flex-col sm:flex-row sm:items-center gap-2 justify-between"
 			>
-				<div class="flex items-center justify-between">
-					<p
-						class="text-xs uppercase tracking-[0.4em] text-primary/60"
-					>
-						Etapa <span id="accion-step-number">1</span> / 6
-					</p>
-					<span class="text-sm text-primary/60"
-						>Duración promedio: 45 días</span
-					>
-				</div>
-				<h3
-					class="text-3xl font-display text-primary"
-					id="accion-title"
+				<p
+					class="text-xs uppercase tracking-[0.4em] text-primary/60"
 				>
-					Asesoría
-				</h3>
-				<p class="text-sm text-primary/70" id="accion-description">
-					Evaluación técnica y energética personalizada antes de
-					cualquier decisión.
+					Etapa <span id="accion-step-number">1</span> / 6
 				</p>
-				<ul
-					class="space-y-3 text-sm text-primary/80"
-					id="accion-points"
+				<span class="text-sm text-primary/60"
+					>Duración promedio: 45 días</span
 				>
-				</ul>
-				<div class="flex items-center gap-2" id="accion-progress-dots">
-				</div>
-				<button
-					id="accion-next"
-					class="ml-auto inline-flex items-center gap-2 px-6 py-2 rounded-full bg-primary text-white font-semibold text-sm"
-				>
-					Siguiente etapa
-					<span>→</span>
-				</button>
 			</div>
+			<h3
+				class="text-2xl sm:text-3xl font-display text-primary"
+				id="accion-title"
+			>
+				Asesoría
+			</h3>
+			<p class="text-base text-primary/70" id="accion-description">
+				Evaluación técnica y energética personalizada antes de
+				cualquier decisión.
+			</p>
+			<ul
+				class="space-y-3 text-sm text-primary/80"
+				id="accion-points"
+			>
+			</ul>
+			<div class="flex items-center gap-2" id="accion-progress-dots">
+			</div>
+			<button
+				id="accion-next"
+				class="ml-auto inline-flex items-center justify-center gap-2 px-6 py-2 rounded-full bg-primary text-white font-semibold text-sm w-full sm:w-auto"
+			>
+				Siguiente etapa
+				<span>→</span>
+			</button>
+		</div>
 		</div>
 	</div>
 </section>
@@ -341,9 +343,10 @@ const steps = [
 		#accion-steps {
 			position: static;
 			transform: none;
-			flex-wrap: wrap;
-			gap: 0.75rem;
-			justify-content: center;
+			display: grid;
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+			gap: 0.85rem;
+			justify-items: center;
 		}
 		.accion-node span {
 			width: 2.5rem;
@@ -353,6 +356,7 @@ const steps = [
 		.accion-node small {
 			font-size: 0.55rem;
 			letter-spacing: 0.16em;
+			text-align: center;
 		}
 	}
 </style>
@@ -492,3 +496,4 @@ const steps = [
 		initAccionTimeline();
 	}
 </script>
+

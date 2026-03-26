@@ -60,7 +60,7 @@ const defaultCategory = categories[0];
 					data-reveal
 					style={`--reveal-delay:${index * 60}ms`}
 				>
-					<div class="flex items-center gap-4 p-5 cursor-pointer" data-toggle>
+					<div class="flex flex-wrap md:flex-nowrap items-center gap-4 p-5 cursor-pointer" data-toggle>
 						<div class="bg-primary/10 text-primary rounded-2xl p-3">
 							<Icon
 								name="bombilla-icon"
@@ -74,7 +74,7 @@ const defaultCategory = categories[0];
 							<h3 class="text-lg font-semibold text-primary mt-1">{item.question}</h3>
 						</div>
 						<button
-							class="shrink-0 w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center"
+							class="shrink-0 w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center mt-2 md:mt-0"
 							aria-label="Desplegar respuesta"
 							data-btn
 						>
@@ -96,7 +96,7 @@ const defaultCategory = categories[0];
 
 	<div class="text-center" data-reveal>
 		<p class="text-sm text-primary/70">¿Aún tienes dudas?</p>
-		<a href="https://wa.me/573001234567" target="_blank" rel="noreferrer" class="inline-flex items-center gap-2 px-5 py-3 bg-primary text-white rounded-full text-xs font-semibold uppercase tracking-[0.3em]">
+		<a href="https://wa.me/573001234567" target="_blank" rel="noreferrer" class="inline-flex items-center justify-center gap-2 px-5 py-3 bg-primary text-white rounded-full text-xs font-semibold uppercase tracking-[0.3em] w-full max-w-xs mx-auto">
 			Habla con un ingeniero
 		</a>
 	</div>

@@ -30,8 +30,8 @@ const badges = [
 			<div class="w-2 h-2 rounded-full bg-secondary animate-pulse"></div>
 			<p class="uppercase font-semibold tracking-[0.2em] text-xs">ingeniería solar wm sas</p>
 		</div>
-		<div class="flex flex-wrap items-center gap-3 text-sm">
-			<a href="tel:+573001234567" class="flex items-center gap-2 text-primary font-semibold">
+		<div class="flex flex-col sm:flex-row items-center gap-3 text-sm w-full sm:w-auto">
+			<a href="tel:+573001234567" class="flex items-center gap-2 text-primary font-semibold w-full sm:w-auto justify-center">
 				<span class="w-2 h-2 rounded-full bg-secondary"></span>
 				+57 300 123 4567
 			</a>
@@ -40,7 +40,7 @@ const badges = [
 				href="https://wa.me/573001234567"
 				target="_blank"
 				rel="noreferrer"
-				class="flex items-center gap-2 px-3 py-1 rounded-full bg-primary text-white text-xs font-semibold uppercase tracking-wide"
+				class="flex items-center gap-2 px-3 py-1 rounded-full bg-primary text-white text-xs font-semibold uppercase tracking-wide w-full sm:w-auto justify-center"
 			>
 				<span class="text-secondary">●</span> asesoría inmediata
 			</a>
@@ -63,22 +63,22 @@ const badges = [
 					Controla tu factura y protege tus operaciones frente a futuras alzas.
 				</p>
 			</div>
-			<div class="flex flex-wrap items-center gap-4" data-reveal style="--reveal-delay:120ms">
+			<div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4" data-reveal style="--reveal-delay:120ms">
 				<a
 					href="#calculadora"
-					class="group inline-flex items-center gap-3 px-6 py-3 rounded-full bg-secondary text-primary font-semibold uppercase tracking-wide text-sm shadow-[0_12px_60px_-30px_rgba(243,199,70,0.9)]"
+					class="group inline-flex items-center justify-center gap-3 px-6 py-3 rounded-full bg-secondary text-primary font-semibold uppercase tracking-wide text-sm shadow-[0_12px_60px_-30px_rgba(243,199,70,0.9)] w-full sm:w-auto"
 				>
 					Calcular mi ahorro
 					<span class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center group-hover:translate-x-1 transition-transform">→</span>
 				</a>
 				<a
 					href="#doubts"
-					class="inline-flex items-center gap-2 px-5 py-2 text-sm font-semibold text-primary/70 hover:text-primary border border-primary/20 rounded-full"
+					class="inline-flex items-center justify-center gap-2 px-5 py-2 text-sm font-semibold text-primary/70 hover:text-primary border border-primary/20 rounded-full w-full sm:w-auto"
 				>
 					Ver dudas frecuentes
 				</a>
 			</div>
-			<div class="grid sm:grid-cols-3 gap-4">
+			<div class="grid grid-cols-1 min-[420px]:grid-cols-2 sm:grid-cols-3 gap-4">
 				{highlights.map((item, index) => (
 					<div class="bg-white/80 border border-white/60 rounded-2xl p-4 shadow-[0_25px_60px_-50px_rgba(12,21,39,0.8)]" data-reveal style={`--reveal-delay:${index * 80}ms`}>
 						<p class="text-3xl font-display text-primary">{item.value}</p>

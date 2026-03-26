@@ -28,6 +28,7 @@ body {
 		var(--surface);
     min-height: 100vh;
     font-family: var(--font-body);
+    overflow-x: hidden;
 }
 
 h1,

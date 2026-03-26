@@ -16,16 +16,16 @@ const assurances = [
 ];
 ---
 
-<section class="py-16 lg:py-24">
-	<div class="max-w-6xl mx-auto px-4 lg:px-8 grid gap-10 lg:grid-cols-[1.1fr_0.9fr] items-center">
+<section class="py-16 lg:py-24 overflow-x-hidden">
+    <div class="max-w-6xl w-full mx-auto px-4 lg:px-8 grid gap-10 lg:grid-cols-[1.1fr_0.9fr] items-center">
 		<div class="space-y-6" data-reveal>
 			<p class="text-xs uppercase tracking-[0.5em] text-primary/60">confianza</p>
 			<h2 class="text-3xl sm:text-4xl font-display text-primary">Aliados estratégicos y certificaciones</h2>
 			<p class="text-sm text-primary/70 max-w-xl">
 				Trabajamos junto a constructores, empresas de servicios públicos y marcas tecnológicas para garantizar soporte postventa, repuestos y financiamiento competitivo.
 			</p>
-			<div class="relative overflow-hidden rounded-3xl border border-primary/10 bg-white/80 shadow-[0_40px_80px_-60px_rgba(0,0,0,0.5)]">
-				<div class="flex gap-8 animate-scroll-x py-6 px-6" aria-label="Logos de aliados">
+            <div class="relative overflow-hidden rounded-3xl border border-primary/10 bg-white/80 shadow-[0_40px_80px_-60px_rgba(0,0,0,0.5)]">
+                <div class="flex gap-8 animate-scroll-x py-6 px-6 w-[200%]" aria-label="Logos de aliados">
 					{partners.concat(partners).map((partner, index) => (
 						<div class="flex items-center justify-center w-32 shrink-0" aria-hidden={index >= partners.length ? 'true' : 'false'}>
 							<img src={partner.logo} alt={partner.name} class="w-24 opacity-80" />

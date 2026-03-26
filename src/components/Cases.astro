@@ -97,7 +97,7 @@ const metrics = [
 
 		<button
 			id="slider-prev"
-			class="absolute left-0 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 rounded-full bg-primary flex items-center justify-center shadow-lg hover:bg-primary/80 transition-colors z-10"
+			class="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 rounded-full bg-primary items-center justify-center shadow-lg hover:bg-primary/80 transition-colors z-10"
 			aria-label="Caso anterior"
 		>
 			<svg class="w-5 h-5 md:w-6 md:h-6 text-white" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
@@ -107,13 +107,27 @@ const metrics = [
 
 		<button
 			id="slider-next"
-			class="absolute right-0 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 rounded-full bg-primary flex items-center justify-center shadow-lg hover:bg-primary/80 transition-colors z-10"
+			class="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 rounded-full bg-primary items-center justify-center shadow-lg hover:bg-primary/80 transition-colors z-10"
 			aria-label="Siguiente caso"
 		>
 			<svg class="w-5 h-5 md:w-6 md:h-6 text-white" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
 				<path d="M526.299 0 434 92.168l867.636 867.767L434 1827.57l92.299 92.43 959.935-960.065z" fill-rule="evenodd" />
 			</svg>
 		</button>
+		<div class="flex md:hidden gap-3 mt-6">
+			<button
+				id="slider-prev-mobile"
+				class="flex-1 inline-flex items-center justify-center gap-2 rounded-full border border-primary/20 text-primary text-sm font-semibold py-2"
+			>
+				Anterior
+			</button>
+			<button
+				id="slider-next-mobile"
+				class="flex-1 inline-flex items-center justify-center gap-2 rounded-full bg-primary text-white text-sm font-semibold py-2"
+			>
+				Siguiente
+			</button>
+		</div>
 	</div>
 
 	<div class="flex justify-center gap-2 pb-4" id="slider-dots">
@@ -133,6 +147,8 @@ const metrics = [
 	const track = document.getElementById('slider-track');
 	const prevBtn = document.getElementById('slider-prev');
 	const nextBtn = document.getElementById('slider-next');
+	const prevBtnMobile = document.getElementById('slider-prev-mobile');
+	const nextBtnMobile = document.getElementById('slider-next-mobile');
 	const dots = document.querySelectorAll('[data-dot]');
 
 	let currentIndex = 0;
@@ -177,6 +193,8 @@ const metrics = [
 
 	prevBtn?.addEventListener('click', goPrev);
 	nextBtn?.addEventListener('click', goNext);
+	prevBtnMobile?.addEventListener('click', goPrev);
+	nextBtnMobile?.addEventListener('click', goNext);
 
 	dots.forEach((dot) => {
 		dot.addEventListener('click', () => {
