@@ -37,55 +37,74 @@ const { lang = 'es' } = Astro.props;
 		<main class="lg:pl-15 fondo">
 			<slot />
 		</main>
-		<script>
-			const revealElements = document.querySelectorAll('[data-reveal]');
-			const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-			if (prefersReduced) {
-				revealElements.forEach((el) => el.classList.add('is-visible'));
-			} else {
-				const observer = new IntersectionObserver(
-					(entries) => {
-						entries.forEach((entry) => {
-							if (entry.isIntersecting) {
-								entry.target.classList.add('is-visible');
-							}
-						});
-					},
-					{ threshold: 0.2 }
-				);
+		<script is:inline>
+			(() => {
+				try {
+					const revealElements = document.querySelectorAll('[data-reveal]');
+					const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+					const supportsObserver = 'IntersectionObserver' in window;
+					const enableRevealMotion = () => document.body.classList.add('js-ready');
 
-				revealElements.forEach((el) => observer.observe(el));
-			}
+					if (prefersReduced || !supportsObserver) {
+						revealElements.forEach((el) => el.classList.add('is-visible'));
+						enableRevealMotion();
+					} else {
+						const observer = new IntersectionObserver(
+							(entries) => {
+								entries.forEach((entry) => {
+									if (entry.isIntersecting) {
+										entry.target.classList.add('is-visible');
+									}
+								});
+							},
+							{ threshold: 0.2 }
+						);
 
-			const currentLang = "{lang}";
-			const langToggleTargets = document.querySelectorAll('[data-lang-toggle]');
-			const getPathForLang = (code) => (code === 'en' ? '/en/' : '/');
-			try {
-				const storedLang = localStorage.getItem('preferredLang');
-				if (!storedLang) {
-					localStorage.setItem('preferredLang', currentLang);
-				} else if (storedLang !== currentLang) {
-					const target = getPathForLang(storedLang);
-					if (!window.location.pathname.startsWith(target)) {
-						window.location.href = target;
+						revealElements.forEach((el) => observer.observe(el));
+						enableRevealMotion();
 					}
-				}
-			} catch (error) {
-				/* ignore storage errors */
-			}
 
-			langToggleTargets.forEach((trigger) => {
-				trigger.addEventListener('click', (event) => {
-					event.preventDefault();
-					const nextLang = currentLang === 'es' ? 'en' : 'es';
+					const currentLang = ${JSON.stringify(lang)};
+					const langToggleTargets = document.querySelectorAll('[data-lang-toggle]');
+					const getPathForLang = (code) => (code === 'en' ? '/en/' : '/');
 					try {
-						localStorage.setItem('preferredLang', nextLang);
+						const storedLang = localStorage.getItem('preferredLang');
+						if (!storedLang) {
+							localStorage.setItem('preferredLang', currentLang);
+						} else if (storedLang !== currentLang) {
+							const target = getPathForLang(storedLang);
+							if (!window.location.pathname.startsWith(target)) {
+								window.location.href = target;
+							}
+						}
 					} catch (error) {
 						/* ignore storage errors */
 					}
-					window.location.href = getPathForLang(nextLang);
-				});
-			});
+
+					langToggleTargets.forEach((trigger) => {
+						const tagName = trigger.tagName?.toLowerCase();
+						trigger.addEventListener('click', (event) => {
+							const nextLang = currentLang === 'es' ? 'en' : 'es';
+							const targetPath = getPathForLang(nextLang);
+							try {
+								localStorage.setItem('preferredLang', nextLang);
+							} catch (error) {
+								/* ignore storage errors */
+							}
+							if (tagName === 'a') {
+								if (trigger.getAttribute('href') !== targetPath) {
+									trigger.setAttribute('href', targetPath);
+								}
+								return;
+							}
+							event.preventDefault();
+							window.location.href = targetPath;
+						});
+					});
+				} catch (uiError) {
+					console.error('UI bootstrap failed', uiError);
+				}
+			})();
 		</script>
 	</body>
 </html>
