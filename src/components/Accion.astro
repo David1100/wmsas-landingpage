@@ -3,14 +3,23 @@ const steps = [
 	{
 		phase: "A",
 		title: "Asesoría",
-		description: "Evaluamos consumo, infraestructura y normativa para definir alcance real",
-		points: ["Levantamiento energético", "Inspección en sitio", "Modelado inicial"],
+		description:
+			"Evaluamos consumo, infraestructura y normativa para definir alcance real",
+		points: [
+			"Levantamiento energético",
+			"Inspección en sitio",
+			"Modelado inicial",
+		],
 	},
 	{
 		phase: "C",
 		title: "Cotización",
 		description: "Escogemos tecnología y planteamos escenarios financieros",
-		points: ["Diseño 3D + simulación", "CapEx / OpEx", "Opciones de financiamiento"],
+		points: [
+			"Diseño 3D + simulación",
+			"CapEx / OpEx",
+			"Opciones de financiamiento",
+		],
 	},
 	{
 		phase: "C",
@@ -34,18 +43,33 @@ const steps = [
 		phase: "N",
 		title: "Normalización",
 		description: "Gestionamos certificaciones, conexión a red y garantías",
-		points: ["Trámites con comercializador", "Certificados RETIE", "Capacitación"],
+		points: [
+			"Trámites con comercializador",
+			"Certificados RETIE",
+			"Capacitación",
+		],
 	},
 ];
 ---
 
 <section id="accion" class="py-12 lg:py-24 relative overflow-hidden">
-	<div class="absolute inset-0 bg-gradient-to-b from-white via-white to-transparent"></div>
+	<div
+		class="absolute inset-0 bg-gradient-to-b from-white via-white to-transparent"
+	>
+	</div>
 	<div class="max-w-6xl mx-auto px-4 lg:px-8 relative space-y-12">
 		<div class="text-center" data-reveal>
-			<p class="text-xs uppercase tracking-[0.5em] text-primary/60">Proceso WM SAS</p>
-			<h2 class="text-3xl sm:text-4xl font-display text-primary">Así implementamos tu sistema solar paso a paso</h2>
-			<p class="text-sm text-primary/70">Un proceso estructurado en <span class="text-secondary font-semibold">6 etapas</span></p>
+			<p class="text-xs uppercase tracking-[0.5em] text-primary/60">
+				Proceso WM SAS
+			</p>
+			<h2 class="text-3xl sm:text-4xl font-display text-primary">
+				Así implementamos tu sistema solar paso a paso
+			</h2>
+			<p class="text-sm text-primary/70">
+				Un proceso estructurado en <span
+					class="text-secondary font-semibold">6 etapas</span
+				>
+			</p>
 		</div>
 
 		<div class="accion-stage relative space-y-10">
@@ -54,42 +78,98 @@ const steps = [
 					<div class="flex items-center gap-4 md:gap-6 lg:gap-10">
 						<div class="accion-terminal" data-terminal="start">
 							<div class="accion-terminal__icon">
-								<img src="/images/solar-icon.svg" alt="Icono solar" class="w-16" />
+								<img
+									src="/images/solar-icon.svg"
+									alt="Icono solar"
+									class="w-16"
+								/>
 							</div>
 							<span class="accion-terminal__label">Inicio</span>
 						</div>
-						<div class="flex-1 min-w-0 lg:max-w-4xl mx-auto relative" id="accion-track">
-							<div class="track-base h-2 bg-primary/10 rounded-full w-full"></div>
-							<div class="h-2 bg-secondary rounded-full transition-all duration-700" id="accion-progress" style="width:0%"></div>
-							<div class="absolute inset-x-0 top-1/2 -translate-y-1/2 flex justify-between" id="accion-steps">
-								{steps.map((step, index) => (
-									<button type="button" class="accion-node" data-step={index}>
-										<span>{step.phase}</span>
-										<small>{step.title}</small>
-									</button>
-								))}
+						<div
+							class="flex-1 min-w-0 lg:max-w-4xl mx-auto relative"
+							id="accion-track"
+						>
+							<div
+								class="track-base h-2 bg-primary/10 rounded-full w-full"
+							>
+							</div>
+							<div
+								class="h-2 bg-secondary rounded-full transition-all duration-700"
+								id="accion-progress"
+								style="width:0%"
+							>
+							</div>
+							<div
+								class="absolute inset-x-0 top-1/2 flex justify-between"
+								id="accion-steps"
+							>
+								{
+									steps.map((step, index) => (
+										<button
+											type="button"
+											class="accion-node"
+											data-step={index}
+										>
+											<span>{step.phase}</span>
+											<small>{step.title}</small>
+										</button>
+									))
+								}
 							</div>
 						</div>
 						<div class="accion-terminal" data-terminal="end">
 							<div class="accion-terminal__icon">
-								<img src="/images/energia-solar-icon.svg" alt="Casa WM" class="w-16" />
+								<img
+									src="/images/energia-solar-icon.svg"
+									alt="Casa WM"
+									class="w-16"
+								/>
 							</div>
-							<span class="accion-terminal__label">Normalización</span>
+							<span class="accion-terminal__label"
+								>Normalización</span
+							>
 						</div>
 					</div>
 				</div>
 			</div>
 
-			<div class="glass-panel rounded-[2rem] bg-white/90 p-8 space-y-6" data-reveal id="accion-card">
+			<div
+				class="glass-panel rounded-[2rem] bg-white/90 p-8 space-y-6"
+				data-reveal
+				id="accion-card"
+			>
 				<div class="flex items-center justify-between">
-					<p class="text-xs uppercase tracking-[0.4em] text-primary/60">Etapa <span id="accion-step-number">1</span> / 6</p>
-					<span class="text-sm text-primary/60">Duración promedio: 45 días</span>
+					<p
+						class="text-xs uppercase tracking-[0.4em] text-primary/60"
+					>
+						Etapa <span id="accion-step-number">1</span> / 6
+					</p>
+					<span class="text-sm text-primary/60"
+						>Duración promedio: 45 días</span
+					>
 				</div>
-				<h3 class="text-3xl font-display text-primary" id="accion-title">Asesoría</h3>
-				<p class="text-sm text-primary/70" id="accion-description">Evaluación técnica y energética personalizada antes de cualquier decisión.</p>
-				<ul class="space-y-3 text-sm text-primary/80" id="accion-points"></ul>
-				<div class="flex items-center gap-2" id="accion-progress-dots"></div>
-				<button id="accion-next" class="ml-auto inline-flex items-center gap-2 px-6 py-2 rounded-full bg-primary text-white font-semibold text-sm">
+				<h3
+					class="text-3xl font-display text-primary"
+					id="accion-title"
+				>
+					Asesoría
+				</h3>
+				<p class="text-sm text-primary/70" id="accion-description">
+					Evaluación técnica y energética personalizada antes de
+					cualquier decisión.
+				</p>
+				<ul
+					class="space-y-3 text-sm text-primary/80"
+					id="accion-points"
+				>
+				</ul>
+				<div class="flex items-center gap-2" id="accion-progress-dots">
+				</div>
+				<button
+					id="accion-next"
+					class="ml-auto inline-flex items-center gap-2 px-6 py-2 rounded-full bg-primary text-white font-semibold text-sm"
+				>
 					Siguiente etapa
 					<span>→</span>
 				</button>
@@ -98,10 +178,15 @@ const steps = [
 	</div>
 </section>
 
-<script type="application/json" id="accion-data" set:html={JSON.stringify(steps)}></script>
+<script
+	type="application/json"
+	id="accion-data"
+	set:html={JSON.stringify(steps)}
+/>
 <style>
 	.accion-stage {
 		position: relative;
+		--accion-track-offset: 2.4rem;
 	}
 
 	.accion-terminal {
@@ -124,7 +209,10 @@ const steps = [
 		justify-content: center;
 		position: relative;
 		animation: float-y 10s ease-in-out infinite;
-		transition: transform 0.4s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+		transition:
+			transform 0.4s ease,
+			border-color 0.3s ease,
+			box-shadow 0.3s ease;
 	}
 
 	.accion-terminal__icon.is-complete {
@@ -159,7 +247,9 @@ const steps = [
 		font-weight: 600;
 		font-size: 0.75rem;
 		color: rgba(57, 60, 122, 0.55);
-		transition: transform 0.2s ease, color 0.2s ease;
+		transition:
+			transform 0.2s ease,
+			color 0.2s ease;
 		position: relative;
 		z-index: 2;
 	}
@@ -208,8 +298,8 @@ const steps = [
 
 	#accion-track {
 		position: relative;
-		min-height: 4.5rem;
-		padding: 2.5rem 0 1.5rem;
+		min-height: calc(4.5rem + var(--accion-track-offset));
+		padding: calc(2.5rem + var(--accion-track-offset)) 0 1.5rem;
 	}
 
 	#accion-track .track-base,
@@ -217,13 +307,10 @@ const steps = [
 		position: absolute;
 		left: 0;
 		right: 0;
-		top: 50%;
+		top: calc(50% + var(--accion-track-offset));
 		transform: translateY(-50%);
 		height: 0.35rem;
 		pointer-events: none;
-	}
-
-	#accion-track .track-base {
 		z-index: 0;
 	}
 
@@ -231,7 +318,15 @@ const steps = [
 		z-index: 1;
 	}
 
+	#accion-steps {
+		transform: translateY(calc(-50% - var(--accion-track-offset)));
+		z-index: 2;
+	}
+
 	@media (max-width: 768px) {
+		.accion-terminal__label {
+			font-size: 5px;
+		}
 		.accion-terminal__icon {
 			width: 5.2rem;
 			height: 5.2rem;
@@ -262,52 +357,58 @@ const steps = [
 	}
 </style>
 
-
 <script is:inline>
 	function initAccionTimeline() {
-		const dataTag = document.getElementById('accion-data');
+		const dataTag = document.getElementById("accion-data");
 		let stepsData = [];
 		try {
-			stepsData = dataTag?.textContent ? JSON.parse(dataTag.textContent) : [];
+			stepsData = dataTag?.textContent
+				? JSON.parse(dataTag.textContent)
+				: [];
 		} catch (error) {
-			console.error('No se pudo leer el flujo ACCION', error);
+			console.error("No se pudo leer el flujo ACCION", error);
 			return;
 		}
 		if (!Array.isArray(stepsData) || !stepsData.length) return;
 
 		let accionCurrent = 0;
-		const cardTitle = document.getElementById('accion-title');
-		const cardDesc = document.getElementById('accion-description');
-		const cardList = document.getElementById('accion-points');
-		const stepNumber = document.getElementById('accion-step-number');
-		const dotContainer = document.getElementById('accion-progress-dots');
-		const progressLine = document.getElementById('accion-progress');
-		const nodes = document.querySelectorAll('.accion-node');
-		const nextButton = document.getElementById('accion-next');
-		const terminalStart = document.querySelector('[data-terminal="start"] .accion-terminal__icon');
-		const terminalEnd = document.querySelector('[data-terminal="end"] .accion-terminal__icon');
+		const cardTitle = document.getElementById("accion-title");
+		const cardDesc = document.getElementById("accion-description");
+		const cardList = document.getElementById("accion-points");
+		const stepNumber = document.getElementById("accion-step-number");
+		const dotContainer = document.getElementById("accion-progress-dots");
+		const progressLine = document.getElementById("accion-progress");
+		const nodes = document.querySelectorAll(".accion-node");
+		const nextButton = document.getElementById("accion-next");
+		const terminalStart = document.querySelector(
+			'[data-terminal="start"] .accion-terminal__icon',
+		);
+		const terminalEnd = document.querySelector(
+			'[data-terminal="end"] .accion-terminal__icon',
+		);
 		let lastPercent = 0;
 		let currentAnimation = null;
 		const progressColors = [
-			'var(--color-secondary)',
-			'#8da8ff',
-			'#7cc3ff',
-			'#6fd8d5',
-			'#5fd99f',
-			'#f3b86b',
+			"var(--color-secondary)",
+			"#8da8ff",
+			"#7cc3ff",
+			"#6fd8d5",
+			"#5fd99f",
+			"#f3b86b",
 		];
 
 		function renderDots() {
-			dotContainer.innerHTML = '';
+			dotContainer.innerHTML = "";
 			stepsData.forEach((_, index) => {
-				const segment = document.createElement('div');
-				segment.className = index <= accionCurrent ? 'active' : '';
+				const segment = document.createElement("div");
+				segment.className = index <= accionCurrent ? "active" : "";
 				dotContainer.appendChild(segment);
 			});
 		}
 
 		function animateProgress(nextPercent) {
-			const color = progressColors[accionCurrent] || 'var(--color-secondary)';
+			const color =
+				progressColors[accionCurrent] || "var(--color-secondary)";
 			progressLine.style.background = color;
 			if (!progressLine) return;
 			if (currentAnimation) currentAnimation.cancel();
@@ -317,7 +418,11 @@ const steps = [
 						{ width: `${lastPercent}%` },
 						{ width: `${nextPercent}%` },
 					],
-					{ duration: 900, easing: 'cubic-bezier(0.16, 1, 0.3, 1)' }
+					{
+						duration: 900,
+						easing: "cubic-bezier(0.16, 1, 0.3, 1)",
+						fill: "forwards",
+					},
 				);
 				currentAnimation.onfinish = () => {
 					progressLine.style.width = `${nextPercent}%`;
@@ -325,7 +430,8 @@ const steps = [
 					currentAnimation = null;
 				};
 			} else {
-				progressLine.style.transition = 'width 0.9s cubic-bezier(0.16, 1, 0.3, 1)';
+				progressLine.style.transition =
+					"width 0.9s cubic-bezier(0.16, 1, 0.3, 1)";
 				progressLine.style.width = `${nextPercent}%`;
 				lastPercent = nextPercent;
 			}
@@ -336,47 +442,52 @@ const steps = [
 			stepNumber.textContent = accionCurrent + 1;
 			cardTitle.textContent = step.title;
 			cardDesc.textContent = step.description;
-			cardList.innerHTML = '';
+			cardList.innerHTML = "";
 			step.points.forEach((point) => {
-				const item = document.createElement('li');
-				item.className = 'flex items-center gap-3';
+				const item = document.createElement("li");
+				item.className = "flex items-center gap-3";
 				item.innerHTML = `<span class="w-3 h-3 rounded-full bg-secondary"></span>${point}`;
 				cardList.appendChild(item);
 			});
 			nodes.forEach((node, index) => {
-				node.classList.toggle('active', index === accionCurrent);
+				node.classList.toggle("active", index === accionCurrent);
 			});
 			if (accionCurrent === stepsData.length - 1) {
-				terminalEnd?.classList.add('is-complete');
+				terminalEnd?.classList.add("is-complete");
 			} else {
-				terminalEnd?.classList.remove('is-complete');
+				terminalEnd?.classList.remove("is-complete");
 			}
-			const progressPercent = (accionCurrent / (stepsData.length - 1)) * 100;
+			const progressPercent =
+				(accionCurrent / (stepsData.length - 1)) * 100;
 			animateProgress(progressPercent);
 			renderDots();
 		}
 
 		nodes.forEach((node) => {
-			node.addEventListener('click', () => {
-				accionCurrent = parseInt(node.getAttribute('data-step') || '0', 10);
+			node.addEventListener("click", () => {
+				accionCurrent = parseInt(
+					node.getAttribute("data-step") || "0",
+					10,
+				);
 				renderStep();
 			});
 		});
 
-		nextButton?.addEventListener('click', () => {
-            alert('asdadas')
+		nextButton?.addEventListener("click", () => {
 			accionCurrent = (accionCurrent + 1) % stepsData.length;
 			renderStep();
 		});
 
 		renderDots();
-		progressLine.style.width = '0%';
+		progressLine.style.width = "0%";
 		lastPercent = 0;
 		renderStep();
 	}
 
-	if (document.readyState === 'loading') {
-		document.addEventListener('DOMContentLoaded', initAccionTimeline, { once: true });
+	if (document.readyState === "loading") {
+		document.addEventListener("DOMContentLoaded", initAccionTimeline, {
+			once: true,
+		});
 	} else {
 		initAccionTimeline();
 	}
