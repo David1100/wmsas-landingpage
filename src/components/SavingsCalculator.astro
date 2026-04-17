@@ -173,7 +173,7 @@ const text = copy[lang];
 			</p>
 		</div>
 
-		<div class="glass-panel rounded-[1.8rem] p-6 sm:p-8 bg-white/80" data-reveal="right" style="--reveal-delay:120ms">
+		<div class="glass-panel rounded-[1.8rem] p-6 sm:p-8 bg-white/80 result-panel opacity-0 translate-y-4 transition-all duration-700 ease-out" data-reveal="right" style="--reveal-delay:120ms">
 			<div class="flex items-center gap-3 text-xs uppercase tracking-[0.4em] text-primary/60">
 				<span class="w-8 h-8 rounded-full bg-secondary text-primary flex items-center justify-center font-semibold">02</span>
 				<span>{text.rightStep}</span>
@@ -181,7 +181,7 @@ const text = copy[lang];
 			<h3 class="text-2xl font-display text-primary mt-4">{text.rightTitle}</h3>
 			<p class="text-sm text-primary/70">{text.rightSubtitle}</p>
 
-			<div class="mt-8 space-y-6">
+			<div class="mt-8 space-y-6 blur-[3px] select-none result-data">
 				<div class="bg-primary text-white rounded-2xl p-5 space-y-2">
 					<p class="text-xs uppercase tracking-[0.4em] text-white/70">{text.savingsCard}</p>
 					<p data-result-ahorro class="text-4xl font-display">78%</p>
@@ -296,12 +296,14 @@ const text = copy[lang];
         irradiance: "media",
         bill: 600000,
         consumption: 420,
+        address: "",
     };
 
     const propertyButtons = document.querySelectorAll('[data-property]');
     const irradianceButtons = document.querySelectorAll('[data-irradiance]');
     const billInput = document.getElementById('bill-range');
     const consumptionInput = document.getElementById('consumption-range');
+    const addressInput = document.getElementById('input-address');
     const billOutput = document.getElementById('bill-output');
     const consumptionOutput = document.getElementById('consumption-output');
     const ahorroNode = document.querySelector('[data-result-ahorro]');
@@ -310,6 +312,19 @@ const text = copy[lang];
     const retornoNode = document.querySelector('[data-result-retorno]');
     const summaryNode = document.querySelector('[data-summary]');
     const tierNode = document.querySelector('[data-tier]');
+    const resultPanel = document.querySelector('.result-panel');
+    const resultData = document.querySelector('.result-data');
+
+    function checkFormComplete() {
+        return state.address.length >= 5;
+    }
+
+    function showResult() {
+        if (resultPanel && !resultPanel.classList.contains('opacity-100')) {
+            resultPanel.classList.remove('opacity-0', 'translate-y-4');
+            resultPanel.classList.add('opacity-100', 'translate-y-0');
+        }
+    }
 
     function activateButtons(group, valueKey, newValue) {
         group.forEach((btn) => {
@@ -351,6 +366,10 @@ const text = copy[lang];
 
         billOutput.textContent = currencyFormat(state.bill);
         consumptionOutput.textContent = `${state.consumption} kWh`;
+
+        if (checkFormComplete()) {
+            showResult();
+        }
     }
 
     propertyButtons.forEach((button) => {
@@ -367,6 +386,11 @@ const text = copy[lang];
             activateButtons(irradianceButtons, 'data-irradiance', state.irradiance);
             updateProjection();
         });
+    });
+
+    addressInput?.addEventListener('input', () => {
+        state.address = addressInput.value.trim();
+        updateProjection();
     });
 
     billInput?.addEventListener('input', () => {
